@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS static_pages (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    content LONGTEXT,
+    page_type SMALLINT NOT NULL DEFAULT 0,
+    sort_order SMALLINT NOT NULL DEFAULT 0,
+    seo JSON DEFAULT NULL,
+    ads_platform TINYINT(1) NOT NULL DEFAULT 0,
+    status TINYINT(1) NOT NULL DEFAULT 0,
+	deleted_version TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    created_by BIGINT UNSIGNED DEFAULT NULL,
+    updated_by BIGINT UNSIGNED DEFAULT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    INDEX idx_page_type (page_type),
+    INDEX idx_status (status),
+    INDEX idx_slug (slug),
+	INDEX idx_deleted_version (deleted_version)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

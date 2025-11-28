@@ -1,0 +1,10 @@
+port: 50000
+db:
+  host: 127.0.0.1
+  port: 3306
+  user: root
+  password: root
+  name: epaygates_dev
+  maxOpenConnections: 200
+  maxIdleConnections: 50 # Usually 10–25% of MaxOpenConns
+  maxLifeTimeInSeconds: 1800

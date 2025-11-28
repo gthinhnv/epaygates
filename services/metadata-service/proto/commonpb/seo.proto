@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package commonpb;
+
+option go_package = "metadatasvc/gen/go/commonpb;commonpb";
+
+message SEO {
+    string metaTitle = 1;
+    string metaDesc = 2;
+    string metaKeywords = 3;
+    string schema = 4;
+}
