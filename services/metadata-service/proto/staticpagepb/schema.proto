@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package staticpagepb;
 
-option go_package = "metadatasvc/gen/go/staticpagepb;staticpagepb";
-
-import "commonpb/seo.proto";
+import "sharedpb/seo.proto";
+import "sharedpb/status.proto";
+import "sharedpb/page_type.proto";
 import "google/protobuf/field_mask.proto";
 import "buf/validate/validate.proto";
 
@@ -17,11 +17,11 @@ message StaticPage {
     string title = 2;
     string slug = 3;
     string content = 4;
-    int32 pageType = 5;
+    sharedpb.PageType pageType = 5;
     int32 sortOrder = 6;
-    commonpb.SEO seo = 7;
+    sharedpb.SEO seo = 7;
     int32 adsPlatform = 8;
-    int32 status = 9;
+    sharedpb.Status status = 9;
 
     uint64 createdBy = 10;
     uint64 updatedBy = 11;
@@ -37,13 +37,13 @@ message StaticPage {
 
 message CreateRequest {
     string title = 1 [(buf.validate.field).string.min_len = 1];
-    string slug = 2;
+    string slug = 2 [(buf.validate.field).string.min_len = 1];
     string content = 3;
-    int32 pageType = 4;
+    sharedpb.PageType pageType = 4 [(buf.validate.field).enum.defined_only = true];
     int32 sortOrder = 5;
-    commonpb.SEO seo = 6;
+    sharedpb.SEO seo = 6;
     int32 adsPlatform = 7;
-    int32 status = 8;
+    sharedpb.Status status = 8 [(buf.validate.field).enum.defined_only = true];
     uint64 createdBy = 9;
 }
 
@@ -61,11 +61,11 @@ message UpdateRequest {
     string title = 2;
     string slug = 3;
     string content = 4;
-    int32 pageType = 5;
+    sharedpb.PageType pageType = 5;
     int32 sortOrder = 6;
-    commonpb.SEO seo = 7;
+    sharedpb.SEO seo = 7;
     int32 adsPlatform = 8;
-    int32 status = 9;
+    sharedpb.Status status = 9;
 
     uint64 updatedBy = 10;
 

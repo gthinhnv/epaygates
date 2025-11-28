@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package staticpagepb;
 
-option go_package = "metadatasvc/gen/go/staticpagepb;staticpagepb";
-
 import "staticpagepb/schema.proto";
 
 service StaticPageService {

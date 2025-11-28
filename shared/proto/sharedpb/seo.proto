@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-package commonpb;
-
-option go_package = "metadatasvc/gen/go/commonpb;commonpb";
+package sharedpb;
 
 message SEO {
     string metaTitle = 1;
