@@ -5,5 +5,5 @@ ROOT_DIR=$(dirname "$0")/..
 
 echo "Running buf generate..."
 buf dep update
-buf generate "$ROOT_DIR"
+buf generate
 echo "Done!"
