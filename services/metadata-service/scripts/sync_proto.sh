@@ -6,6 +6,3 @@ SCRIPT_DIR=$(dirname "$0")
 
 # Run the sync_shared_proto.sh script
 bash "$SCRIPT_DIR/sync_shared_proto.sh"
-
-# Run the sync_metadata_proto.sh script
-bash "$SCRIPT_DIR/sync_metadatasvc_proto.sh"

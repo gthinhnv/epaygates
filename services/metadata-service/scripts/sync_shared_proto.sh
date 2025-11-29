@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR=$(dirname "$0")/..
-SRC_DIR="$ROOT_DIR/../shared/proto/sharedpb"
+SRC_DIR="$ROOT_DIR/../../shared/proto/sharedpb"
 DEST_DIR="$ROOT_DIR/proto/sharedpb"
 
 mkdir -p "$DEST_DIR"
