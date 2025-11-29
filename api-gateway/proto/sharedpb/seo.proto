@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package sharedpb;
+
+message SEO {
+    string metaTitle = 1;
+    string metaDesc = 2;
+    string metaKeywords = 3;
+    string schema = 4;
+}
