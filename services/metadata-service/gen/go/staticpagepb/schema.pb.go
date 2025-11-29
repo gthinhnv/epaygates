@@ -33,7 +33,7 @@ type StaticPage struct {
 	PageType       sharedpb.PageType      `protobuf:"varint,5,opt,name=pageType,proto3,enum=sharedpb.PageType" json:"pageType,omitempty"`
 	SortOrder      int32                  `protobuf:"varint,6,opt,name=sortOrder,proto3" json:"sortOrder,omitempty"`
 	Seo            *sharedpb.SEO          `protobuf:"bytes,7,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform    int32                  `protobuf:"varint,8,opt,name=adsPlatform,proto3" json:"adsPlatform,omitempty"`
+	AdsPlatform    sharedpb.AdsPlatform   `protobuf:"varint,8,opt,name=adsPlatform,proto3,enum=sharedpb.AdsPlatform" json:"adsPlatform,omitempty"`
 	Status         sharedpb.Status        `protobuf:"varint,9,opt,name=status,proto3,enum=sharedpb.Status" json:"status,omitempty"`
 	CreatedBy      uint64                 `protobuf:"varint,10,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
 	UpdatedBy      uint64                 `protobuf:"varint,11,opt,name=updatedBy,proto3" json:"updatedBy,omitempty"`
@@ -123,11 +123,11 @@ func (x *StaticPage) GetSeo() *sharedpb.SEO {
 	return nil
 }
 
-func (x *StaticPage) GetAdsPlatform() int32 {
+func (x *StaticPage) GetAdsPlatform() sharedpb.AdsPlatform {
 	if x != nil {
 		return x.AdsPlatform
 	}
-	return 0
+	return sharedpb.AdsPlatform(0)
 }
 
 func (x *StaticPage) GetStatus() sharedpb.Status {
@@ -180,7 +180,7 @@ type CreateRequest struct {
 	PageType      sharedpb.PageType      `protobuf:"varint,4,opt,name=pageType,proto3,enum=sharedpb.PageType" json:"pageType,omitempty"`
 	SortOrder     int32                  `protobuf:"varint,5,opt,name=sortOrder,proto3" json:"sortOrder,omitempty"`
 	Seo           *sharedpb.SEO          `protobuf:"bytes,6,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform   int32                  `protobuf:"varint,7,opt,name=adsPlatform,proto3" json:"adsPlatform,omitempty"`
+	AdsPlatform   sharedpb.AdsPlatform   `protobuf:"varint,7,opt,name=adsPlatform,proto3,enum=sharedpb.AdsPlatform" json:"adsPlatform,omitempty"`
 	Status        sharedpb.Status        `protobuf:"varint,8,opt,name=status,proto3,enum=sharedpb.Status" json:"status,omitempty"`
 	CreatedBy     uint64                 `protobuf:"varint,9,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -259,11 +259,11 @@ func (x *CreateRequest) GetSeo() *sharedpb.SEO {
 	return nil
 }
 
-func (x *CreateRequest) GetAdsPlatform() int32 {
+func (x *CreateRequest) GetAdsPlatform() sharedpb.AdsPlatform {
 	if x != nil {
 		return x.AdsPlatform
 	}
-	return 0
+	return sharedpb.AdsPlatform(0)
 }
 
 func (x *CreateRequest) GetStatus() sharedpb.Status {
@@ -333,7 +333,7 @@ type UpdateRequest struct {
 	PageType    sharedpb.PageType      `protobuf:"varint,5,opt,name=pageType,proto3,enum=sharedpb.PageType" json:"pageType,omitempty"`
 	SortOrder   int32                  `protobuf:"varint,6,opt,name=sortOrder,proto3" json:"sortOrder,omitempty"`
 	Seo         *sharedpb.SEO          `protobuf:"bytes,7,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform int32                  `protobuf:"varint,8,opt,name=adsPlatform,proto3" json:"adsPlatform,omitempty"`
+	AdsPlatform sharedpb.AdsPlatform   `protobuf:"varint,8,opt,name=adsPlatform,proto3,enum=sharedpb.AdsPlatform" json:"adsPlatform,omitempty"`
 	Status      sharedpb.Status        `protobuf:"varint,9,opt,name=status,proto3,enum=sharedpb.Status" json:"status,omitempty"`
 	UpdatedBy   uint64                 `protobuf:"varint,10,opt,name=updatedBy,proto3" json:"updatedBy,omitempty"`
 	// standard Google field mask ("title", "slug", "seo", ...)
@@ -421,11 +421,11 @@ func (x *UpdateRequest) GetSeo() *sharedpb.SEO {
 	return nil
 }
 
-func (x *UpdateRequest) GetAdsPlatform() int32 {
+func (x *UpdateRequest) GetAdsPlatform() sharedpb.AdsPlatform {
 	if x != nil {
 		return x.AdsPlatform
 	}
-	return 0
+	return sharedpb.AdsPlatform(0)
 }
 
 func (x *UpdateRequest) GetStatus() sharedpb.Status {
@@ -592,13 +592,13 @@ func (x *DeleteResponse) GetIds() []uint64 {
 type ListRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// filters
-	Ids            []uint64 `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Title          string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Slug           string   `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
-	PageTypes      []int32  `protobuf:"varint,4,rep,packed,name=pageTypes,proto3" json:"pageTypes,omitempty"`
-	AdsPlatforms   []int32  `protobuf:"varint,5,rep,packed,name=adsPlatforms,proto3" json:"adsPlatforms,omitempty"`
-	Statuses       []int32  `protobuf:"varint,6,rep,packed,name=statuses,proto3" json:"statuses,omitempty"`
-	DeletedVersion int32    `protobuf:"varint,7,opt,name=deletedVersion,proto3" json:"deletedVersion,omitempty"`
+	Ids            []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Slug           string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
+	PageTypes      []sharedpb.PageType    `protobuf:"varint,4,rep,packed,name=pageTypes,proto3,enum=sharedpb.PageType" json:"pageTypes,omitempty"`
+	AdsPlatforms   []sharedpb.AdsPlatform `protobuf:"varint,5,rep,packed,name=adsPlatforms,proto3,enum=sharedpb.AdsPlatform" json:"adsPlatforms,omitempty"`
+	Statuses       []sharedpb.Status      `protobuf:"varint,6,rep,packed,name=statuses,proto3,enum=sharedpb.Status" json:"statuses,omitempty"`
+	DeletedVersion int32                  `protobuf:"varint,7,opt,name=deletedVersion,proto3" json:"deletedVersion,omitempty"`
 	// sql select override
 	Select string `protobuf:"bytes,8,opt,name=select,proto3" json:"select,omitempty"`
 	// sorting: "created_at desc", "sortOrder asc", etc.
@@ -662,21 +662,21 @@ func (x *ListRequest) GetSlug() string {
 	return ""
 }
 
-func (x *ListRequest) GetPageTypes() []int32 {
+func (x *ListRequest) GetPageTypes() []sharedpb.PageType {
 	if x != nil {
 		return x.PageTypes
 	}
 	return nil
 }
 
-func (x *ListRequest) GetAdsPlatforms() []int32 {
+func (x *ListRequest) GetAdsPlatforms() []sharedpb.AdsPlatform {
 	if x != nil {
 		return x.AdsPlatforms
 	}
 	return nil
 }
 
-func (x *ListRequest) GetStatuses() []int32 {
+func (x *ListRequest) GetStatuses() []sharedpb.Status {
 	if x != nil {
 		return x.Statuses
 	}
@@ -886,7 +886,7 @@ var File_staticpagepb_schema_proto protoreflect.FileDescriptor
 
 const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
-	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x12sharedpb/seo.proto\x1a\x15sharedpb/status.proto\x1a\x18sharedpb/page_type.proto\x1a google/protobuf/field_mask.proto\x1a\x1bbuf/validate/validate.proto\"\xbb\x03\n" +
+	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x12sharedpb/seo.proto\x1a\x15sharedpb/status.proto\x1a\x1bsharedpb/ads_platform.proto\x1a\x18sharedpb/page_type.proto\x1a google/protobuf/field_mask.proto\x1a\x1bbuf/validate/validate.proto\"\xd2\x03\n" +
 	"\n" +
 	"StaticPage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
@@ -895,27 +895,27 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12.\n" +
 	"\bpageType\x18\x05 \x01(\x0e2\x12.sharedpb.PageTypeR\bpageType\x12\x1c\n" +
 	"\tsortOrder\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\a \x01(\v2\r.sharedpb.SEOR\x03seo\x12 \n" +
-	"\vadsPlatform\x18\b \x01(\x05R\vadsPlatform\x12(\n" +
+	"\x03seo\x18\a \x01(\v2\r.sharedpb.SEOR\x03seo\x127\n" +
+	"\vadsPlatform\x18\b \x01(\x0e2\x15.sharedpb.AdsPlatformR\vadsPlatform\x12(\n" +
 	"\x06status\x18\t \x01(\x0e2\x10.sharedpb.StatusR\x06status\x12\x1c\n" +
 	"\tcreatedBy\x18\n" +
 	" \x01(\x04R\tcreatedBy\x12\x1c\n" +
 	"\tupdatedBy\x18\v \x01(\x04R\tupdatedBy\x12\x1c\n" +
 	"\tcreatedAt\x18\f \x01(\x03R\tcreatedAt\x12\x1c\n" +
 	"\tupdatedAt\x18\r \x01(\x03R\tupdatedAt\x12&\n" +
-	"\x0edeletedVersion\x18\x0e \x01(\x05R\x0edeletedVersion\"\xd2\x02\n" +
+	"\x0edeletedVersion\x18\x0e \x01(\x05R\x0edeletedVersion\"\xe9\x02\n" +
 	"\rCreateRequest\x12\x1d\n" +
 	"\x05title\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x1b\n" +
 	"\x04slug\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04slug\x12\x18\n" +
 	"\acontent\x18\x03 \x01(\tR\acontent\x128\n" +
 	"\bpageType\x18\x04 \x01(\x0e2\x12.sharedpb.PageTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\bpageType\x12\x1c\n" +
 	"\tsortOrder\x18\x05 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\x06 \x01(\v2\r.sharedpb.SEOR\x03seo\x12 \n" +
-	"\vadsPlatform\x18\a \x01(\x05R\vadsPlatform\x122\n" +
+	"\x03seo\x18\x06 \x01(\v2\r.sharedpb.SEOR\x03seo\x127\n" +
+	"\vadsPlatform\x18\a \x01(\x0e2\x15.sharedpb.AdsPlatformR\vadsPlatform\x122\n" +
 	"\x06status\x18\b \x01(\x0e2\x10.sharedpb.StatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1c\n" +
 	"\tcreatedBy\x18\t \x01(\x04R\tcreatedBy\" \n" +
 	"\x0eCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"\xf8\x02\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x8f\x03\n" +
 	"\rUpdateRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
@@ -923,8 +923,8 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12.\n" +
 	"\bpageType\x18\x05 \x01(\x0e2\x12.sharedpb.PageTypeR\bpageType\x12\x1c\n" +
 	"\tsortOrder\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\a \x01(\v2\r.sharedpb.SEOR\x03seo\x12 \n" +
-	"\vadsPlatform\x18\b \x01(\x05R\vadsPlatform\x12(\n" +
+	"\x03seo\x18\a \x01(\v2\r.sharedpb.SEOR\x03seo\x127\n" +
+	"\vadsPlatform\x18\b \x01(\x0e2\x15.sharedpb.AdsPlatformR\vadsPlatform\x12(\n" +
 	"\x06status\x18\t \x01(\x0e2\x10.sharedpb.StatusR\x06status\x12\x1c\n" +
 	"\tupdatedBy\x18\n" +
 	" \x01(\x04R\tupdatedBy\x12:\n" +
@@ -937,14 +937,14 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x1c\n" +
 	"\tdeletedBy\x18\x02 \x01(\x04R\tdeletedBy\"\"\n" +
 	"\x0eDeleteResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\xcd\x02\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x8a\x03\n" +
 	"\vListRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x1c\n" +
-	"\tpageTypes\x18\x04 \x03(\x05R\tpageTypes\x12\"\n" +
-	"\fadsPlatforms\x18\x05 \x03(\x05R\fadsPlatforms\x12\x1a\n" +
-	"\bstatuses\x18\x06 \x03(\x05R\bstatuses\x12&\n" +
+	"\x04slug\x18\x03 \x01(\tR\x04slug\x120\n" +
+	"\tpageTypes\x18\x04 \x03(\x0e2\x12.sharedpb.PageTypeR\tpageTypes\x129\n" +
+	"\fadsPlatforms\x18\x05 \x03(\x0e2\x15.sharedpb.AdsPlatformR\fadsPlatforms\x12,\n" +
+	"\bstatuses\x18\x06 \x03(\x0e2\x10.sharedpb.StatusR\bstatuses\x12&\n" +
 	"\x0edeletedVersion\x18\a \x01(\x05R\x0edeletedVersion\x12\x16\n" +
 	"\x06select\x18\b \x01(\tR\x06select\x12\x12\n" +
 	"\x04sort\x18\t \x01(\tR\x04sort\x12\x14\n" +
@@ -991,27 +991,34 @@ var file_staticpagepb_schema_proto_goTypes = []any{
 	(*GetResponse)(nil),           // 10: staticpagepb.GetResponse
 	(sharedpb.PageType)(0),        // 11: sharedpb.PageType
 	(*sharedpb.SEO)(nil),          // 12: sharedpb.SEO
-	(sharedpb.Status)(0),          // 13: sharedpb.Status
-	(*fieldmaskpb.FieldMask)(nil), // 14: google.protobuf.FieldMask
+	(sharedpb.AdsPlatform)(0),     // 13: sharedpb.AdsPlatform
+	(sharedpb.Status)(0),          // 14: sharedpb.Status
+	(*fieldmaskpb.FieldMask)(nil), // 15: google.protobuf.FieldMask
 }
 var file_staticpagepb_schema_proto_depIdxs = []int32{
 	11, // 0: staticpagepb.StaticPage.pageType:type_name -> sharedpb.PageType
 	12, // 1: staticpagepb.StaticPage.seo:type_name -> sharedpb.SEO
-	13, // 2: staticpagepb.StaticPage.status:type_name -> sharedpb.Status
-	11, // 3: staticpagepb.CreateRequest.pageType:type_name -> sharedpb.PageType
-	12, // 4: staticpagepb.CreateRequest.seo:type_name -> sharedpb.SEO
-	13, // 5: staticpagepb.CreateRequest.status:type_name -> sharedpb.Status
-	11, // 6: staticpagepb.UpdateRequest.pageType:type_name -> sharedpb.PageType
-	12, // 7: staticpagepb.UpdateRequest.seo:type_name -> sharedpb.SEO
-	13, // 8: staticpagepb.UpdateRequest.status:type_name -> sharedpb.Status
-	14, // 9: staticpagepb.UpdateRequest.updateMask:type_name -> google.protobuf.FieldMask
-	0,  // 10: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
-	0,  // 11: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	13, // 2: staticpagepb.StaticPage.adsPlatform:type_name -> sharedpb.AdsPlatform
+	14, // 3: staticpagepb.StaticPage.status:type_name -> sharedpb.Status
+	11, // 4: staticpagepb.CreateRequest.pageType:type_name -> sharedpb.PageType
+	12, // 5: staticpagepb.CreateRequest.seo:type_name -> sharedpb.SEO
+	13, // 6: staticpagepb.CreateRequest.adsPlatform:type_name -> sharedpb.AdsPlatform
+	14, // 7: staticpagepb.CreateRequest.status:type_name -> sharedpb.Status
+	11, // 8: staticpagepb.UpdateRequest.pageType:type_name -> sharedpb.PageType
+	12, // 9: staticpagepb.UpdateRequest.seo:type_name -> sharedpb.SEO
+	13, // 10: staticpagepb.UpdateRequest.adsPlatform:type_name -> sharedpb.AdsPlatform
+	14, // 11: staticpagepb.UpdateRequest.status:type_name -> sharedpb.Status
+	15, // 12: staticpagepb.UpdateRequest.updateMask:type_name -> google.protobuf.FieldMask
+	11, // 13: staticpagepb.ListRequest.pageTypes:type_name -> sharedpb.PageType
+	13, // 14: staticpagepb.ListRequest.adsPlatforms:type_name -> sharedpb.AdsPlatform
+	14, // 15: staticpagepb.ListRequest.statuses:type_name -> sharedpb.Status
+	0,  // 16: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
+	0,  // 17: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_staticpagepb_schema_proto_init() }

@@ -4,6 +4,7 @@ package staticpagepb;
 
 import "sharedpb/seo.proto";
 import "sharedpb/status.proto";
+import "sharedpb/ads_platform.proto";
 import "sharedpb/page_type.proto";
 import "google/protobuf/field_mask.proto";
 import "buf/validate/validate.proto";
@@ -20,7 +21,7 @@ message StaticPage {
     sharedpb.PageType pageType = 5;
     int32 sortOrder = 6;
     sharedpb.SEO seo = 7;
-    int32 adsPlatform = 8;
+    sharedpb.AdsPlatform adsPlatform = 8;
     sharedpb.Status status = 9;
 
     uint64 createdBy = 10;
@@ -42,7 +43,7 @@ message CreateRequest {
     sharedpb.PageType pageType = 4 [(buf.validate.field).enum.defined_only = true];
     int32 sortOrder = 5;
     sharedpb.SEO seo = 6;
-    int32 adsPlatform = 7;
+    sharedpb.AdsPlatform adsPlatform = 7;
     sharedpb.Status status = 8 [(buf.validate.field).enum.defined_only = true];
     uint64 createdBy = 9;
 }
@@ -64,7 +65,7 @@ message UpdateRequest {
     sharedpb.PageType pageType = 5;
     int32 sortOrder = 6;
     sharedpb.SEO seo = 7;
-    int32 adsPlatform = 8;
+    sharedpb.AdsPlatform adsPlatform = 8;
     sharedpb.Status status = 9;
 
     uint64 updatedBy = 10;
@@ -99,9 +100,9 @@ message ListRequest {
     repeated uint64 ids = 1;
     string title = 2;
     string slug = 3;
-    repeated int32 pageTypes = 4;
-    repeated int32 adsPlatforms = 5;
-    repeated int32 statuses = 6;
+    repeated sharedpb.PageType pageTypes = 4;
+    repeated sharedpb.AdsPlatform adsPlatforms = 5;
+    repeated sharedpb.Status statuses = 6;
     int32 deletedVersion = 7;
 
     // sql select override

@@ -12,6 +12,7 @@ FILES=(
 	"seo.proto"
 	"status.proto"
 	"page_type.proto"
+	"ads_platform.proto"
 )
 
 echo "Syncing selected proto files..."
