@@ -4,5 +4,6 @@ set -euo pipefail
 ROOT_DIR=$(dirname "$0")/..
 
 echo "Running buf generate..."
+buf dep update
 buf generate "$ROOT_DIR"
 echo "Done!"
