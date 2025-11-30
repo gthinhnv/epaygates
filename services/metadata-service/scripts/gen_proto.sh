@@ -2,17 +2,15 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(dirname "$0")"
-GEN_DIR="$SCRIPT_DIR/../gen"
+ROOT_DIR="$SCRIPT_DIR/.."
+GEN_DIR="$ROOT_DIR/gen/go"
 
-echo "→ Removing generated folder: $GEN_DIR"
-rm -rf "$GEN_DIR"
-mkdir -p "$GEN_DIR"
-
-echo "→ Syncing proto files..."
-bash "$SCRIPT_DIR/sync_proto.sh"
+echo "→ Cleaning $GEN_DIR ..."
+if [[ -d "$GEN_DIR" ]]; then
+  rm -rf "$GEN_DIR"
+fi
 
 echo "→ Running buf generate..."
-buf dep update
 buf generate
 
 echo "Done!"

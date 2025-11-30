@@ -1,0 +1,139 @@
+syntax = "proto3";
+
+package staticpagepb;
+
+import "commonpb/seo.proto";
+import "commonpb/status.proto";
+import "commonpb/ads_platform.proto";
+import "commonpb/page_type.proto";
+import "google/protobuf/field_mask.proto";
+import "buf/validate/validate.proto";
+
+// ========================
+// ENTITY
+// ========================
+
+message StaticPage {
+    uint64 id = 1;
+    string title = 2;
+    string slug = 3;
+    string content = 4;
+    commonpb.PageType pageType = 5;
+    int32 sortOrder = 6;
+    commonpb.SEO seo = 7;
+    commonpb.AdsPlatform adsPlatform = 8;
+    commonpb.Status status = 9;
+
+    uint64 createdBy = 10;
+    uint64 updatedBy = 11;
+    int64 createdAt = 12;
+    int64 updatedAt = 13;
+
+    int32 deletedVersion = 14;
+}
+
+// ========================
+// CREATE https://protovalidate.com
+// ========================
+
+message CreateRequest {
+    string title = 1 [(buf.validate.field).string.min_len = 1];
+    string slug = 2 [(buf.validate.field).string.min_len = 1];
+    string content = 3;
+    commonpb.PageType pageType = 4 [(buf.validate.field).enum.defined_only = true];
+    int32 sortOrder = 5;
+    commonpb.SEO seo = 6;
+    commonpb.AdsPlatform adsPlatform = 7;
+    commonpb.Status status = 8 [(buf.validate.field).enum.defined_only = true];
+    uint64 createdBy = 9;
+}
+
+message CreateResponse {
+    uint64 id = 1;
+}
+
+// ========================
+// UPDATE (with field mask)
+// ========================
+
+message UpdateRequest {
+    uint64 id = 1;
+
+    string title = 2;
+    string slug = 3;
+    string content = 4;
+    commonpb.PageType pageType = 5;
+    int32 sortOrder = 6;
+    commonpb.SEO seo = 7;
+    commonpb.AdsPlatform adsPlatform = 8;
+    commonpb.Status status = 9;
+
+    uint64 updatedBy = 10;
+
+    // standard Google field mask ("title", "slug", "seo", ...)
+    google.protobuf.FieldMask updateMask = 11;
+}
+
+message UpdateResponse {
+    uint64 id = 1;
+}
+
+// ========================
+// DELETE (batch)
+// ========================
+
+message DeleteRequest {
+    repeated uint64 ids = 1;
+    uint64 deletedBy = 2;
+}
+
+message DeleteResponse {
+    repeated uint64 ids = 1;
+}
+
+// ========================
+// LIST
+// ========================
+
+message ListRequest {
+    // filters
+    repeated uint64 ids = 1;
+    string title = 2;
+    string slug = 3;
+    repeated commonpb.PageType pageTypes = 4;
+    repeated commonpb.AdsPlatform adsPlatforms = 5;
+    repeated commonpb.Status statuses = 6;
+    int32 deletedVersion = 7;
+
+    // sql select override
+    string select = 8;
+
+    // sorting: "created_at desc", "sortOrder asc", etc.
+    string sort = 9;
+
+    // pagination
+    uint32 limit = 10;
+    uint32 offset = 11;
+    bool includeTotal = 12;
+}
+
+message ListResponse {
+    repeated StaticPage pages = 1;
+    uint64 total = 2;
+}
+
+// ========================
+// DETAIL (single)
+// ========================
+
+message GetRequest {
+    uint64 id = 1;
+    string slug = 2;
+
+    // optionally override columns
+    string select = 3;
+}
+
+message GetResponse {
+    StaticPage page = 1;
+}

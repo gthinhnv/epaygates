@@ -1,6 +1,9 @@
 version: v2
 inputs:
-  - directory: proto
+  - directory: ../../shared/proto
+    paths:
+      - ../../shared/proto/commonpb
+      - ../../shared/proto/staticpagepb
 plugins:
   - remote: buf.build/protocolbuffers/go
     out: gen/go
