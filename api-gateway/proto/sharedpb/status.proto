@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package sharedpb;
-
-enum Status {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_ACTIVE = 1;
-    STATUS_INACTIVE = 2;
-}

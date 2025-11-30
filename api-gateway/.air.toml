@@ -1,19 +1,19 @@
-root = "../.."
-testdata_dir = "services/metadata-service/testdata"
-tmp_dir = "services/metadata-service/logs"
+root = ".."
+testdata_dir = "api-gateway/testdata"
+tmp_dir = "api-gateway/logs"
 
 [build]
   args_bin = []
   bin = "./cmd/server/main"
   cmd = "go run ./cmd/server/main.go"
   delay = 1000
-  exclude_dir = ["shared/proto", "services/metadata-service/logs", "services/metadata-service/scripts"]
+  exclude_dir = ["shared/proto", "api-gateway/logs", "api-gateway/scripts"]
   exclude_file = []
   exclude_regex = ["_test.go"]
   exclude_unchanged = false
   follow_symlink = false
   full_bin = ""
-  include_dir = ["shared", "services/metadata-service"]
+  include_dir = ["shared", "api-gateway"]
   include_ext = ["go", "tpl", "tmpl", "html"]
   kill_delay = "0s"
   log = "build-errors.log"
