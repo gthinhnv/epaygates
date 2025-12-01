@@ -2,8 +2,8 @@ package staticpageservice
 
 import (
 	"apigateway/gen/go/staticpagepb"
+	"apigateway/internal/bootstrap"
 	"context"
-	"fmt"
 	"log"
 
 	"google.golang.org/grpc"
@@ -19,7 +19,7 @@ func NewStaticPageServiceServer() *StaticPageServiceServer {
 }
 
 func (s *StaticPageServiceServer) Create(ctx context.Context, req *staticpagepb.CreateRequest) (*staticpagepb.CreateResponse, error) {
-	conn, err := grpc.NewClient(fmt.Sprintf("localhost:%d", 50000), grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(bootstrap.SharedConfig.MetadataService.GRPC.LocalAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}

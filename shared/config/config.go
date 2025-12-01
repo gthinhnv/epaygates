@@ -1,6 +1,11 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"path/filepath"
+	"runtime"
+
+	"github.com/spf13/viper"
+)
 
 type Config struct {
 	MetadataService MetadataService
@@ -34,7 +39,10 @@ type Web struct {
 func Load(env string) (*Config, error) {
 	var config Config
 
-	viper.SetConfigFile("config." + env + ".yaml")
+	_, filename, _, _ := runtime.Caller(0)
+	baseDir := filepath.Dir(filename)
+
+	viper.SetConfigFile(baseDir + "/../config." + env + ".yaml")
 
 	if err := viper.ReadInConfig(); err != nil {
 		return nil, err
@@ -47,7 +55,7 @@ func Load(env string) (*Config, error) {
 	/*
 	 * Override config with local config
 	 */
-	viper.SetConfigFile("localconfig." + env + ".yaml")
+	viper.SetConfigFile(baseDir + "/../localconfig." + env + ".yaml")
 
 	if err := viper.ReadInConfig(); err == nil {
 		viper.Unmarshal(&config)
