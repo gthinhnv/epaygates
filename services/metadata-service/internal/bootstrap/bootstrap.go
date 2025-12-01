@@ -6,12 +6,14 @@ import (
 	"metadatasvc/internal/db"
 	"metadatasvc/internal/repositories"
 	"os"
+	"shared/pkg/logger"
 
 	"github.com/joho/godotenv"
 )
 
 var (
 	Config *config.Config
+	Logger *logger.Logger
 	DB     *db.DB
 	Repos  *repositories.Repositories
 )
@@ -24,6 +26,11 @@ func Init() error {
 	}
 
 	Config, err = config.Load(os.Getenv("ENV"))
+	if err != nil {
+		return err
+	}
+
+	Logger, err = logger.New(&Config.Log)
 	if err != nil {
 		return err
 	}

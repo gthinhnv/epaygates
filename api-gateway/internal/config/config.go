@@ -1,11 +1,14 @@
 package config
 
 import (
+	"shared/pkg/logger"
+
 	"github.com/spf13/viper"
 )
 
 type Config struct {
 	Port int
+	Log  logger.LogConfig
 }
 
 func Load(env string) (*Config, error) {

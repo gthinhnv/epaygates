@@ -2,12 +2,14 @@ package config
 
 import (
 	"metadatasvc/internal/db"
+	"shared/pkg/logger"
 
 	"github.com/spf13/viper"
 )
 
 type Config struct {
 	Port int
+	Log  logger.LogConfig
 	DB   db.Config
 }
 

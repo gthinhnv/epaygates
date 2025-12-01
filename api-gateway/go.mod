@@ -38,6 +38,7 @@ require (
 
 require (
 	github.com/gin-gonic/gin v1.11.0
+	github.com/sirupsen/logrus v1.9.3
 	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/text v0.27.0 // indirect
 )

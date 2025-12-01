@@ -1,4 +1,8 @@
 port: 50000
+log:
+  output: file
+  filePath: logs/app.log
+  level: info # level: info # logrus Level: error, warning, info, debug, trace
 db:
   host: 127.0.0.1
   port: 3306

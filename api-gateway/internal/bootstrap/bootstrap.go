@@ -4,6 +4,7 @@ import (
 	"apigateway/internal/config"
 	"os"
 	sharedConfig "shared/config"
+	"shared/pkg/logger"
 
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
@@ -13,6 +14,8 @@ import (
 var (
 	SharedConfig *sharedConfig.Config
 	Config       *config.Config
+
+	Logger *logger.Logger
 
 	MetadataServiceConn *grpc.ClientConn
 )
@@ -32,6 +35,11 @@ func Init() error {
 	}
 
 	Config, err = config.Load(appEnv)
+	if err != nil {
+		return err
+	}
+
+	Logger, err = logger.New(&Config.Log)
 	if err != nil {
 		return err
 	}
