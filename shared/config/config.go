@@ -14,26 +14,21 @@ type Config struct {
 	Web             Web
 }
 
-type Endpoint struct {
-	LocalAddress  string
-	PublicAddress string
-}
-
 type MetadataService struct {
-	GRPC Endpoint
+	GRPCAddress string
 }
 
 type ApiGateway struct {
-	GRPC Endpoint
-	HTTP Endpoint
+	GRPCAddress string
+	HTTPAddress string
 }
 
 type CMS struct {
-	HTTP Endpoint
+	HTTPAddress string
 }
 
 type Web struct {
-	HTTP Endpoint
+	HTTPAddress string
 }
 
 func Load(env string) (*Config, error) {
