@@ -19,12 +19,5 @@ func NewStaticPageServiceServer() *StaticPageServiceServer {
 
 func (s *StaticPageServiceServer) Create(ctx context.Context, req *staticpagepb.CreateRequest) (*staticpagepb.CreateResponse, error) {
 	bootstrap.Logger.Info("StaticPageServiceServer: Create called")
-	resp, err := s.client.Create(ctx, req)
-	if err != nil {
-		return nil, err
-	}
-
-	return &staticpagepb.CreateResponse{
-		Id: resp.Id,
-	}, nil
+	return s.client.Create(ctx, req)
 }

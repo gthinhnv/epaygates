@@ -2,7 +2,10 @@ module shared
 
 go 1.24.0
 
-require github.com/spf13/viper v1.21.0
+require (
+	github.com/sirupsen/logrus v1.9.3
+	github.com/spf13/viper v1.21.0
+)
 
 require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect

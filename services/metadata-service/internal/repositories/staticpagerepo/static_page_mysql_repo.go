@@ -2,6 +2,7 @@ package staticpagerepo
 
 import (
 	"context"
+	"fmt"
 	"metadatasvc/gen/go/staticpagepb"
 
 	"github.com/jmoiron/sqlx"
@@ -65,7 +66,15 @@ func (r *MysqlRepository) Delete(ctx context.Context, ids []uint64, deletedBy ui
 // GetByID retrieves a static page by ID.
 // --------------------------------------------------
 func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb.StaticPage, error) {
-	return nil, nil
+	var res staticpagepb.StaticPage
+
+	err := getByIDStmt.GetContext(ctx, &res, id)
+	if err != nil {
+		fmt.Println("errrrrrrrrr", err)
+		return nil, err
+	}
+
+	return &res, nil
 }
 
 // --------------------------------------------------

@@ -30,16 +30,16 @@ type StaticPage struct {
 	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Slug           string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
 	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	PageType       commonpb.PageType      `protobuf:"varint,5,opt,name=pageType,proto3,enum=commonpb.PageType" json:"pageType,omitempty"`
-	SortOrder      int32                  `protobuf:"varint,6,opt,name=sortOrder,proto3" json:"sortOrder,omitempty"`
+	PageType       commonpb.PageType      `protobuf:"varint,5,opt,name=page_type,json=pageType,proto3,enum=commonpb.PageType" json:"page_type,omitempty"`
+	SortOrder      int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Seo            *commonpb.SEO          `protobuf:"bytes,7,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform    commonpb.AdsPlatform   `protobuf:"varint,8,opt,name=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"adsPlatform,omitempty"`
+	AdsPlatform    commonpb.AdsPlatform   `protobuf:"varint,8,opt,name=ads_platform,json=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"ads_platform,omitempty"`
 	Status         commonpb.Status        `protobuf:"varint,9,opt,name=status,proto3,enum=commonpb.Status" json:"status,omitempty"`
-	CreatedBy      uint64                 `protobuf:"varint,10,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
-	UpdatedBy      uint64                 `protobuf:"varint,11,opt,name=updatedBy,proto3" json:"updatedBy,omitempty"`
-	CreatedAt      int64                  `protobuf:"varint,12,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	UpdatedAt      int64                  `protobuf:"varint,13,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
-	DeletedVersion int32                  `protobuf:"varint,14,opt,name=deletedVersion,proto3" json:"deletedVersion,omitempty"`
+	CreatedBy      uint64                 `protobuf:"varint,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy      uint64                 `protobuf:"varint,11,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt      int64                  `protobuf:"varint,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt      int64                  `protobuf:"varint,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedVersion int32                  `protobuf:"varint,14,opt,name=deleted_version,json=deletedVersion,proto3" json:"deleted_version,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -177,12 +177,12 @@ type CreateRequest struct {
 	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	Slug          string                 `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	PageType      commonpb.PageType      `protobuf:"varint,4,opt,name=pageType,proto3,enum=commonpb.PageType" json:"pageType,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,5,opt,name=sortOrder,proto3" json:"sortOrder,omitempty"`
+	PageType      commonpb.PageType      `protobuf:"varint,4,opt,name=page_type,json=pageType,proto3,enum=commonpb.PageType" json:"page_type,omitempty"`
+	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Seo           *commonpb.SEO          `protobuf:"bytes,6,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform   commonpb.AdsPlatform   `protobuf:"varint,7,opt,name=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"adsPlatform,omitempty"`
+	AdsPlatform   commonpb.AdsPlatform   `protobuf:"varint,7,opt,name=ads_platform,json=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"ads_platform,omitempty"`
 	Status        commonpb.Status        `protobuf:"varint,8,opt,name=status,proto3,enum=commonpb.Status" json:"status,omitempty"`
-	CreatedBy     uint64                 `protobuf:"varint,9,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
+	CreatedBy     uint64                 `protobuf:"varint,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -330,14 +330,14 @@ type UpdateRequest struct {
 	Title       string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Slug        string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
 	Content     string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	PageType    commonpb.PageType      `protobuf:"varint,5,opt,name=pageType,proto3,enum=commonpb.PageType" json:"pageType,omitempty"`
-	SortOrder   int32                  `protobuf:"varint,6,opt,name=sortOrder,proto3" json:"sortOrder,omitempty"`
+	PageType    commonpb.PageType      `protobuf:"varint,5,opt,name=page_type,json=pageType,proto3,enum=commonpb.PageType" json:"page_type,omitempty"`
+	SortOrder   int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Seo         *commonpb.SEO          `protobuf:"bytes,7,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform commonpb.AdsPlatform   `protobuf:"varint,8,opt,name=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"adsPlatform,omitempty"`
+	AdsPlatform commonpb.AdsPlatform   `protobuf:"varint,8,opt,name=ads_platform,json=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"ads_platform,omitempty"`
 	Status      commonpb.Status        `protobuf:"varint,9,opt,name=status,proto3,enum=commonpb.Status" json:"status,omitempty"`
-	UpdatedBy   uint64                 `protobuf:"varint,10,opt,name=updatedBy,proto3" json:"updatedBy,omitempty"`
+	UpdatedBy   uint64                 `protobuf:"varint,10,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	// standard Google field mask ("title", "slug", "seo", ...)
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,11,opt,name=updateMask,proto3" json:"updateMask,omitempty"`
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,11,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -595,8 +595,8 @@ type ListRequest struct {
 	Ids            []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Slug           string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
-	PageTypes      []commonpb.PageType    `protobuf:"varint,4,rep,packed,name=pageTypes,proto3,enum=commonpb.PageType" json:"pageTypes,omitempty"`
-	AdsPlatforms   []commonpb.AdsPlatform `protobuf:"varint,5,rep,packed,name=adsPlatforms,proto3,enum=commonpb.AdsPlatform" json:"adsPlatforms,omitempty"`
+	PageTypes      []commonpb.PageType    `protobuf:"varint,4,rep,packed,name=page_types,json=pageTypes,proto3,enum=commonpb.PageType" json:"page_types,omitempty"`
+	AdsPlatforms   []commonpb.AdsPlatform `protobuf:"varint,5,rep,packed,name=ads_platforms,json=adsPlatforms,proto3,enum=commonpb.AdsPlatform" json:"ads_platforms,omitempty"`
 	Statuses       []commonpb.Status      `protobuf:"varint,6,rep,packed,name=statuses,proto3,enum=commonpb.Status" json:"statuses,omitempty"`
 	DeletedVersion int32                  `protobuf:"varint,7,opt,name=deletedVersion,proto3" json:"deletedVersion,omitempty"`
 	// sql select override
@@ -886,50 +886,58 @@ var File_staticpagepb_schema_proto protoreflect.FileDescriptor
 
 const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
-	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a google/protobuf/field_mask.proto\x1a\x1bbuf/validate/validate.proto\"\xd2\x03\n" +
+	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a google/protobuf/field_mask.proto\x1a\x1bbuf/validate/validate.proto\"\xda\x03\n" +
 	"\n" +
 	"StaticPage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
 	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12.\n" +
-	"\bpageType\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1c\n" +
-	"\tsortOrder\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOR\x03seo\x127\n" +
-	"\vadsPlatform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
-	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1c\n" +
-	"\tcreatedBy\x18\n" +
-	" \x01(\x04R\tcreatedBy\x12\x1c\n" +
-	"\tupdatedBy\x18\v \x01(\x04R\tupdatedBy\x12\x1c\n" +
-	"\tcreatedAt\x18\f \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\r \x01(\x03R\tupdatedAt\x12&\n" +
-	"\x0edeletedVersion\x18\x0e \x01(\x05R\x0edeletedVersion\"\xe9\x02\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12/\n" +
+	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1d\n" +
+	"\n" +
+	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
+	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOR\x03seo\x128\n" +
+	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
+	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\n" +
+	" \x01(\x04R\tcreatedBy\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\v \x01(\x04R\tupdatedBy\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\f \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\r \x01(\x03R\tupdatedAt\x12'\n" +
+	"\x0fdeleted_version\x18\x0e \x01(\x05R\x0edeletedVersion\"\xed\x02\n" +
 	"\rCreateRequest\x12\x1d\n" +
 	"\x05title\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x1b\n" +
 	"\x04slug\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04slug\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\x128\n" +
-	"\bpageType\x18\x04 \x01(\x0e2\x12.commonpb.PageTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\bpageType\x12\x1c\n" +
-	"\tsortOrder\x18\x05 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\x06 \x01(\v2\r.commonpb.SEOR\x03seo\x127\n" +
-	"\vadsPlatform\x18\a \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x122\n" +
-	"\x06status\x18\b \x01(\x0e2\x10.commonpb.StatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1c\n" +
-	"\tcreatedBy\x18\t \x01(\x04R\tcreatedBy\" \n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\x129\n" +
+	"\tpage_type\x18\x04 \x01(\x0e2\x12.commonpb.PageTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\bpageType\x12\x1d\n" +
+	"\n" +
+	"sort_order\x18\x05 \x01(\x05R\tsortOrder\x12\x1f\n" +
+	"\x03seo\x18\x06 \x01(\v2\r.commonpb.SEOR\x03seo\x128\n" +
+	"\fads_platform\x18\a \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x122\n" +
+	"\x06status\x18\b \x01(\x0e2\x10.commonpb.StatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\t \x01(\x04R\tcreatedBy\" \n" +
 	"\x0eCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"\x8f\x03\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x94\x03\n" +
 	"\rUpdateRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
 	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12.\n" +
-	"\bpageType\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1c\n" +
-	"\tsortOrder\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOR\x03seo\x127\n" +
-	"\vadsPlatform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
-	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1c\n" +
-	"\tupdatedBy\x18\n" +
-	" \x01(\x04R\tupdatedBy\x12:\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12/\n" +
+	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1d\n" +
 	"\n" +
-	"updateMask\x18\v \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
+	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOR\x03seo\x128\n" +
+	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
+	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\n" +
+	" \x01(\x04R\tupdatedBy\x12;\n" +
+	"\vupdate_mask\x18\v \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\" \n" +
 	"\x0eUpdateResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"?\n" +
@@ -937,13 +945,14 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x1c\n" +
 	"\tdeletedBy\x18\x02 \x01(\x04R\tdeletedBy\"\"\n" +
 	"\x0eDeleteResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x8a\x03\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x8c\x03\n" +
 	"\vListRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04slug\x18\x03 \x01(\tR\x04slug\x120\n" +
-	"\tpageTypes\x18\x04 \x03(\x0e2\x12.commonpb.PageTypeR\tpageTypes\x129\n" +
-	"\fadsPlatforms\x18\x05 \x03(\x0e2\x15.commonpb.AdsPlatformR\fadsPlatforms\x12,\n" +
+	"\x04slug\x18\x03 \x01(\tR\x04slug\x121\n" +
+	"\n" +
+	"page_types\x18\x04 \x03(\x0e2\x12.commonpb.PageTypeR\tpageTypes\x12:\n" +
+	"\rads_platforms\x18\x05 \x03(\x0e2\x15.commonpb.AdsPlatformR\fadsPlatforms\x12,\n" +
 	"\bstatuses\x18\x06 \x03(\x0e2\x10.commonpb.StatusR\bstatuses\x12&\n" +
 	"\x0edeletedVersion\x18\a \x01(\x05R\x0edeletedVersion\x12\x16\n" +
 	"\x06select\x18\b \x01(\tR\x06select\x12\x12\n" +
@@ -996,21 +1005,21 @@ var file_staticpagepb_schema_proto_goTypes = []any{
 	(*fieldmaskpb.FieldMask)(nil), // 15: google.protobuf.FieldMask
 }
 var file_staticpagepb_schema_proto_depIdxs = []int32{
-	11, // 0: staticpagepb.StaticPage.pageType:type_name -> commonpb.PageType
+	11, // 0: staticpagepb.StaticPage.page_type:type_name -> commonpb.PageType
 	12, // 1: staticpagepb.StaticPage.seo:type_name -> commonpb.SEO
-	13, // 2: staticpagepb.StaticPage.adsPlatform:type_name -> commonpb.AdsPlatform
+	13, // 2: staticpagepb.StaticPage.ads_platform:type_name -> commonpb.AdsPlatform
 	14, // 3: staticpagepb.StaticPage.status:type_name -> commonpb.Status
-	11, // 4: staticpagepb.CreateRequest.pageType:type_name -> commonpb.PageType
+	11, // 4: staticpagepb.CreateRequest.page_type:type_name -> commonpb.PageType
 	12, // 5: staticpagepb.CreateRequest.seo:type_name -> commonpb.SEO
-	13, // 6: staticpagepb.CreateRequest.adsPlatform:type_name -> commonpb.AdsPlatform
+	13, // 6: staticpagepb.CreateRequest.ads_platform:type_name -> commonpb.AdsPlatform
 	14, // 7: staticpagepb.CreateRequest.status:type_name -> commonpb.Status
-	11, // 8: staticpagepb.UpdateRequest.pageType:type_name -> commonpb.PageType
+	11, // 8: staticpagepb.UpdateRequest.page_type:type_name -> commonpb.PageType
 	12, // 9: staticpagepb.UpdateRequest.seo:type_name -> commonpb.SEO
-	13, // 10: staticpagepb.UpdateRequest.adsPlatform:type_name -> commonpb.AdsPlatform
+	13, // 10: staticpagepb.UpdateRequest.ads_platform:type_name -> commonpb.AdsPlatform
 	14, // 11: staticpagepb.UpdateRequest.status:type_name -> commonpb.Status
-	15, // 12: staticpagepb.UpdateRequest.updateMask:type_name -> google.protobuf.FieldMask
-	11, // 13: staticpagepb.ListRequest.pageTypes:type_name -> commonpb.PageType
-	13, // 14: staticpagepb.ListRequest.adsPlatforms:type_name -> commonpb.AdsPlatform
+	15, // 12: staticpagepb.UpdateRequest.update_mask:type_name -> google.protobuf.FieldMask
+	11, // 13: staticpagepb.ListRequest.page_types:type_name -> commonpb.PageType
+	13, // 14: staticpagepb.ListRequest.ads_platforms:type_name -> commonpb.AdsPlatform
 	14, // 15: staticpagepb.ListRequest.statuses:type_name -> commonpb.Status
 	0,  // 16: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
 	0,  // 17: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
