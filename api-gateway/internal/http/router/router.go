@@ -1,7 +1,7 @@
 package router
 
 import (
-	"apigateway/internal/http/router/routerv1"
+	routerV1 "apigateway/internal/http/router/v1"
 	"net/http"
 	"os"
 
@@ -22,7 +22,7 @@ func New() *gin.Engine {
 	/*
 	 * V1 routes
 	 */
-	routerv1.New(r)
+	routerV1.New(r)
 
 	return r
 }
