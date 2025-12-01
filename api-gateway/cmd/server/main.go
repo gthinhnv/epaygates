@@ -4,12 +4,12 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"apigateway/internal/grpc/staticpageservice"
+	"apigateway/internal/http/router"
 	"fmt"
 	"log"
 	"net"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/soheilhy/cmux"
 	"google.golang.org/grpc"
 )
@@ -40,13 +40,10 @@ func main() {
 	}()
 
 	// --- Gin HTTP server ---
-	router := gin.Default()
-	router.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"status": "ok"})
-	})
+	r := router.New()
 
 	httpServer := &http.Server{
-		Handler: router,
+		Handler: r,
 	}
 
 	go func() {
