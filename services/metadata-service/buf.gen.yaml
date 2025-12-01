@@ -1,6 +1,6 @@
 version: v2
 inputs:
-  - directory: ../../shared/proto
+  - directory: ../../shared
     paths:
       - ../../shared/proto/commonpb
       - ../../shared/proto/staticpagepb

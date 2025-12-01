@@ -886,7 +886,7 @@ var File_staticpagepb_schema_proto protoreflect.FileDescriptor
 
 const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
-	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a google/protobuf/field_mask.proto\x1a\x1bbuf/validate/validate.proto\"\xda\x03\n" +
+	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a google/protobuf/field_mask.proto\"\xda\x03\n" +
 	"\n" +
 	"StaticPage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +

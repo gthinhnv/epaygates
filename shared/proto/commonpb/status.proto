@@ -3,7 +3,7 @@ syntax = "proto3";
 package commonpb;
 
 enum Status {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_ACTIVE = 1;
-    STATUS_INACTIVE = 2;
+  STATUS_UNSPECIFIED = 0;
+  STATUS_ACTIVE = 1;
+  STATUS_INACTIVE = 2;
 }

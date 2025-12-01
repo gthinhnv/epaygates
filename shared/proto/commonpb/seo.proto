@@ -3,8 +3,8 @@ syntax = "proto3";
 package commonpb;
 
 message SEO {
-    string metaTitle = 1;
-    string metaDesc = 2;
-    string metaKeywords = 3;
-    string schema = 4;
+  string meta_title = 1;
+  string meta_desc = 2;
+  string meta_keywords = 3;
+  string schema = 4;
 }

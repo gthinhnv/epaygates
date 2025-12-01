@@ -5,18 +5,18 @@ package staticpagepb;
 import "staticpagepb/schema.proto";
 
 service StaticPageService {
-    // Creating a page
-    rpc Create(CreateRequest) returns (CreateResponse);
+  // Creating a page
+  rpc Create(CreateRequest) returns (CreateResponse);
 
-    // Updating a page
-    rpc Update(UpdateRequest) returns (UpdateResponse);
+  // Updating a page
+  rpc Update(UpdateRequest) returns (UpdateResponse);
 
-    // Soft/hard delete
-    rpc Delete(DeleteRequest) returns (DeleteResponse);
+  // Soft/hard delete
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
 
-    // List pages (with pagination, filter, sort)
-    rpc List(ListRequest) returns (ListResponse);
+  // List pages (with pagination, filter, sort)
+  rpc List(ListRequest) returns (ListResponse);
 
-    // Get one page by ID/slug
-    rpc Get(GetRequest) returns (GetResponse);
+  // Get one page by ID/slug
+  rpc Get(GetRequest) returns (GetResponse);
 }

@@ -3,7 +3,7 @@ syntax = "proto3";
 package commonpb;
 
 enum PageType {
-    PAGE_TYPE_UNSPECIFIED = 0;
-    PAGE_TYPE_HEADER = 1;
-    PAGE_TYPE_FOOTER = 2;
+  PAGE_TYPE_UNSPECIFIED = 0;
+  PAGE_TYPE_HEADER = 1;
+  PAGE_TYPE_FOOTER = 2;
 }
