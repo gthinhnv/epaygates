@@ -3,12 +3,14 @@ package bootstrap
 import (
 	"apigateway/internal/config"
 	"os"
+	sharedConfig "shared/config"
 
 	"github.com/joho/godotenv"
 )
 
 var (
-	Config *config.Config
+	SharedConfig *sharedConfig.Config
+	Config       *config.Config
 )
 
 func Init() error {
@@ -18,7 +20,14 @@ func Init() error {
 		return err
 	}
 
-	Config, err = config.Load(os.Getenv("ENV"))
+	appEnv := os.Getenv("ENV")
+
+	SharedConfig, err = sharedConfig.Load(appEnv)
+	if err != nil {
+		return err
+	}
+
+	Config, err = config.Load(appEnv)
 	if err != nil {
 		return err
 	}

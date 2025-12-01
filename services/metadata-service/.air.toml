@@ -5,8 +5,8 @@ tmp_dir = "services/metadata-service/logs"
 [build]
   args_bin = []
   bin = "./cmd/server/main"
-  cmd = "go run ./cmd/server/main.go"
-  delay = 1000
+  cmd = "go build -o cmd/server/main ./cmd/server/main.go"
+  delay = 500
   exclude_dir = ["shared/proto", "services/metadata-service/logs", "services/metadata-service/scripts"]
   exclude_file = []
   exclude_regex = ["_test.go"]

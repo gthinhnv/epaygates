@@ -1,0 +1,19 @@
+metadataService:
+  grpc:
+    localAddress: "127.0.0.1:50000"
+    publicAddress: ""
+apiGateway:
+  grpc:
+    localAddress: "127.0.0.1:50500"
+    publicAddress: ""
+  http:
+    localAddress: "http://127.0.0.1:50500"
+    publicAddress: "http://127.0.0.1:50500"
+cms:
+  http:
+    localAddress: ""
+    publicAddress: ""
+web:
+  http:
+    localAddress: ""
+    publicAddress: ""
