@@ -2,23 +2,17 @@ package dbutil
 
 import (
 	"errors"
-	"fmt"
 	"reflect"
 	"sync"
 	"time"
 )
 
-// fieldCache stores mapping from dst type to slice of src/dst field indices
 var (
-	fieldCache sync.Map // map[reflect.Type][]fieldPair
+	fieldCache sync.Map // map[srcType][dstType][]fieldSetter
 )
 
-type fieldPair struct {
-	srcIndex int
-	dstIndex int
-}
+type fieldSetter func(src, dst reflect.Value)
 
-// MapStruct copies exported fields from src to dst efficiently.
 func MapStruct(src, dst interface{}) error {
 	if src == nil || dst == nil {
 		return errors.New("src or dst is nil")
@@ -39,97 +33,59 @@ func MapStruct(src, dst interface{}) error {
 		return errors.New("src and dst must be structs or pointers to structs")
 	}
 
-	dstType := dv.Type()
-	pairs := getFieldPairs(sv.Type(), dstType)
-
-	for _, pair := range pairs {
-		sField := sv.Field(pair.srcIndex)
-		dField := dv.Field(pair.dstIndex)
-
-		if dField.CanSet() {
-			fieldName := dstType.Field(pair.dstIndex).Name
-			if err := setValue(fieldName, sField, dField); err != nil {
-				return fmt.Errorf("cannot copy field %s: %w", fieldName, err)
-			}
-		}
+	setters := getSetters(sv.Type(), dv.Type())
+	for _, set := range setters {
+		set(sv, dv)
 	}
 
 	return nil
 }
 
-// getFieldPairs returns cached src->dst field index mapping
-func getFieldPairs(srcType, dstType reflect.Type) []fieldPair {
-	if cached, ok := fieldCache.Load(dstType); ok {
-		return cached.([]fieldPair)
+// getSetters returns or builds cached setter functions
+func getSetters(srcType, dstType reflect.Type) []fieldSetter {
+	key := srcType.String() + "->" + dstType.String()
+	if cached, ok := fieldCache.Load(key); ok {
+		return cached.([]fieldSetter)
 	}
 
-	var pairs []fieldPair
+	var setters []fieldSetter
 	for i := 0; i < dstType.NumField(); i++ {
 		dstField := dstType.Field(i)
 		if !dstField.IsExported() {
 			continue
 		}
+
 		if srcField, ok := srcType.FieldByName(dstField.Name); ok && srcField.IsExported() {
-			pairs = append(pairs, fieldPair{srcIndex: srcField.Index[0], dstIndex: i})
-		}
-	}
+			dstIndex := i
+			srcIndex := srcField.Index[0]
 
-	fieldCache.Store(dstType, pairs)
-	return pairs
-}
-
-// setValue handles pointers, structs, and basic types recursively
-func setValue(fieldName string, sv, dv reflect.Value) error {
-	if !sv.IsValid() || !dv.CanSet() {
-		return nil
-	}
-
-	// Special cases
-	switch fieldName {
-	case "CreatedAt", "UpdatedAt":
-		if sv.Type() == reflect.TypeOf(time.Time{}) {
-			ts := sv.Interface().(time.Time).Unix()
-			dv.Set(reflect.ValueOf(ts))
-			return nil
-		}
-	}
-
-	switch sv.Kind() {
-	case reflect.Ptr:
-		if sv.IsNil() {
-			return nil
-		}
-		if dv.Kind() == reflect.Ptr {
-			if dv.IsNil() {
-				dv.Set(reflect.New(dv.Type().Elem()))
+			// special handling for time.Time -> int64
+			if dstField.Name == "CreatedAt" || dstField.Name == "UpdatedAt" {
+				if srcField.Type == reflect.TypeOf(time.Time{}) && dstField.Type.Kind() == reflect.Int64 {
+					setters = append(setters, func(sv, dv reflect.Value) {
+						t := sv.Field(srcIndex).Interface().(time.Time).Unix()
+						dv.Field(dstIndex).SetInt(t)
+					})
+					continue
+				}
 			}
-			return setValue(fieldName, sv.Elem(), dv.Elem())
-		}
-		return setValue(fieldName, sv.Elem(), dv)
 
-	case reflect.Struct:
-		if dv.Kind() != reflect.Struct {
-			return fmt.Errorf("cannot assign struct to %s", dv.Type())
+			// assignable/convertible types
+			setters = append(setters, func(sv, dv reflect.Value) {
+				svField := sv.Field(srcIndex)
+				dvField := dv.Field(dstIndex)
+				if !dvField.CanSet() {
+					return
+				}
+				if svField.Type().AssignableTo(dvField.Type()) {
+					dvField.Set(svField)
+				} else if svField.Type().ConvertibleTo(dvField.Type()) {
+					dvField.Set(svField.Convert(dvField.Type()))
+				}
+			})
 		}
-		for i := 0; i < dv.NumField(); i++ {
-			df := dv.Field(i)
-			if df.CanSet() {
-				sf := sv.FieldByName(dv.Type().Field(i).Name)
-				setValue(fieldName, sf, df)
-			}
-		}
-		return nil
 	}
 
-	// Assignable or convertible types
-	if sv.Type().AssignableTo(dv.Type()) {
-		dv.Set(sv)
-		return nil
-	}
-	if sv.Type().ConvertibleTo(dv.Type()) {
-		dv.Set(sv.Convert(dv.Type()))
-		return nil
-	}
-
-	return fmt.Errorf("type mismatch: src=%s dst=%s", sv.Type(), dv.Type())
+	fieldCache.Store(key, setters)
+	return setters
 }
