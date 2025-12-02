@@ -5,6 +5,6 @@ package commonpb;
 message SEO {
   string meta_title = 1;
   string meta_desc = 2;
-  string meta_keywords = 3;
+  repeated string meta_keywords = 3;
   string schema = 4;
 }

@@ -4,7 +4,11 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"context"
+	"fmt"
 	"net/http"
+	"shared/models/staticpage"
+
+	"github.com/mitchellh/mapstructure"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -25,6 +29,23 @@ func (h *StaticPageHandler) RegisterRoutes(router *gin.RouterGroup) {
 }
 
 func (h *StaticPageHandler) Get(c *gin.Context) {
+	fmt.Println("**************")
+	staticPageDB := staticpage.StaticPage{
+		Id:      1,
+		Title:   "About Us",
+		Content: "This is the About Us page content.",
+		Status:  1,
+	}
+	var staticPageProto staticpagepb.StaticPage
+
+	err := mapstructure.Decode(&staticPageDB, &staticPageProto)
+	if err != nil {
+		fmt.Println("Error decoding:", err)
+		// return
+	}
+	fmt.Println("staticPageProto:", staticPageProto)
+	return
+
 	resp, err := h.client.Get(context.Background(), &staticpagepb.GetRequest{
 		Id: 1,
 	})
