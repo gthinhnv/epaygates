@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"metadatasvc/gen/go/staticpagepb"
+	"shared/models/staticpage"
+	"shared/pkg/utils/dbutil"
 
 	"github.com/jmoiron/sqlx"
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -66,14 +68,16 @@ func (r *MysqlRepository) Delete(ctx context.Context, ids []uint64, deletedBy ui
 // GetByID retrieves a static page by ID.
 // --------------------------------------------------
 func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb.StaticPage, error) {
-	var res staticpagepb.StaticPage
+	var model staticpage.StaticPage
 
-	err := getByIDStmt.GetContext(ctx, &res, id)
+	err := r.db.Get(&model, "SELECT * FROM static_pages WHERE id = ?", id)
 	if err != nil {
-		fmt.Println("errrrrrrrrr", err)
 		return nil, err
 	}
 
+	var res staticpagepb.StaticPage
+	err = dbutil.MapStruct(model, &res)
+	fmt.Println("err", err)
 	return &res, nil
 }
 
