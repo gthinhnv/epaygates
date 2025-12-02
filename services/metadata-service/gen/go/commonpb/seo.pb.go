@@ -23,9 +23,9 @@ const (
 
 type SEO struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MetaTitle     string                 `protobuf:"bytes,1,opt,name=metaTitle,proto3" json:"metaTitle,omitempty"`
-	MetaDesc      string                 `protobuf:"bytes,2,opt,name=metaDesc,proto3" json:"metaDesc,omitempty"`
-	MetaKeywords  string                 `protobuf:"bytes,3,opt,name=metaKeywords,proto3" json:"metaKeywords,omitempty"`
+	MetaTitle     string                 `protobuf:"bytes,1,opt,name=meta_title,json=metaTitle,proto3" json:"meta_title,omitempty"`
+	MetaDesc      string                 `protobuf:"bytes,2,opt,name=meta_desc,json=metaDesc,proto3" json:"meta_desc,omitempty"`
+	MetaKeywords  []string               `protobuf:"bytes,3,rep,name=meta_keywords,json=metaKeywords,proto3" json:"meta_keywords,omitempty"`
 	Schema        string                 `protobuf:"bytes,4,opt,name=schema,proto3" json:"schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -75,11 +75,11 @@ func (x *SEO) GetMetaDesc() string {
 	return ""
 }
 
-func (x *SEO) GetMetaKeywords() string {
+func (x *SEO) GetMetaKeywords() []string {
 	if x != nil {
 		return x.MetaKeywords
 	}
-	return ""
+	return nil
 }
 
 func (x *SEO) GetSchema() string {
@@ -93,11 +93,12 @@ var File_commonpb_seo_proto protoreflect.FileDescriptor
 
 const file_commonpb_seo_proto_rawDesc = "" +
 	"\n" +
-	"\x12commonpb/seo.proto\x12\bcommonpb\"{\n" +
-	"\x03SEO\x12\x1c\n" +
-	"\tmetaTitle\x18\x01 \x01(\tR\tmetaTitle\x12\x1a\n" +
-	"\bmetaDesc\x18\x02 \x01(\tR\bmetaDesc\x12\"\n" +
-	"\fmetaKeywords\x18\x03 \x01(\tR\fmetaKeywords\x12\x16\n" +
+	"\x12commonpb/seo.proto\x12\bcommonpb\"~\n" +
+	"\x03SEO\x12\x1d\n" +
+	"\n" +
+	"meta_title\x18\x01 \x01(\tR\tmetaTitle\x12\x1b\n" +
+	"\tmeta_desc\x18\x02 \x01(\tR\bmetaDesc\x12#\n" +
+	"\rmeta_keywords\x18\x03 \x03(\tR\fmetaKeywords\x12\x16\n" +
 	"\x06schema\x18\x04 \x01(\tR\x06schemaBu\n" +
 	"\fcom.commonpbB\bSeoProtoP\x01Z\x1bmetadatasvc/gen/go/commonpb\xa2\x02\x03CXX\xaa\x02\bCommonpb\xca\x02\bCommonpb\xe2\x02\x14Commonpb\\GPBMetadata\xea\x02\bCommonpbb\x06proto3"
 

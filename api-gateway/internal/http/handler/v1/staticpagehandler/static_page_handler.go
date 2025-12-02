@@ -4,7 +4,6 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"context"
-	"fmt"
 	"net/http"
 	"shared/models/staticpage"
 	"shared/pkg/utils/dbutil"
@@ -29,7 +28,7 @@ func (h *StaticPageHandler) RegisterRoutes(router *gin.RouterGroup) {
 
 func (h *StaticPageHandler) Get(c *gin.Context) {
 	resp, err := h.client.Get(context.Background(), &staticpagepb.GetRequest{
-		Id: 1,
+		Id: 18,
 	})
 	if err != nil {
 		bootstrap.Logger.WithFields(logrus.Fields{
@@ -44,7 +43,16 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 
 	var staticPage staticpage.StaticPage
 	err = dbutil.MapStruct(resp.Page, &staticPage)
-	fmt.Println("err", err)
+	if err != nil {
+		bootstrap.Logger.WithFields(logrus.Fields{
+			"err": err,
+		}).Warn("StaticPageHandler >>> Get: failed to get map struct proto to model")
+
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Failed to get static page",
+		})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",

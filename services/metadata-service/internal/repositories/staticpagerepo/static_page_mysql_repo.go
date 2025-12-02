@@ -2,6 +2,7 @@ package staticpagerepo
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"metadatasvc/gen/go/staticpagepb"
 	"shared/models/staticpage"
@@ -26,13 +27,18 @@ func NewMysqlRepository(db *sqlx.DB) Repository {
 // Create inserts a new static page and returns its ID.
 // --------------------------------------------------
 func (r *MysqlRepository) Create(ctx context.Context, page *staticpagepb.CreateRequest) (uint64, error) {
+	var seoJson []byte
+	if page.Seo != nil {
+		seoJson, _ = json.Marshal(page.Seo)
+	}
+
 	res, err := createStmt.ExecContext(ctx,
 		page.Title,
 		page.Slug,
 		page.Content,
 		page.PageType,
 		page.SortOrder,
-		page.Seo,
+		seoJson,
 		page.AdsPlatform,
 		page.Status,
 		page.CreatedBy,
@@ -75,9 +81,12 @@ func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb
 		return nil, err
 	}
 
+	fmt.Println("***", model.Seo)
+
 	var res staticpagepb.StaticPage
 	err = dbutil.MapStruct(model, &res)
 	fmt.Println("err", err)
+	fmt.Println("seo", res.Seo)
 	return &res, nil
 }
 

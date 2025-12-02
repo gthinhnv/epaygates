@@ -32,7 +32,7 @@ type StaticPage struct {
 	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
 	PageType       commonpb.PageType      `protobuf:"varint,5,opt,name=page_type,json=pageType,proto3,enum=commonpb.PageType" json:"page_type,omitempty"`
 	SortOrder      int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Seo            *commonpb.SEO          `protobuf:"bytes,7,opt,name=seo,proto3" json:"seo,omitempty"`
+	Seo            *commonpb.SEO          `protobuf:"bytes,7,opt,name=seo,proto3,oneof" json:"seo,omitempty"`
 	AdsPlatform    commonpb.AdsPlatform   `protobuf:"varint,8,opt,name=ads_platform,json=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"ads_platform,omitempty"`
 	Status         commonpb.Status        `protobuf:"varint,9,opt,name=status,proto3,enum=commonpb.Status" json:"status,omitempty"`
 	CreatedBy      uint64                 `protobuf:"varint,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
@@ -496,7 +496,7 @@ func (x *UpdateResponse) GetId() uint64 {
 type DeleteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	DeletedBy     uint64                 `protobuf:"varint,2,opt,name=deletedBy,proto3" json:"deletedBy,omitempty"`
+	DeletedBy     uint64                 `protobuf:"varint,2,opt,name=deleted_by,json=deletedBy,proto3" json:"deleted_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -598,7 +598,7 @@ type ListRequest struct {
 	PageTypes      []commonpb.PageType    `protobuf:"varint,4,rep,packed,name=page_types,json=pageTypes,proto3,enum=commonpb.PageType" json:"page_types,omitempty"`
 	AdsPlatforms   []commonpb.AdsPlatform `protobuf:"varint,5,rep,packed,name=ads_platforms,json=adsPlatforms,proto3,enum=commonpb.AdsPlatform" json:"ads_platforms,omitempty"`
 	Statuses       []commonpb.Status      `protobuf:"varint,6,rep,packed,name=statuses,proto3,enum=commonpb.Status" json:"statuses,omitempty"`
-	DeletedVersion int32                  `protobuf:"varint,7,opt,name=deletedVersion,proto3" json:"deletedVersion,omitempty"`
+	DeletedVersion int32                  `protobuf:"varint,7,opt,name=deleted_version,json=deletedVersion,proto3" json:"deleted_version,omitempty"`
 	// sql select override
 	Select string `protobuf:"bytes,8,opt,name=select,proto3" json:"select,omitempty"`
 	// sorting: "created_at desc", "sortOrder asc", etc.
@@ -606,7 +606,6 @@ type ListRequest struct {
 	// pagination
 	Limit         uint32 `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset        uint32 `protobuf:"varint,11,opt,name=offset,proto3" json:"offset,omitempty"`
-	IncludeTotal  bool   `protobuf:"varint,12,opt,name=includeTotal,proto3" json:"includeTotal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -716,13 +715,6 @@ func (x *ListRequest) GetOffset() uint32 {
 		return x.Offset
 	}
 	return 0
-}
-
-func (x *ListRequest) GetIncludeTotal() bool {
-	if x != nil {
-		return x.IncludeTotal
-	}
-	return false
 }
 
 type ListResponse struct {
@@ -886,7 +878,7 @@ var File_staticpagepb_schema_proto protoreflect.FileDescriptor
 
 const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
-	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a google/protobuf/field_mask.proto\"\xda\x03\n" +
+	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a google/protobuf/field_mask.proto\"\xe7\x03\n" +
 	"\n" +
 	"StaticPage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
@@ -895,8 +887,8 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12/\n" +
 	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1d\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOR\x03seo\x128\n" +
+	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12$\n" +
+	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOH\x00R\x03seo\x88\x01\x01\x128\n" +
 	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
 	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1d\n" +
 	"\n" +
@@ -908,7 +900,8 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"created_at\x18\f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\r \x01(\x03R\tupdatedAt\x12'\n" +
-	"\x0fdeleted_version\x18\x0e \x01(\x05R\x0edeletedVersion\"\xed\x02\n" +
+	"\x0fdeleted_version\x18\x0e \x01(\x05R\x0edeletedVersionB\x06\n" +
+	"\x04_seo\"\xed\x02\n" +
 	"\rCreateRequest\x12\x1d\n" +
 	"\x05title\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x1b\n" +
 	"\x04slug\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04slug\x12\x18\n" +
@@ -940,12 +933,13 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\vupdate_mask\x18\v \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\" \n" +
 	"\x0eUpdateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"?\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"@\n" +
 	"\rDeleteRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x1c\n" +
-	"\tdeletedBy\x18\x02 \x01(\x04R\tdeletedBy\"\"\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x1d\n" +
+	"\n" +
+	"deleted_by\x18\x02 \x01(\x04R\tdeletedBy\"\"\n" +
 	"\x0eDeleteResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x8c\x03\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\xe9\x02\n" +
 	"\vListRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
@@ -953,14 +947,13 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
 	"page_types\x18\x04 \x03(\x0e2\x12.commonpb.PageTypeR\tpageTypes\x12:\n" +
 	"\rads_platforms\x18\x05 \x03(\x0e2\x15.commonpb.AdsPlatformR\fadsPlatforms\x12,\n" +
-	"\bstatuses\x18\x06 \x03(\x0e2\x10.commonpb.StatusR\bstatuses\x12&\n" +
-	"\x0edeletedVersion\x18\a \x01(\x05R\x0edeletedVersion\x12\x16\n" +
+	"\bstatuses\x18\x06 \x03(\x0e2\x10.commonpb.StatusR\bstatuses\x12'\n" +
+	"\x0fdeleted_version\x18\a \x01(\x05R\x0edeletedVersion\x12\x16\n" +
 	"\x06select\x18\b \x01(\tR\x06select\x12\x12\n" +
 	"\x04sort\x18\t \x01(\tR\x04sort\x12\x14\n" +
 	"\x05limit\x18\n" +
 	" \x01(\rR\x05limit\x12\x16\n" +
-	"\x06offset\x18\v \x01(\rR\x06offset\x12\"\n" +
-	"\fincludeTotal\x18\f \x01(\bR\fincludeTotal\"T\n" +
+	"\x06offset\x18\v \x01(\rR\x06offset\"T\n" +
 	"\fListResponse\x12.\n" +
 	"\x05pages\x18\x01 \x03(\v2\x18.staticpagepb.StaticPageR\x05pages\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x04R\x05total\"H\n" +
@@ -1035,6 +1028,7 @@ func file_staticpagepb_schema_proto_init() {
 	if File_staticpagepb_schema_proto != nil {
 		return
 	}
+	file_staticpagepb_schema_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
