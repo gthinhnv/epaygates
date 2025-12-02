@@ -3,7 +3,6 @@ package staticpagerepo
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"metadatasvc/gen/go/staticpagepb"
 	"shared/models/staticpage"
 	"shared/pkg/utils/dbutil"
@@ -81,12 +80,12 @@ func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb
 		return nil, err
 	}
 
-	fmt.Println("***", model.Seo)
-
 	var res staticpagepb.StaticPage
-	err = dbutil.MapStruct(model, &res)
-	fmt.Println("err", err)
-	fmt.Println("seo", res.Seo)
+
+	if err := dbutil.MapStruct(model, &res); err != nil {
+		return nil, err
+	}
+
 	return &res, nil
 }
 

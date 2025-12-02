@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	fieldCache sync.Map // map[srcType][dstType][]fieldSetter
+	fieldCache sync.Map // map[string][]fieldSetter
 )
 
 type fieldSetter func(src, dst reflect.Value)
@@ -18,19 +18,18 @@ func MapStruct(src, dst interface{}) error {
 		return errors.New("src or dst is nil")
 	}
 
+	sv := reflect.ValueOf(src)
 	dv := reflect.ValueOf(dst)
+
 	if dv.Kind() != reflect.Ptr || dv.IsNil() {
 		return errors.New("dst must be a non-nil pointer")
 	}
-	dv = dv.Elem()
 
-	sv := reflect.ValueOf(src)
-	if sv.Kind() == reflect.Ptr && !sv.IsNil() {
-		sv = sv.Elem()
-	}
+	sv = indirect(sv)
+	dv = indirect(dv)
 
 	if sv.Kind() != reflect.Struct || dv.Kind() != reflect.Struct {
-		return errors.New("src and dst must be structs or pointers to structs")
+		return errors.New("src and dst must be struct or *struct")
 	}
 
 	setters := getSetters(sv.Type(), dv.Type())
@@ -41,7 +40,6 @@ func MapStruct(src, dst interface{}) error {
 	return nil
 }
 
-// getSetters returns or builds cached setter functions
 func getSetters(srcType, dstType reflect.Type) []fieldSetter {
 	key := srcType.String() + "->" + dstType.String()
 	if cached, ok := fieldCache.Load(key); ok {
@@ -49,52 +47,173 @@ func getSetters(srcType, dstType reflect.Type) []fieldSetter {
 	}
 
 	var setters []fieldSetter
+
 	for i := 0; i < dstType.NumField(); i++ {
 		dstField := dstType.Field(i)
 		if !dstField.IsExported() {
 			continue
 		}
 
-		if srcField, ok := srcType.FieldByName(dstField.Name); ok && srcField.IsExported() {
-			dstIndex := i
-			srcIndex := srcField.Index[0]
+		srcField, ok := srcType.FieldByName(dstField.Name)
+		if !ok || !srcField.IsExported() {
+			continue
+		}
 
-			// special handling for time.Time -> int64
-			if dstField.Name == "CreatedAt" || dstField.Name == "UpdatedAt" {
-				if srcField.Type == reflect.TypeOf(time.Time{}) && dstField.Type.Kind() == reflect.Int64 {
-					setters = append(setters, func(sv, dv reflect.Value) {
-						t := sv.Field(srcIndex).Interface().(time.Time).Unix()
-						dv.Field(dstIndex).SetInt(t)
-					})
-					continue
-				}
+		dstIndex := dstField.Index
+		srcIndex := srcField.Index
 
-				if srcField.Type.Kind() == reflect.Int64 && dstField.Type == reflect.TypeOf(time.Time{}) {
-					setters = append(setters, func(sv, dv reflect.Value) {
-						sec := sv.Field(srcIndex).Interface().(int64)
-						t := time.Unix(sec, 0)
-						dv.Field(dstIndex).Set(reflect.ValueOf(t))
-					})
-					continue
-				}
-			}
+		srcFieldType := srcField.Type
+		dstFieldType := dstField.Type
 
-			// assignable/convertible types
+		// ----------------------------------------------------------
+		// Special case: time.Time <-> int64
+		// ----------------------------------------------------------
+		if (dstField.Name == "CreatedAt" || dstField.Name == "UpdatedAt") &&
+			srcFieldType == reflect.TypeOf(time.Time{}) &&
+			dstFieldType.Kind() == reflect.Int64 {
+
 			setters = append(setters, func(sv, dv reflect.Value) {
-				svField := sv.Field(srcIndex)
-				dvField := dv.Field(dstIndex)
-				if !dvField.CanSet() {
+				svField := fieldByIndex(sv, srcIndex)
+				if !svField.IsValid() {
 					return
 				}
-				if svField.Type().AssignableTo(dvField.Type()) {
-					dvField.Set(svField)
-				} else if svField.Type().ConvertibleTo(dvField.Type()) {
-					dvField.Set(svField.Convert(dvField.Type()))
+				sec := svField.Interface().(time.Time).Unix()
+				fieldByIndex(dv, dstIndex).SetInt(sec)
+			})
+			continue
+		}
+
+		if (dstField.Name == "CreatedAt" || dstField.Name == "UpdatedAt") &&
+			srcFieldType.Kind() == reflect.Int64 &&
+			dstFieldType == reflect.TypeOf(time.Time{}) {
+
+			setters = append(setters, func(sv, dv reflect.Value) {
+				svField := fieldByIndex(sv, srcIndex)
+				if !svField.IsValid() {
+					return
+				}
+				t := time.Unix(svField.Int(), 0)
+				fieldByIndex(dv, dstIndex).Set(reflect.ValueOf(t))
+			})
+			continue
+		}
+
+		// ----------------------------------------------------------
+		// Nested struct or pointer-to-struct → recursively map
+		// ----------------------------------------------------------
+		if isStructOrPtrStruct(srcFieldType) &&
+			isStructOrPtrStruct(dstFieldType) {
+
+			nestedSrc := indirectType(srcFieldType)
+			nestedDst := indirectType(dstFieldType)
+
+			nestedSet := getSetters(nestedSrc, nestedDst)
+
+			setters = append(setters, func(sv, dv reflect.Value) {
+				svField := fieldByIndex(sv, srcIndex)
+				if !svField.IsValid() {
+					return
+				}
+
+				svField = indirect(svField)
+				if svField.Kind() != reflect.Struct {
+					return
+				}
+
+				dvField := fieldByIndex(dv, dstIndex)
+
+				// allocate pointer target if needed
+				if dvField.Kind() == reflect.Ptr {
+					if dvField.IsNil() {
+						dvField.Set(reflect.New(dvField.Type().Elem()))
+					}
+					dvField = dvField.Elem()
+				}
+
+				if dvField.Kind() != reflect.Struct {
+					return
+				}
+
+				for _, n := range nestedSet {
+					n(svField, dvField)
 				}
 			})
+
+			continue
 		}
+
+		// ----------------------------------------------------------
+		// Normal assign / convert
+		// ----------------------------------------------------------
+		setters = append(setters, func(sv, dv reflect.Value) {
+			svField := fieldByIndex(sv, srcIndex)
+			if !svField.IsValid() {
+				return
+			}
+
+			svField = indirect(svField)
+
+			dvField := fieldByIndex(dv, dstIndex)
+			if !dvField.CanSet() {
+				return
+			}
+
+			if dvField.Kind() == reflect.Ptr {
+				if dvField.IsNil() {
+					dvField.Set(reflect.New(dvField.Type().Elem()))
+				}
+				dvField = dvField.Elem()
+			}
+
+			if svField.Type().AssignableTo(dvField.Type()) {
+				dvField.Set(svField)
+			} else if svField.Type().ConvertibleTo(dvField.Type()) {
+				dvField.Set(svField.Convert(dvField.Type()))
+			}
+		})
 	}
 
 	fieldCache.Store(key, setters)
 	return setters
+}
+
+// ----------------------------------------------------------
+// Helpers
+// ----------------------------------------------------------
+
+func indirect(v reflect.Value) reflect.Value {
+	for v.Kind() == reflect.Ptr {
+		if v.IsNil() {
+			return v
+		}
+		v = v.Elem()
+	}
+	return v
+}
+
+func indirectType(t reflect.Type) reflect.Type {
+	for t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+	return t
+}
+
+func fieldByIndex(v reflect.Value, index []int) reflect.Value {
+	for _, i := range index {
+		if v.Kind() == reflect.Ptr {
+			if v.IsNil() {
+				return reflect.Value{}
+			}
+			v = v.Elem()
+		}
+		v = v.Field(i)
+	}
+	return v
+}
+
+func isStructOrPtrStruct(t reflect.Type) bool {
+	if t.Kind() == reflect.Struct {
+		return true
+	}
+	return t.Kind() == reflect.Ptr && t.Elem().Kind() == reflect.Struct
 }
