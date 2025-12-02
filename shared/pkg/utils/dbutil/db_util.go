@@ -68,6 +68,15 @@ func getSetters(srcType, dstType reflect.Type) []fieldSetter {
 					})
 					continue
 				}
+
+				if srcField.Type.Kind() == reflect.Int64 && dstField.Type == reflect.TypeOf(time.Time{}) {
+					setters = append(setters, func(sv, dv reflect.Value) {
+						sec := sv.Field(srcIndex).Interface().(int64)
+						t := time.Unix(sec, 0)
+						dv.Field(dstIndex).Set(reflect.ValueOf(t))
+					})
+					continue
+				}
 			}
 
 			// assignable/convertible types

@@ -4,7 +4,10 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"context"
+	"fmt"
 	"net/http"
+	"shared/models/staticpage"
+	"shared/pkg/utils/dbutil"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -39,8 +42,12 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 		return
 	}
 
+	var staticPage staticpage.StaticPage
+	err = dbutil.MapStruct(resp.Page, &staticPage)
+	fmt.Println("err", err)
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
-		"data":    resp.Page,
+		"data":    staticPage,
 	})
 }
