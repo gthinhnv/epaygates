@@ -6,7 +6,9 @@ import (
 	"context"
 	"net/http"
 	"shared/models/staticpage"
+	"shared/pkg/utils/apiutil"
 	"shared/pkg/utils/dbutil"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -27,16 +29,27 @@ func (h *StaticPageHandler) RegisterRoutes(router *gin.RouterGroup) {
 }
 
 func (h *StaticPageHandler) Get(c *gin.Context) {
+	// Parse ID
+	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_NOT_FOUND,
+			Message: "Record doen't exist",
+		})
+		return
+	}
+
 	resp, err := h.client.Get(context.Background(), &staticpagepb.GetRequest{
-		Id: 18,
+		Id: id,
 	})
 	if err != nil {
 		bootstrap.Logger.WithFields(logrus.Fields{
 			"err": err,
 		}).Warn("StaticPageHandler >>> Get: failed to get static page")
 
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to get static page",
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "An error happened when getting data",
 		})
 		return
 	}
@@ -48,14 +61,16 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 			"err": err,
 		}).Warn("StaticPageHandler >>> Get: failed to get map struct proto to model")
 
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to get static page",
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "An error happened when getting data",
 		})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Success",
-		"data":    staticPage,
+	c.JSON(http.StatusOK, apiutil.Response{
+		Code:    apiutil.CODE_SUCCESS,
+		Message: "Success",
+		Data:    staticPage,
 	})
 }
