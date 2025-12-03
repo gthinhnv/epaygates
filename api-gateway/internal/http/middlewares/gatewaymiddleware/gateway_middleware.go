@@ -18,15 +18,16 @@ func ContextSetup() gin.HandlerFunc {
 		c.Header("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE")
 		c.Header("Access-Control-Max-Age", "86400")
 
-		if c.Request.Method == http.MethodOptions {
-			if origin := c.GetHeader("origin"); origin != "" {
-				if isAllowedOrigin(origin) {
-					c.Header("Access-Control-Allow-Origin", origin)
-					c.Header("Access-Control-Allow-Credentials", "true")
-					c.AbortWithStatus(http.StatusNoContent)
-					return
-				}
+		if origin := c.GetHeader("origin"); origin != "" {
+			if isAllowedOrigin(origin) {
+				c.Header("Access-Control-Allow-Origin", origin)
+				c.Header("Access-Control-Allow-Credentials", "true")
 			}
+		}
+
+		if c.Request.Method == http.MethodOptions {
+			c.AbortWithStatus(http.StatusNoContent)
+			return
 		}
 
 		c.Next()

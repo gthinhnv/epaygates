@@ -402,6 +402,7 @@ function responseHandler(res) {
 }
 
 function operateFormatter(value, row, index) {
+    console.log('**********', row);
     return [
         `)
 //line internal/http/views/pages/staticpage/list.qtpl:68

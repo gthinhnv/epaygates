@@ -21,6 +21,7 @@ function responseHandler(res) {
 }
 
 function operateFormatter(value, row, index) {
+    console.log('**********', row);
     return [
         `<a class="table-action-item update" href="/staticPages/${row.id}/update" title="Update">
             <i class="fa fa-edit"></i>
