@@ -1,7 +1,7 @@
 package router
 
 import (
-	routerV1 "cms/internal/http/router/v1"
+	"cms/internal/http/handler/dashboardhandler"
 	"net/http"
 	"os"
 
@@ -13,16 +13,15 @@ func New() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	dashboardHandler := dashboardhandler.NewStaticPageHandler()
+
 	r := gin.New()
 
 	r.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+		c.JSON(http.StatusOK, gin.H{"status": "ok1"})
 	})
 
-	/*
-	 * V1 routes
-	 */
-	routerV1.New(r)
+	r.GET("/dashboard", dashboardHandler.GetIndex)
 
 	return r
 }

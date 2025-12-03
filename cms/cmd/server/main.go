@@ -1,61 +1,52 @@
 package main
 
 import (
-	"cms/gen/go/staticpagepb"
 	"cms/internal/bootstrap"
-	"cms/internal/grpc/staticpageservice"
 	"cms/internal/http/router"
+	"context"
 	"fmt"
 	"log"
-	"net"
 	"net/http"
-
-	"github.com/soheilhy/cmux"
-	"google.golang.org/grpc"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 func main() {
+	// Initialize bootstrap/config
 	if err := bootstrap.Init(); err != nil {
-		panic(err)
+		log.Fatalf("Failed to initialize: %v", err)
 	}
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", bootstrap.Config.Port))
-	if err != nil {
-		panic(fmt.Sprintf("failed to listen: %v", err))
-	}
+	addr := fmt.Sprintf(":%d", bootstrap.Config.Port)
 
-	// cmux for protocol multiplexing
-	m := cmux.New(lis)
-	grpcL := m.MatchWithWriters(cmux.HTTP2MatchHeaderFieldSendSettings("content-type", "application/grpc"))
-	httpL := m.Match(cmux.HTTP1Fast())
-
-	// --- gRPC server ---
-	grpcServer := grpc.NewServer()
-	staticpagepb.RegisterStaticPageServiceServer(grpcServer, staticpageservice.NewStaticPageServiceServer())
-	go func() {
-		log.Printf("gRPC server listening on port %d", bootstrap.Config.Port)
-		if err := grpcServer.Serve(grpcL); err != nil {
-			panic(err)
-		}
-	}()
-
-	// --- Gin HTTP server ---
 	r := router.New()
-
 	httpServer := &http.Server{
+		Addr:    addr,
 		Handler: r,
 	}
 
+	// Start server in goroutine
 	go func() {
-		log.Printf("HTTP server (Gin) listening on port %d", bootstrap.Config.Port)
-		if err := httpServer.Serve(httpL); err != nil && err != http.ErrServerClosed {
-			panic(err)
+		log.Printf("HTTP server (Gin) listening on %s", addr)
+		if err := httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("HTTP server error: %v", err)
 		}
 	}()
 
-	// Start cmux
-	log.Println("Starting cmux multiplexer...")
-	if err := m.Serve(); err != nil {
-		panic(err)
+	// Graceful shutdown on SIGINT/SIGTERM
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+	<-stop
+
+	log.Println("Shutting down server...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := httpServer.Shutdown(ctx); err != nil {
+		log.Printf("HTTP server shutdown error: %v", err)
 	}
+
+	log.Println("Server gracefully stopped")
 }
