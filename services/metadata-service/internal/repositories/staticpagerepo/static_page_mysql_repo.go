@@ -99,7 +99,7 @@ func (r *MysqlRepository) GetBySlug(ctx context.Context, slug string) (*staticpa
 // --------------------------------------------------
 // List returns pages with filters, sorting, and pagination.
 // --------------------------------------------------
-func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagepb.StaticPage, error) {
+func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) (*staticpagepb.ListResponse, error) {
 	query := `
 		SELECT *
 		FROM static_pages
@@ -112,15 +112,20 @@ func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListReques
 		return nil, err
 	}
 
+	var pageProtos []*staticpagepb.StaticPage
 	for _, page := range pages {
-		var pagePB staticpagepb.StaticPage
+		var pageProto staticpagepb.StaticPage
 
-		if err := dbutil.MapStruct(page, &pagePB); err != nil {
+		if err := dbutil.MapStruct(page, &pageProto); err != nil {
 			return nil, err
 		}
+
+		pageProtos = append(pageProtos, &pageProto)
 	}
 
-	return nil, nil
+	return &staticpagepb.ListResponse{
+		Pages: pageProtos,
+	}, nil
 }
 
 // --------------------------------------------------
