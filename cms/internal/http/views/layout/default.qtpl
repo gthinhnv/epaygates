@@ -1,5 +1,5 @@
 {% import (
-	"internal/bootstrap"
+	"cms/internal/bootstrap"
     "github.com/gin-gonic/gin"
 ) %}
 

@@ -1,0 +1,109 @@
+{% import (
+	"cms/internal/http/views/layout"
+) %}
+
+{% code
+	type DashboardIndex struct {
+		layout.BasePage
+	}
+%}
+
+{% stripspace %}
+{% func (p *DashboardIndex) getSeoTitle() %}
+	Dashboard
+{% endfunc %}
+{% endstripspace %}
+
+{% stripspace %}
+{% func (p *DashboardIndex) getSeoDesc() %}
+	This is seo desc
+{% endfunc %}
+{% endstripspace %}
+
+{% stripspace %}
+{% func (p *DashboardIndex) getSeoKW() %}
+	This is seo keyword
+{% endfunc %}
+{% endstripspace %}
+
+{% func (p *DashboardIndex) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
+
+{% func (p *DashboardIndex) Seo() %}
+	{%= p.BasePage.Seo() %}
+	<meta name="title" content="{%s= p.getSeoTitle() %}">
+{% endfunc %}
+
+{% stripspace %}
+{% func (p *DashboardIndex) Css() %}
+	{%= p.BasePage.Css([]string{
+		"<link rel=\"stylesheet\" href=\"/assets/libs/bootstrap-table/bootstrap-table.min.css\">",
+		"<link rel=\"stylesheet\" href=\"/assets/libs/select2/css/select2.min.css\">",
+		"<link rel=\"stylesheet\" href=\"/assets/libs/toastr/toastr.min.css\">",
+		"<link rel=\"stylesheet\" href=\"/assets/libs/sweetalert2/sweetalert2.min.css\">",
+	}) %}
+{% endfunc %}
+{% endstripspace %}
+
+{% func (p *DashboardIndex) Script() %}
+	{%= p.BasePage.Script([]string{
+		"<script src=\"/assets/libs/bootstrap-table/bootstrap-table.min.js\"></script>",
+		"<script src=\"/assets/libs/ckeditor/ckeditor.js\"></script>",
+		"<script src=\"/assets/libs/select2/js/select2.min.js\"></script>",
+		"<script src=\"/assets/libs/toastr/toastr.min.js\"></script>",
+		"<script src=\"/assets/libs/sweetalert2/sweetalert2.min.js\"></script>",
+	}) %}
+	<script type="text/javascript">
+		{% cat "./script.js" %}
+	</script>
+{% endfunc %}
+
+{% stripspace %}
+{% func (p *DashboardIndex) Content() %}
+	<div class="pcoded-content">
+		<div class="page-header card">
+			<div class="row align-items-end">
+				<div class="col-lg-8">
+					<div class="page-header-title">
+						<i class="feather icon-home bg-c-blue"></i>
+						<div class="d-inline">
+							<h5>Dashboard</h5>
+							<span>Some overview data.</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="page-header-breadcrumb">
+						<ul class=" breadcrumb breadcrumb-title">
+							<li class="breadcrumb-item">
+								<a href="#!"><i class="feather icon-home"></i>{% space %}Dashboard</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="pcoded-inner-content">
+			<div class="main-body">
+				<div class="page-wrapper">
+					<div class="page-body">
+						<div class="row">
+							<div class="col-md-12 col-xl-12">
+								<div class="card sale-card">
+									<div class="card-header">
+										<h5>
+											Dashboard first card block
+										</h5>
+									</div>
+									<div class="card-block">
+										<h1>Some overview data will be displayed here!</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfunc %}
+{% endstripspace %}

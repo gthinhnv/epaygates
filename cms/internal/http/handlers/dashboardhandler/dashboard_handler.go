@@ -1,7 +1,8 @@
 package dashboardhandler
 
 import (
-	"net/http"
+	"cms/internal/http/views/layout"
+	"cms/internal/http/views/pages/dashboard"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +15,7 @@ func NewStaticPageHandler() *DashboardHandler {
 }
 
 func (h *DashboardHandler) GetIndex(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Dashboard Index",
-	})
+	p := dashboard.DashboardIndex{}
+	p.Ctx = c
+	layout.WritePageTemplate(c.Writer, &p)
 }

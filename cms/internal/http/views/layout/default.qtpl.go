@@ -6,8 +6,8 @@ package layout
 
 //line internal/http/views/layout/default.qtpl:1
 import (
+	"cms/internal/bootstrap"
 	"github.com/gin-gonic/gin"
-	"internal/bootstrap"
 )
 
 //line internal/http/views/layout/default.qtpl:6

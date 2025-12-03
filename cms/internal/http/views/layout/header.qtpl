@@ -49,7 +49,7 @@
 										<img class="img-radius" src="/assets/images/avatar-4.jpg"
 											alt="Generic placeholder image">
 										<div class="media-body">
-											<h5 class="notification-user">{%s user.UserName %}</h5>
+											<h5 class="notification-user">user.UserName</h5>
 											<p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
 												elit.</p>
 											<span class="notification-time">30 minutes ago</span>
@@ -95,7 +95,7 @@
 						<div class="dropdown-primary dropdown">
 							<div class="dropdown-toggle" data-toggle="dropdown">
 								<img src="/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-								<span>{%s user.UserName %}</span>
+								<span>user.UserName</span>
 								<i class="feather icon-chevron-down"></i>
 							</div>
 							<ul class="show-notification profile-notification dropdown-menu"
@@ -155,14 +155,14 @@
 					</div>
 					<div class="main-friend-list">
 						<div class="media userlist-box waves-effect waves-light" data-id="1"
-							data-status="online" data-username="{%s user.UserName %}">
+							data-status="online" data-username="user.UserName">
 							<a class="media-left" href="#!">
 								<img class="media-object img-radius img-radius" src="/assets/images/avatar-3.jpg"
 									alt="Generic placeholder image ">
 								<div class="live-status bg-success"></div>
 							</a>
 							<div class="media-body">
-								<div class="chat-header">{%s user.UserName %}</div>
+								<div class="chat-header">user.UserName</div>
 							</div>
 						</div>
 						<div class="media userlist-box waves-effect waves-light" data-id="2"

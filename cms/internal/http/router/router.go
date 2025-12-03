@@ -17,6 +17,13 @@ func New() *gin.Engine {
 
 	r := gin.New()
 
+	staticRouteGroup := r.Group("/")
+
+	/*
+	 * Serve static files
+	 */
+	staticRouteGroup.Static("/assets", "./assets")
+
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok1"})
 	})
