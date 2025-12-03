@@ -14,9 +14,9 @@ service StaticPageService {
   // Soft/hard delete
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 
-  // List pages (with pagination, filter, sort)
-  rpc List(ListRequest) returns (ListResponse);
-
   // Get one page by ID/slug
   rpc Get(GetRequest) returns (GetResponse);
+
+  // List pages (with pagination, filter, sort)
+  rpc List(ListRequest) returns (ListResponse);
 }

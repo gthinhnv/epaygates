@@ -73,20 +73,20 @@ func (r *MysqlRepository) Delete(ctx context.Context, ids []uint64, deletedBy ui
 // GetByID retrieves a static page by ID.
 // --------------------------------------------------
 func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb.StaticPage, error) {
-	var model staticpagemodel.StaticPage
+	var page staticpagemodel.StaticPage
 
-	err := r.db.Get(&model, "SELECT * FROM static_pages WHERE id = ?", id)
+	err := r.db.Get(&page, "SELECT * FROM static_pages WHERE id = ?", id)
 	if err != nil {
 		return nil, err
 	}
 
-	var res staticpagepb.StaticPage
+	var pagePB staticpagepb.StaticPage
 
-	if err := dbutil.MapStruct(model, &res); err != nil {
+	if err := dbutil.MapStruct(page, &pagePB); err != nil {
 		return nil, err
 	}
 
-	return &res, nil
+	return &pagePB, nil
 }
 
 // --------------------------------------------------
@@ -99,8 +99,28 @@ func (r *MysqlRepository) GetBySlug(ctx context.Context, slug string) (*staticpa
 // --------------------------------------------------
 // List returns pages with filters, sorting, and pagination.
 // --------------------------------------------------
-func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagepb.StaticPage, uint64, error) {
-	return nil, 0, nil
+func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagepb.StaticPage, error) {
+	query := `
+		SELECT *
+		FROM static_pages
+		LIMIT ? OFFSET ?
+	`
+	var pages []staticpagemodel.StaticPage
+
+	err := r.db.SelectContext(ctx, &pages, query, 10, 0)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, page := range pages {
+		var pagePB staticpagepb.StaticPage
+
+		if err := dbutil.MapStruct(page, &pagePB); err != nil {
+			return nil, err
+		}
+	}
+
+	return nil, nil
 }
 
 // --------------------------------------------------

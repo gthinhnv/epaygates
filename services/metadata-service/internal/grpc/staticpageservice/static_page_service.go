@@ -59,3 +59,14 @@ func (s *StaticPageServiceServer) Get(ctx context.Context, req *staticpagepb.Get
 		Page: page,
 	}, nil
 }
+
+func (s *StaticPageServiceServer) List(ctx context.Context, req *staticpagepb.ListRequest) (*staticpagepb.ListResponse, error) {
+	pages, err := bootstrap.Repos.StaticPageRepo.List(ctx, req)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get static page: %v", err)
+	}
+
+	return &staticpagepb.ListResponse{
+		Pages: pages,
+	}, nil
+}

@@ -26,7 +26,7 @@ type Repository interface {
 	GetBySlug(ctx context.Context, slug string) (*staticpagepb.StaticPage, error)
 
 	// List returns pages with filters, sorting, and pagination.
-	List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagepb.StaticPage, uint64, error)
+	List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagepb.StaticPage, error)
 
 	// Count returns total items for the given filter (used for pagination).
 	Count(ctx context.Context, req *staticpagepb.ListRequest) (uint64, error)

@@ -8,5 +8,7 @@ import (
 
 func RegisterRoutes(router *gin.RouterGroup) {
 	staticPageHandler := staticpagehandler.NewStaticPageHandler()
+
 	router.GET("/staticPages/:id", staticPageHandler.Get)
+	router.GET("/staticPages", staticPageHandler.List)
 }

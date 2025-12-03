@@ -70,3 +70,38 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 		Data:    staticPage,
 	})
 }
+
+func (h *StaticPageHandler) List(c *gin.Context) {
+	resp, err := h.client.List(context.Background(), &staticpagepb.ListRequest{})
+	if err != nil {
+		bootstrap.Logger.WithFields(logrus.Fields{
+			"err": err,
+		}).Warn("StaticPageHandler >>> List: failed to get static pages")
+
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "An error happened when getting data",
+		})
+		return
+	}
+
+	var staticPages []*staticpagemodel.StaticPage
+
+	for _, staticPagePB := range resp.GetPages() {
+		var staticPage staticpagemodel.StaticPage
+		if err := dbutil.MapStruct(staticPagePB, &staticPage); err != nil {
+			bootstrap.Logger.WithFields(logrus.Fields{
+				"err":          err,
+				"staticPagePB": staticPagePB,
+			}).Warn("StaticPageHandler >>> List: failed to get map struct proto to model")
+			continue
+		}
+		staticPages = append(staticPages, &staticPage)
+	}
+
+	c.JSON(http.StatusOK, apiutil.Response{
+		Code:    apiutil.CODE_SUCCESS,
+		Message: "Success",
+		Data:    staticPages,
+	})
+}
