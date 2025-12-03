@@ -1,0 +1,77 @@
+pixie-editor.mode-overlay {
+    z-index: 9999;
+}
+pixie-editor .mat-button-wrapper svg {
+    vertical-align: unset;
+}
+.image-picker .image-picker-btn, .ipicker .ipicker-btn {
+    cursor: pointer;
+    margin: 0;
+    padding: 10px 15px;
+    font-size: 26px;
+    border: 1px dashed #9c9c9c;
+    background: rgba(221, 221, 221, 0.28);
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+.image-picker .image-picker-btn:hover, .ipicker .ipicker-btn:hover {
+    background: rgba(221, 221, 221, 1);
+}
+.image-picker .preview, .ipicker .preview {
+    display: inline-block;
+}
+.image-picker .preview-item, .ipicker .preview-item {
+    position: relative;
+    max-width: 128px;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.image-picker .preview-item .delete-image, .ipicker .preview-item .delete-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    cursor: pointer;
+}
+.image-picker .preview-item .delete-image i, .ipicker .preview-item .delete-image i {
+    top: 0;
+    margin-top: calc(50% - 10px);
+    color: #b5221f;
+    font-size: 16px;
+}
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    color: #999;
+    background-color: #e8e8e8;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    transition: all .15s linear;
+    padding: 8px 15px;
+}
+.upload-btn-wrapper:hover {
+    background-color: rgba(221, 221, 221, 0.89);
+    color: #666666;
+    border: 1px dashed #666666;
+}
+.upload-btn-wrapper .file-upload-display {
+    font-size: 37px;
+    text-align: center;
+}
+.upload-btn-wrapper .file-upload-display .instruction {
+    font-size: 12px;
+}
+.upload-btn-wrapper input[type=file] {
+    cursor: pointer;
+    font-size: 100px;
+    filter: alpha(opacity=1);
+    -moz-opacity: 0.01;
+    opacity: 0.01;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
