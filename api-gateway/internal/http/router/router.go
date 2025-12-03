@@ -1,6 +1,7 @@
 package router
 
 import (
+	"apigateway/internal/http/middlewares/gatewaymiddleware"
 	routerV1 "apigateway/internal/http/router/v1"
 	"net/http"
 	"os"
@@ -18,6 +19,8 @@ func New() *gin.Engine {
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
+
+	r.Use(gatewaymiddleware.ContextSetup())
 
 	/*
 	 * V1 routes

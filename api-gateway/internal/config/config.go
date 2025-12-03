@@ -7,8 +7,9 @@ import (
 )
 
 type Config struct {
-	Port int
-	Log  logger.LogConfig
+	Port         int
+	Log          logger.LogConfig
+	AllowedHosts []string
 }
 
 func Load(env string) (*Config, error) {
