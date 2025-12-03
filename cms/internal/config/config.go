@@ -56,35 +56,40 @@ func Load(env string) (*Config, error) {
 }
 
 func loadMenu(env string) []*MenuItem {
-	var menuItems []*MenuItem
-	/*
-	 * Build menu tree
-	 */
+	type menu struct {
+		Items []*MenuItem
+	}
+
+	var m menu
+
+	// Load config file
 	viper.SetConfigFile("config_menu." + env + ".yaml")
-	if err := viper.ReadInConfig(); err == nil {
-		if err := viper.Unmarshal(&menuItems); err == nil {
-			for i, menuItem := range menuItems {
-				if len(menuItem.Children) > 0 {
-					menuItems[i].Roles = []int{}
-					for _, childMenu := range menuItem.Children {
-						for _, role := range childMenu.Roles {
-							hadRole := false
-							for _, parentRole := range menuItem.Roles {
-								if parentRole == role {
-									hadRole = true
-									break
-								}
-							}
-							if hadRole {
-								continue
-							}
-							menuItems[i].Roles = append(menuItems[i].Roles, role)
-						}
-					}
-				}
+	if err := viper.ReadInConfig(); err != nil {
+		return nil
+	}
+
+	// Unmarshal YAML into struct
+	if err := viper.Unmarshal(&m); err != nil {
+		return nil
+	}
+
+	// Build parent roles from child roles
+	for i, parent := range m.Items {
+		roleSet := make(map[int]struct{})
+		for _, child := range parent.Children {
+			for _, role := range child.Roles {
+				roleSet[role] = struct{}{}
+			}
+		}
+
+		if len(roleSet) > 0 {
+			// Convert map keys to slice
+			m.Items[i].Roles = make([]int, 0, len(roleSet))
+			for role := range roleSet {
+				m.Items[i].Roles = append(m.Items[i].Roles, role)
 			}
 		}
 	}
 
-	return menuItems
+	return m.Items
 }

@@ -6,7 +6,7 @@
 {% stripspace %}
 {% func Sidebar(p *BasePage) %}
     {% code
-		menuItems, _ := p.Ctx.Value("menuItems").([]config.MenuItem)
+		menuItems, _ := p.Ctx.Value("menuItems").([]*config.MenuItem)
 	%}
 	<nav class="pcoded-navbar">
         <div class="nav-list">
@@ -43,7 +43,7 @@
                                         %}
                                         <li class="{% if activeIndex == j %}active{% endif %}">
                                             <a href="{%s childItem.Route %}" class="waves-effect waves-dark">
-                                                <span class="pcoded-mtext">{%s menuItem.Name %}</span>
+                                                <span class="pcoded-mtext">{%s childItem.Name %}</span>
                                             </a>
                                         </li>
                                     {% endfor %}

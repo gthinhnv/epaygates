@@ -26,7 +26,7 @@ var (
 //line internal/http/views/layout/sidebar.qtpl:7
 func StreamSidebar(qw422016 *qt422016.Writer, p *BasePage) {
 //line internal/http/views/layout/sidebar.qtpl:9
-	menuItems, _ := p.Ctx.Value("menuItems").([]config.MenuItem)
+	menuItems, _ := p.Ctx.Value("menuItems").([]*config.MenuItem)
 
 //line internal/http/views/layout/sidebar.qtpl:10
 	qw422016.N().S(`<nav class="pcoded-navbar"><div class="nav-list"><div class="pcoded-inner-navbar main-menu">`)
@@ -92,7 +92,7 @@ func StreamSidebar(qw422016 *qt422016.Writer, p *BasePage) {
 //line internal/http/views/layout/sidebar.qtpl:45
 				qw422016.N().S(`" class="waves-effect waves-dark"><span class="pcoded-mtext">`)
 //line internal/http/views/layout/sidebar.qtpl:46
-				qw422016.E().S(menuItem.Name)
+				qw422016.E().S(childItem.Name)
 //line internal/http/views/layout/sidebar.qtpl:46
 				qw422016.N().S(`</span></a></li>`)
 //line internal/http/views/layout/sidebar.qtpl:49

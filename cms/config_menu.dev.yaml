@@ -1,149 +1,16 @@
-- id: 0
-  name: DASHBOARD
-  route: /
-  icon: fa fa-home
-  roles: [1, 2, 3, 4]
-- id: 0
-  name: CONTENT
-  route: \#content
-  icon: fa fa-book
-  roles: []
-  children:
-    - id: 0
-      name: AUTHORS
-      route: /authors
-      roles: [1, 2, 3, 4]
-    - id: 0
-      name: CATEGORIES
-      route: /categories
-      roles: [1, 2, 3, 4]
-    - id: 0
-      name: BOOKS
-      route: /books
-      roles: [1, 2, 3, 4]
-    - id: 0
-      name: CHAPTERS
-      route: /chapters
-      roles: [1, 2, 3, 4]
-    - id: 0
-      name: COLLECTIONS
-      route: /collections
-      roles: [1, 2, 3, 4]
-    - id: 0
-      name: PAGES
-      route: /pages
-      roles: [1, 2, 3, 4]
-- id: 0
-  name: COMMENTS
-  route: \#comments
-  icon: fa fa-comment
-  roles: []
-  children:
-    - id: 0
-      name: COMMENTS
-      route: /comments
-      roles: [1, 2, 3]
-- id: 0
-  name: STATISTICS
-  route: \#statistics
-  icon: fa fa-chart-line
-  roles: []
-  children:
-    - id: 0
-      name: VIEWS_SUMMARY
-      route: /statistics/bookViewsSummary
-      roles: [1, 2, 3]
-    - id: 0
-      name: TOP_VIEWS
-      route: /statistics/bookViews
-      roles: [1, 2, 3]
-    - id: 0
-      name: PURCHASES
-      route: /statistics/purchases
-      roles: [1, 2, 3]
-- id: 0
-  name: TOOLS
-  route: \#tools
-  icon: fa fa-wrench
-  roles: []
-  children:
-    - id: 0
-      name: SCRAPING_ACCOUNTS
-      route: /scrapingAccounts
-      roles: [1, 2, 3]
-    - id: 0
-      name: SCRAPINGS
-      route: /scrapings
-      roles: [1, 2, 3]
-    - id: 0
-      name: SCRAPING_QUEUES
-      route: /scrapingQueues
-      roles: [1, 2, 3]
-    - id: 0
-      name: REWRITE_URLS
-      route: /tools/rewriteUrls
-      roles: [1, 2, 3]
-- id: 0
-  name: PAYMENTS
-  route: \#payments
-  icon: fa fa-money-bill-wave
-  roles: []
-  children:
-    - id: 0
-      name: WALLETS
-      route: /wallets
-      roles: [1, 2]
-    - id: 0
-      name: PACKAGES
-      route: /packages
-      roles: [1, 2, 3]
-    - id: 0
-      name: COUPONS
-      route: /coupons
-      roles: [1, 2, 3]
-    - id: 0
-      name: TRANSACTIONS
-      route: /transactions
-      roles: [1, 2, 3]
-    - id: 0
-      name: CAMPAIGNS
-      route: /campaigns
-      roles: [1, 2, 3]
-    - id: 0
-      name: USER_PURCHASES
-      route: /userPurchases
-      roles: [1, 2, 3]
-- id: 0
-  name: ADS
-  route: \#ads
-  icon: fa fa-ad
-  roles: []
-  children:
-    - id: 0
-      name: ADS_UNITS
-      route: /adsUnits
-      roles: [1, 2, 3]
-    - id: 0
-      name: FIX_VIOLATIONS
-      route: /ads/fixViolations
-      roles: [1, 2]
-- id: 0
-  name: SECURITY
-  route: \#security
-  icon: fa fa-shield-alt
-  roles: []
-  children:
-    - id: 0
-      name: ATTACKERS
-      route: /attackers
-      roles: [1, 2]
-- id: 0
-  name: SYSTEM
-  route: \#system
-  icon: fa fa-cogs
-  roles: []
-  children:
-    - id: 0
-      name: USERS
-      route: /users
-      roles: [1, 2]
+items:
+  - id: 0
+    name: DASHBOARD
+    route: /
+    icon: fa fa-home
+    roles: [1, 2, 3, 4]
+  - id: 0
+    name: SYSTEM
+    route: \#system
+    icon: fa fa-cogs
+    roles: []
+    children:
+      - id: 0
+        name: STATIC_PAGES
+        route: /staticPages
+        roles: [1, 2]

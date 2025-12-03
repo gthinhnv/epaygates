@@ -1,7 +1,6 @@
 package gatewaymiddleware
 
 import (
-	"cms/internal/bootstrap"
 	"strconv"
 	"time"
 
@@ -10,7 +9,6 @@ import (
 
 func ContextSetup() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Set("menuItems", bootstrap.Config.MenuItems)
 		c.Next()
 	}
 }

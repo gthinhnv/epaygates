@@ -2,6 +2,7 @@ package router
 
 import (
 	"cms/internal/http/handlers/dashboardhandler"
+	"cms/internal/http/middlewares/authmiddleware"
 	"cms/internal/http/middlewares/gatewaymiddleware"
 	"net/http"
 	"os"
@@ -27,6 +28,7 @@ func New() *gin.Engine {
 	staticRouteGroup.Static("/assets", "./assets")
 
 	r.Use(gatewaymiddleware.ContextSetup())
+	r.Use(authmiddleware.Authenticate())
 
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok1"})
