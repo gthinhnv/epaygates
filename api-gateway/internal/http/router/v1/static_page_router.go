@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"apigateway/internal/http/handler/v1/staticpagehandler"
+	"apigateway/internal/http/handlers/v1/staticpagehandler"
 
 	"github.com/gin-gonic/gin"
 )

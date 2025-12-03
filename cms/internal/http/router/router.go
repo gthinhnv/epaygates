@@ -1,7 +1,7 @@
 package router
 
 import (
-	"cms/internal/http/handler/dashboardhandler"
+	"cms/internal/http/handlers/dashboardhandler"
 	"net/http"
 	"os"
 
