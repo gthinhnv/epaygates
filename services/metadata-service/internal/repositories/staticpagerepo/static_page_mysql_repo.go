@@ -99,7 +99,7 @@ func (r *MysqlRepository) GetBySlug(ctx context.Context, slug string) (*staticpa
 // --------------------------------------------------
 // List returns pages with filters, sorting, and pagination.
 // --------------------------------------------------
-func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) (*staticpagepb.ListResponse, error) {
+func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagepb.StaticPage, error) {
 	query := `
 		SELECT *
 		FROM static_pages
@@ -123,9 +123,7 @@ func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListReques
 		pageProtos = append(pageProtos, &pageProto)
 	}
 
-	return &staticpagepb.ListResponse{
-		Pages: pageProtos,
-	}, nil
+	return pageProtos, nil
 }
 
 // --------------------------------------------------
