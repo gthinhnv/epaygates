@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"apigateway/internal/http/handler/v1/staticpagehandler"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,8 +13,7 @@ func New(router *gin.Engine) *gin.Engine {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
 
-	staticPageHandler := staticpagehandler.NewStaticPageHandler()
-	staticPageHandler.RegisterRoutes(routerV1)
+	RegisterStaticPageRoutes(routerV1)
 
 	return router
 }

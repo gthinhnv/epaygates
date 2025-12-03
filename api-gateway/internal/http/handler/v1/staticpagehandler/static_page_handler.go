@@ -24,10 +24,6 @@ func NewStaticPageHandler() *StaticPageHandler {
 	}
 }
 
-func (h *StaticPageHandler) RegisterRoutes(router *gin.RouterGroup) {
-	router.GET("/staticPages/:id", h.Get)
-}
-
 func (h *StaticPageHandler) Get(c *gin.Context) {
 	// Parse ID
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
