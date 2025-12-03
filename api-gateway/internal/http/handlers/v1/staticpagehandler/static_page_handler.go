@@ -5,7 +5,7 @@ import (
 	"apigateway/internal/bootstrap"
 	"context"
 	"net/http"
-	"shared/models/staticpage"
+	"shared/models/staticpagemodel"
 	"shared/pkg/utils/apiutil"
 	"shared/pkg/utils/dbutil"
 	"strconv"
@@ -50,7 +50,7 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 		return
 	}
 
-	var staticPage staticpage.StaticPage
+	var staticPage staticpagemodel.StaticPage
 	err = dbutil.MapStruct(resp.Page, &staticPage)
 	if err != nil {
 		bootstrap.Logger.WithFields(logrus.Fields{

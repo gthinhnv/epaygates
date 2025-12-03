@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"metadatasvc/gen/go/staticpagepb"
-	"shared/models/staticpage"
+	"shared/models/staticpagemodel"
 	"shared/pkg/utils/dbutil"
 
 	"github.com/jmoiron/sqlx"
@@ -73,7 +73,7 @@ func (r *MysqlRepository) Delete(ctx context.Context, ids []uint64, deletedBy ui
 // GetByID retrieves a static page by ID.
 // --------------------------------------------------
 func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb.StaticPage, error) {
-	var model staticpage.StaticPage
+	var model staticpagemodel.StaticPage
 
 	err := r.db.Get(&model, "SELECT * FROM static_pages WHERE id = ?", id)
 	if err != nil {

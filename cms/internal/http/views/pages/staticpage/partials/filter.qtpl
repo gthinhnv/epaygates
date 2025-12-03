@@ -1,0 +1,38 @@
+{% stripspace %}
+{% func Filter() %}
+	<div id="filter" class="form collapse" role="form">
+		<div class="row">
+			<div class="col-lg-6 col-md-6">
+				<div class="form-group">
+					<input name="ids" class="form-control reset-filter-onchange" type="text" placeholder="ids: 1,2,3, ...">
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<div class="form-group">
+					<input name="title" class="form-control reset-filter-onchange" type="text" placeholder="Name">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6">
+				<div class="form-group">
+					<input name="slug" class="form-control reset-filter-onchange" type="text" placeholder="Slug">
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<div class="form-group">
+					<select class="form-control status-selection is-select2" name="statuses" default=""></select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<button id="apply-filter" type="submit" class="btn btn-primary">
+					<i class="fa fa-check"></i>Apply
+				</button>
+			</div>
+		</div>
+		<div class="pb-4" style="width:100%;display:block;"></div>
+	</div>
+{% endfunc %}
+{% endstripspace %}
