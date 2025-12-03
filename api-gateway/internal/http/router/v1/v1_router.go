@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"apigateway/internal/http/router/v1/commonrouter"
 	"apigateway/internal/http/router/v1/staticpagerouter"
 	"net/http"
 
@@ -13,6 +14,8 @@ func New(router *gin.Engine) *gin.Engine {
 	routerV1.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
+
+	commonrouter.RegisterRoutes(routerV1)
 
 	staticpagerouter.RegisterRoutes(routerV1)
 
