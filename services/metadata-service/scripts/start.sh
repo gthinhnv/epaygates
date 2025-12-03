@@ -7,7 +7,7 @@ ROOT_DIR="$SCRIPT_DIR/.."
 cd "$ROOT_DIR" || exit
 
 ENV_FILE=".env"
-ENV_CONTENT="APP_ENV=dev"
+ENV_CONTENT="ENV=dev"
 
 # Check if the file does not exist, then create it
 if [ ! -f "$ENV_FILE" ]; then
