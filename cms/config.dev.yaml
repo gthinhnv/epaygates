@@ -1,0 +1,5 @@
+port: 50501
+log:
+  output: console
+  filePath: logs/app.log
+  level: info # level: info # logrus Level: error, warning, info, debug, trace

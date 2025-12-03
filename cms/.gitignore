@@ -1,0 +1,4 @@
+.env
+localconfig.*.yaml
+logs
+cmd/server/main
