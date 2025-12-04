@@ -57,7 +57,7 @@ Page prints a page implementing Page interface.
 
 {% code
     type BasePage struct {
-        Ctx *gin.Context
+        Context *gin.Context
         Lang string
     }
 %}

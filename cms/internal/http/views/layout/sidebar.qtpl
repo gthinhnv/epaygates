@@ -6,7 +6,7 @@
 {% stripspace %}
 {% func Sidebar(p *BasePage) %}
     {% code
-		menuItems, _ := p.Ctx.Value("menuItems").([]*config.MenuItem)
+		menuItems, _ := p.Context.Value("menuItems").([]*config.MenuItem)
 	%}
 	<nav class="pcoded-navbar">
         <div class="nav-list">
@@ -23,7 +23,7 @@
                             {% code
                                 activeIndex := -1
                                 for i := 0; i < len(menuItem.Children); i++ {
-                                    if strings.HasPrefix(p.Ctx.Request.URL.Path, menuItem.Children[i].Route) {
+                                    if strings.HasPrefix(p.Context.Request.URL.Path, menuItem.Children[i].Route) {
                                         activeIndex = i
                                         break
                                     }
@@ -52,7 +52,7 @@
                         {% elseif len(menuItem.Route) > 0 && string(menuItem.Route[0]) != "#" %}
                             {% code
                                 isActive := false
-                                if (menuItem.Route == "/" && p.Ctx.Request.URL.Path == "/") || (menuItem.Route != "/" && strings.Contains(p.Ctx.Request.URL.Path, menuItem.Route)) {
+                                if (menuItem.Route == "/" && p.Context.Request.URL.Path == "/") || (menuItem.Route != "/" && strings.Contains(p.Context.Request.URL.Path, menuItem.Route)) {
                                     isActive = true
                                 }
                             %}

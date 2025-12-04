@@ -26,7 +26,7 @@ var (
 //line internal/http/views/layout/sidebar.qtpl:7
 func StreamSidebar(qw422016 *qt422016.Writer, p *BasePage) {
 //line internal/http/views/layout/sidebar.qtpl:9
-	menuItems, _ := p.Ctx.Value("menuItems").([]*config.MenuItem)
+	menuItems, _ := p.Context.Value("menuItems").([]*config.MenuItem)
 
 //line internal/http/views/layout/sidebar.qtpl:10
 	qw422016.N().S(`<nav class="pcoded-navbar"><div class="nav-list"><div class="pcoded-inner-navbar main-menu">`)
@@ -44,7 +44,7 @@ func StreamSidebar(qw422016 *qt422016.Writer, p *BasePage) {
 //line internal/http/views/layout/sidebar.qtpl:24
 			activeIndex := -1
 			for i := 0; i < len(menuItem.Children); i++ {
-				if strings.HasPrefix(p.Ctx.Request.URL.Path, menuItem.Children[i].Route) {
+				if strings.HasPrefix(p.Context.Request.URL.Path, menuItem.Children[i].Route) {
 					activeIndex = i
 					break
 				}
@@ -103,7 +103,7 @@ func StreamSidebar(qw422016 *qt422016.Writer, p *BasePage) {
 		} else if len(menuItem.Route) > 0 && string(menuItem.Route[0]) != "#" {
 //line internal/http/views/layout/sidebar.qtpl:54
 			isActive := false
-			if (menuItem.Route == "/" && p.Ctx.Request.URL.Path == "/") || (menuItem.Route != "/" && strings.Contains(p.Ctx.Request.URL.Path, menuItem.Route)) {
+			if (menuItem.Route == "/" && p.Context.Request.URL.Path == "/") || (menuItem.Route != "/" && strings.Contains(p.Context.Request.URL.Path, menuItem.Route)) {
 				isActive = true
 			}
 

@@ -185,8 +185,8 @@ func PageTemplate(p Page) string {
 
 //line internal/http/views/layout/default.qtpl:59
 type BasePage struct {
-	Ctx  *gin.Context
-	Lang string
+	Context *gin.Context
+	Lang    string
 }
 
 //line internal/http/views/layout/default.qtpl:64

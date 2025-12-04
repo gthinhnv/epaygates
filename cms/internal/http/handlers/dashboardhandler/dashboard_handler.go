@@ -16,6 +16,6 @@ func NewStaticPageHandler() *DashboardHandler {
 
 func (h *DashboardHandler) GetIndex(c *gin.Context) {
 	p := dashboard.DashboardIndex{}
-	p.Ctx = c
+	p.Context = c
 	layout.WritePageTemplate(c.Writer, &p)
 }

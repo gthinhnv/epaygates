@@ -847,7 +847,7 @@ func (p *List) StreamContent(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:105
 	qw422016.E().S(bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil))
 //line internal/http/views/pages/staticpage/list.qtpl:105
-	qw422016.N().S(`</h5><span>...</span></div></div></div><div class="col-lg-4"><div class="page-header-breadcrumb"><ul class=" breadcrumb breadcrumb-title"><li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i>`)
+	qw422016.N().S(`</h5><span class="icofont icofont-dog"></span></div></div></div><div class="col-lg-4"><div class="page-header-breadcrumb"><ul class=" breadcrumb breadcrumb-title"><li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i>`)
 //line internal/http/views/pages/staticpage/list.qtpl:114
 	qw422016.N().S(` `)
 //line internal/http/views/pages/staticpage/list.qtpl:114

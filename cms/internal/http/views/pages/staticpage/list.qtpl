@@ -103,7 +103,7 @@
 						<i class="feather icon-home bg-c-blue"></i>
 						<div class="d-inline">
 							<h5>{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</h5>
-							<span>...</span>
+							<span class="icofont icofont-dog"></span>
 						</div>
 					</div>
 				</div>
