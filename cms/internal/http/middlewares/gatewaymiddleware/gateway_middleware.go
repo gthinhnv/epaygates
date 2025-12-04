@@ -1,6 +1,7 @@
 package gatewaymiddleware
 
 import (
+	"cms/internal/bootstrap"
 	"strconv"
 	"time"
 
@@ -9,6 +10,8 @@ import (
 
 func ContextSetup() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		c.Set("lang", bootstrap.Config.DefaultLang)
+
 		c.Next()
 	}
 }

@@ -2,5 +2,8 @@
   "HELLO": "Hello, {{name}}!",
   "STATUS_UNSPECIFIED": "Unspecified",
   "STATUS_ACTIVE": "Active",
-  "STATUS_INACTIVE": "Inactive"
+  "STATUS_INACTIVE": "Inactive",
+  "PAGE_TYPE_UNSPECIFIED": "Unspecified",
+  "PAGE_TYPE_HEADER": "Header",
+  "PAGE_TYPE_FOOTER": "Footer"
 }

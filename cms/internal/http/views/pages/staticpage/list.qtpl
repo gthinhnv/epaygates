@@ -1,4 +1,5 @@
 {% import (
+	"shared/models/commonmodel"
 	"cms/internal/bootstrap"
 	"cms/internal/http/views/layout"
 	"cms/internal/http/views/pages/staticpage/partials"
@@ -50,8 +51,26 @@
 
 {% func (p *List) Script() %}
 	{% code
-		statusesJson, _ := bootstrap.JSON.MarshalToString(bootstrap.StatusItems)
-		pageTypesJson, _ := bootstrap.JSON.MarshalToString(bootstrap.PageTypeItems)
+		lang := p.Ctx.GetString("lang")
+
+		statusList := make([]*commonmodel.StatusItem, len(bootstrap.StatusItems))
+		for i := 0; i < len(bootstrap.StatusItems); i++ {
+			statusList[i] = &commonmodel.StatusItem{
+				Name: bootstrap.Translator.T(lang, bootstrap.StatusItems[i].Name, nil),
+				Value: bootstrap.StatusItems[i].Value,
+			}
+		}
+
+		pageTypeList := make([]*commonmodel.PageTypeItem, len(bootstrap.PageTypeItems))
+		for i := 0; i < len(bootstrap.PageTypeItems); i++ {
+			pageTypeList[i] = &commonmodel.PageTypeItem{
+				Name: bootstrap.Translator.T(lang, bootstrap.PageTypeItems[i].Name, nil),
+				Value: bootstrap.PageTypeItems[i].Value,
+			}
+		}
+
+		statusListJson, _ := bootstrap.JSON.MarshalToString(statusList)
+		pageTypeListJson, _ := bootstrap.JSON.MarshalToString(pageTypeList)
 	%}
 	{%= p.BasePage.Script([]string{
 		"<script src=\"/assets/libs/bootstrap-table/bootstrap-table.min.js\"></script>",
@@ -66,8 +85,8 @@
 		toastr.options.closeButton = true;
 		toastr.options.progressBar = true;
 
-		const statuses = {%s= statusesJson %};
-		const pageTypes = {%s= pageTypesJson %};
+		const statuses = {%s= statusListJson %};
+		const pageTypes = {%s= pageTypeListJson %};
 
 		const trans = {};
 		

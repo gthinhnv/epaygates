@@ -5,6 +5,7 @@
 
 {% interface
 Page {
+    Lang()
 	Title()
     Seo()
     Css()
@@ -20,7 +21,7 @@ Page {
 Page prints a page implementing Page interface.
 {% func PageTemplate(p Page) %}
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="{%s= p.Lang() %}">
 	<head>
         <title>{%= p.Title() %}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -57,9 +58,9 @@ Page prints a page implementing Page interface.
 {% code
     type BasePage struct {
         Ctx *gin.Context
-        Lang string
     }
 %}
+{% func (p *BasePage) Lang() %}{%s= p.Ctx.GetString("lang") %}{% endfunc %}
 {% func (p *BasePage) Title() %}This is a base title{% endfunc %}
 {% func (p *BasePage) Seo() %}{% endfunc %}
 {% func (p *BasePage) Css(libs []string) %}
