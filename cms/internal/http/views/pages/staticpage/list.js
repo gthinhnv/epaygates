@@ -6,7 +6,6 @@ var $delete = $('#delete');
 var $applyFilter = $('#apply-filter');
 var selections = [];
 
-let statuses = [];
 let pageNumber = DEFAULT_PAGE_NUMBER;
 let pageSize = DEFAULT_PAGE_SIZE;
 
@@ -21,7 +20,6 @@ function responseHandler(res) {
 }
 
 function operateFormatter(value, row, index) {
-    console.log('**********', row);
     return [
         `<a class="table-action-item update" href="/staticPages/${row.id}/update" title="Update">
             <i class="fa fa-edit"></i>
@@ -99,23 +97,31 @@ function initTable() {
                 field: 'pageType',
                 title: trans.PAGE_TYPE || 'pageType',
                 formatter: function (value, row, index) {
-                    let html = `<select class="table-field-page-type" disabled>`;
-                    if (row.pageTypeItem && row.pageTypeItem.id >= 0) {
-                        html += `<option value="${row.pageTypeItem.id}" selected>${row.pageTypeItem.text}</option>`;
-                    }
-                    html += '</select>';
-                    return html;
+                    const optionsHtml = pageTypes.map(st => {
+                        const selected = row.pageType === st.value ? 'selected' : '';
+                        return `<option value="${st.value}" ${selected}>${st.name}</option>`;
+                    }).join('');
+
+                    return `
+                        <select class="table-field-page-type" onchange="updatePageType(${row.id}, this.value)" disabled>
+                            ${optionsHtml}
+                        </select>
+                    `;
                 }
             }, {
                 field: 'status',
                 title: trans.STATUS || 'Status',
                 formatter: function (value, row, index) {
-                    let html = `<select class="table-field-status" onchange="updateStatus(${row.id}, $(this).val())">`;
-                    if (row.statusItem && row.statusItem.id >= 0) {
-                        html += `<option value="${row.statusItem.id}" selected>${row.statusItem.text}</option>`;
-                    }
-                    html += '</select>';
-                    return html;
+                    const optionsHtml = statuses.map(st => {
+                        const selected = row.status === st.value ? 'selected' : '';
+                        return `<option value="${st.value}" ${selected}>${st.name}</option>`;
+                    }).join('');
+
+                    return `
+                        <select class="table-field-status" onchange="updateStatus(${row.id}, this.value)">
+                            ${optionsHtml}
+                        </select>
+                    `;
                 }
             }, {
                 field: 'createdAt',
@@ -155,34 +161,6 @@ function initTable() {
             minimumResultsForSearch: Infinity,
             placeholder: 'Select status',
             dropdownParent: $('#static-page-list'),
-            ajax: {
-                url: `${config.apiAddress}/v1/common/statuses`,
-                headers: {
-                    'Authorization': `Bearer ${getAccessToken()}`,
-                },
-                delay: 300,
-                data: function (params) {
-                    var query = {
-                        name: params.term,
-                    }
-    
-                    return query;
-                },
-                processResults: function (res) {
-                    return {
-                        results: res.data
-                    };
-                }
-            },
-            escapeMarkup: function (markup) {
-                return markup;
-            },
-            templateResult: function (data) {
-                return data.text;
-            },
-            templateSelection: function (data) {
-                return data.text;
-            }
         });
 
         $('#static-page-list .table-field-page-type').select2({
@@ -191,34 +169,6 @@ function initTable() {
             minimumResultsForSearch: Infinity,
             placeholder: 'Select page type',
             dropdownParent: $('#static-page-list'),
-            ajax: {
-                url: `${config.apiAddress}/v1/common/pageTypes`,
-                headers: {
-                    'Authorization': `Bearer ${getAccessToken()}`,
-                },
-                delay: 300,
-                data: function (params) {
-                    var query = {
-                        name: params.term,
-                    }
-    
-                    return query;
-                },
-                processResults: function (res) {
-                    return {
-                        results: res.data
-                    };
-                }
-            },
-            escapeMarkup: function (markup) {
-                return markup;
-            },
-            templateResult: function (data) {
-                return data.text;
-            },
-            templateSelection: function (data) {
-                return data.text;
-            }
         });
     });
     $table.on('check.bs.table uncheck.bs.table ' + 'check-all.bs.table uncheck-all.bs.table', function () {

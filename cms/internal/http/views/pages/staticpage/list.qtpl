@@ -49,6 +49,10 @@
 {% endstripspace %}
 
 {% func (p *List) Script() %}
+	{% code
+		statusesJson, _ := bootstrap.JSON.MarshalToString(bootstrap.StatusItems)
+		pageTypesJson, _ := bootstrap.JSON.MarshalToString(bootstrap.PageTypeItems)
+	%}
 	{%= p.BasePage.Script([]string{
 		"<script src=\"/assets/libs/bootstrap-table/bootstrap-table.min.js\"></script>",
 		"<script src=\"/assets/libs/bootstrap-table/extensions/fixed-columns/bootstrap-table-fixed-columns.min.js\"></script>",
@@ -61,6 +65,9 @@
 	<script type="text/javascript">
 		toastr.options.closeButton = true;
 		toastr.options.progressBar = true;
+
+		const statuses = {%s= statusesJson %};
+		const pageTypes = {%s= pageTypesJson %};
 
 		const trans = {};
 		
