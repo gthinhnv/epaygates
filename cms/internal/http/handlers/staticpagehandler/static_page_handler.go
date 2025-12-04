@@ -15,7 +15,8 @@ func NewStaticPageHandler() *StaticPageHandler {
 }
 
 func (h *StaticPageHandler) List(c *gin.Context) {
-	p := staticpage.List{}
-	p.Ctx = c
+	p := staticpage.List{
+		BasePage: layout.BasePage{Ctx: c, Lang: c.GetString("lang")},
+	}
 	layout.WritePageTemplate(c.Writer, &p)
 }

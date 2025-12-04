@@ -252,12 +252,10 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
 	`)
 //line internal/http/views/pages/staticpage/list.qtpl:54
-	lang := p.Ctx.GetString("lang")
-
 	statusList := make([]*commonmodel.StatusItem, len(bootstrap.StatusItems))
 	for i := 0; i < len(bootstrap.StatusItems); i++ {
 		statusList[i] = &commonmodel.StatusItem{
-			Name:  bootstrap.Translator.T(lang, bootstrap.StatusItems[i].Name, nil),
+			Name:  bootstrap.Translator.T(p.Lang, bootstrap.StatusItems[i].Name, nil),
 			Value: bootstrap.StatusItems[i].Value,
 		}
 	}
@@ -265,7 +263,7 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
 	pageTypeList := make([]*commonmodel.PageTypeItem, len(bootstrap.PageTypeItems))
 	for i := 0; i < len(bootstrap.PageTypeItems); i++ {
 		pageTypeList[i] = &commonmodel.PageTypeItem{
-			Name:  bootstrap.Translator.T(lang, bootstrap.PageTypeItems[i].Name, nil),
+			Name:  bootstrap.Translator.T(p.Lang, bootstrap.PageTypeItems[i].Name, nil),
 			Value: bootstrap.PageTypeItems[i].Value,
 		}
 	}
@@ -273,10 +271,10 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
 	statusListJson, _ := bootstrap.JSON.MarshalToString(statusList)
 	pageTypeListJson, _ := bootstrap.JSON.MarshalToString(pageTypeList)
 
-//line internal/http/views/pages/staticpage/list.qtpl:74
+//line internal/http/views/pages/staticpage/list.qtpl:72
 	qw422016.N().S(`
 	`)
-//line internal/http/views/pages/staticpage/list.qtpl:75
+//line internal/http/views/pages/staticpage/list.qtpl:73
 	p.BasePage.StreamScript(qw422016, []string{
 		"<script src=\"/assets/libs/bootstrap-table/bootstrap-table.min.js\"></script>",
 		"<script src=\"/assets/libs/bootstrap-table/extensions/fixed-columns/bootstrap-table-fixed-columns.min.js\"></script>",
@@ -286,27 +284,27 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
 		"<script src=\"/assets/libs/moment/moment.min.js\"></script>",
 		"<script src=\"/assets/libs/icheck/icheck.min.js\"></script>",
 	})
-//line internal/http/views/pages/staticpage/list.qtpl:83
+//line internal/http/views/pages/staticpage/list.qtpl:81
 	qw422016.N().S(`
 	<script type="text/javascript">
 		toastr.options.closeButton = true;
 		toastr.options.progressBar = true;
 
 		const statuses = `)
-//line internal/http/views/pages/staticpage/list.qtpl:88
+//line internal/http/views/pages/staticpage/list.qtpl:86
 	qw422016.N().S(statusListJson)
-//line internal/http/views/pages/staticpage/list.qtpl:88
+//line internal/http/views/pages/staticpage/list.qtpl:86
 	qw422016.N().S(`;
 		const pageTypes = `)
-//line internal/http/views/pages/staticpage/list.qtpl:89
+//line internal/http/views/pages/staticpage/list.qtpl:87
 	qw422016.N().S(pageTypeListJson)
-//line internal/http/views/pages/staticpage/list.qtpl:89
+//line internal/http/views/pages/staticpage/list.qtpl:87
 	qw422016.N().S(`;
 
 		const trans = {};
 		
 		`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`$(function () {
     initTableFilters();
 
@@ -318,23 +316,23 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
         dropdownParent: $('#filter'),
         ajax: {
             url: `)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`${config.apiAddress}/v1/common/statuses`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`,
             headers: {
                 'Authorization': `)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`Bearer ${getAccessToken()}`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`,
             },
             delay: 300,
@@ -367,13 +365,13 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
         $.ajax({
             type: 'GET',
             url: `)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`${config.apiAddress}/v1/common/statuses`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`,
             authRequired: true,          // 👈 marks this request for interception
             xhrFields: { withCredentials: true },
@@ -383,25 +381,25 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
                 const selectedItem = data.find(x => x.id === selectedStatus);
                 if (selectedItem) {
                     $('#filter .status-selection').empty().append(`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`<option value="${selectedItem.id}" selected>${selectedItem.text}</option>`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`).trigger('change');
                 }
             },
             error: function (xhr, status, error) {
                 const message = (xhr.responseJSON || {}).message || `)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`Failed to get page status. Please contact admin.`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`;
                 toastr['error'](message);
             },
@@ -412,10 +410,10 @@ func (p *List) StreamScript(qw422016 *qt422016.Writer) {
         $('#filter .status-selection').empty().trigger('change');
     }
 });`)
-//line internal/http/views/pages/staticpage/list.qtpl:93
+//line internal/http/views/pages/staticpage/list.qtpl:91
 	qw422016.N().S(`
 		`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`const DEFAULT_PAGE_NUMBER = 1;
 const DEFAULT_PAGE_SIZE = 10;
 
@@ -440,15 +438,15 @@ function responseHandler(res) {
 function operateFormatter(value, row, index) {
     return [
         `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`<a class="table-action-item update" href="/staticPages/${row.id}/update" title="Update">
             <i class="fa fa-edit"></i>
         </a>`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`
     ].join('');
 }
@@ -526,28 +524,28 @@ function initTable() {
                     const optionsHtml = pageTypes.map(st => {
                         const selected = row.pageType === st.value ? 'selected' : '';
                         return `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`<option value="${st.value}" ${selected}>${st.name}</option>`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
                     }).join('');
 
                     return `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`
                         <select class="table-field-page-type" onchange="updatePageType(${row.id}, this.value)" disabled>
                             ${optionsHtml}
                         </select>
                     `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
                 }
             }, {
@@ -557,28 +555,28 @@ function initTable() {
                     const optionsHtml = statuses.map(st => {
                         const selected = row.status === st.value ? 'selected' : '';
                         return `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`<option value="${st.value}" ${selected}>${st.name}</option>`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
                     }).join('');
 
                     return `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`
                         <select class="table-field-status" onchange="updateStatus(${row.id}, this.value)">
                             ${optionsHtml}
                         </select>
                     `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
                 }
             }, {
@@ -590,13 +588,13 @@ function initTable() {
                 align: 'center',
                 formatter: function (value, row, index) {
                     return `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`${moment(row.createdAt).format('DD-MM-YYYY HH:mm:ss')}<br/>${moment(row.updatedAt).format('DD-MM-YYYY HH:mm:ss')}`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
                 }
             }, {
@@ -608,13 +606,13 @@ function initTable() {
                 align: 'center',
                 formatter: function (value, row, index) {
                     return `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`${(row.createdByUser || {}).userName}<br/>${(row.updatedByUser || {}).userName}`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
                 }
             }, {
@@ -679,13 +677,13 @@ function initTable() {
 
 function updateStatus(id, status) {
     const endPoint = `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`${config.apiAddress}/v1/staticPages/${id}/update`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
     $.ajax({
         type: 'POST',
@@ -696,24 +694,24 @@ function updateStatus(id, status) {
         data: JSON.stringify({ status: parseInt(status, 10), fields: ['status'] }),
         success: function (data) {
             toastr['success'](`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`Updated page status successfully!`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`);
         },
         error: function (xhr, status, error) {
             const message = (xhr.responseJSON || {}).message || `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`Failed to updated page status. Please contact admin.`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
             toastr['error'](message);
         },
@@ -724,13 +722,13 @@ function updateStatus(id, status) {
 
 function deletePages(ids) {
     const endPoint = `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`${config.apiAddress}/v1/staticPages/delete`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
     $.ajax({
         type: 'DELETE',
@@ -741,13 +739,13 @@ function deletePages(ids) {
         data: JSON.stringify({ ids: ids }),
         success: function (data) {
             toastr['success'](`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`Deleted admin page with ids = ${ids} successfully!`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`);
             $table.bootstrapTable('remove', {
                 field: 'id',
@@ -760,13 +758,13 @@ function deletePages(ids) {
         },
         error: function (xhr, status, error) {
             const message = (xhr.responseJSON || {}).message || `)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`Failed to delete page with ids = ${ids}. Please contact admin.`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`;
             toastr['error'](message);
         },
@@ -809,80 +807,102 @@ $(function () {
         setToFirstPage();
     });
 })`)
-//line internal/http/views/pages/staticpage/list.qtpl:94
+//line internal/http/views/pages/staticpage/list.qtpl:92
 	qw422016.N().S(`
 	</script>
 `)
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 }
 
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 func (p *List) WriteScript(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	p.StreamScript(qw422016)
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 }
 
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 func (p *List) Script() string {
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	p.WriteScript(qb422016)
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 	return qs422016
-//line internal/http/views/pages/staticpage/list.qtpl:96
+//line internal/http/views/pages/staticpage/list.qtpl:94
 }
 
-//line internal/http/views/pages/staticpage/list.qtpl:99
+//line internal/http/views/pages/staticpage/list.qtpl:97
 func (p *List) StreamContent(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/list.qtpl:99
-	qw422016.N().S(`<div class="pcoded-content"><div class="page-header card"><div class="row align-items-end"><div class="col-lg-8"><div class="page-header-title"><i class="feather icon-home bg-c-blue"></i><div class="d-inline"><h5>PAGES</h5><span>PAGE_LIST</span></div></div></div><div class="col-lg-4"><div class="page-header-breadcrumb"><ul class=" breadcrumb breadcrumb-title"><li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i>`)
-//line internal/http/views/pages/staticpage/list.qtpl:116
+//line internal/http/views/pages/staticpage/list.qtpl:97
+	qw422016.N().S(`<div class="pcoded-content"><div class="page-header card"><div class="row align-items-end"><div class="col-lg-8"><div class="page-header-title"><i class="feather icon-home bg-c-blue"></i><div class="d-inline"><h5>`)
+//line internal/http/views/pages/staticpage/list.qtpl:105
+	qw422016.E().S(bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil))
+//line internal/http/views/pages/staticpage/list.qtpl:105
+	qw422016.N().S(`</h5><span>...</span></div></div></div><div class="col-lg-4"><div class="page-header-breadcrumb"><ul class=" breadcrumb breadcrumb-title"><li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i>`)
+//line internal/http/views/pages/staticpage/list.qtpl:114
 	qw422016.N().S(` `)
+//line internal/http/views/pages/staticpage/list.qtpl:114
+	qw422016.E().S(bootstrap.Translator.T(p.Lang, "DASHBOARD", nil))
+//line internal/http/views/pages/staticpage/list.qtpl:114
+	qw422016.N().S(`</a></li><li class="breadcrumb-item"><a href="#!">`)
 //line internal/http/views/pages/staticpage/list.qtpl:116
-	qw422016.N().S(`DASHBOARD</a></li><li class="breadcrumb-item"><a href="#!">PAGES</a></li></ul></div></div></div></div><div class="pcoded-inner-content"><div class="main-body"><div class="page-wrapper"><div class="page-body"><div class="row"><div class="col-md-12 col-xl-12"><div class="card sale-card"><div class="card-header"><h5 id="toolbar"><div class="ml-n1 mr-n1"><a class="btn waves-effect waves-light btn-success m-1" href="/staticPages/create"><i class="icofont icofont-plus"></i>CREATE</a><button class="btn waves-effect waves-light btn-primary m-1" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="filter"><i class="icofont icofont-filter"></i>FILTER</button><button id="delete" class="btn waves-effect waves-light btn-danger m-1 disabled" disabled><i class="icofont icofont-trash"></i>DELETE</button></div></h5></div><div class="card-block">`)
-//line internal/http/views/pages/staticpage/list.qtpl:147
+	qw422016.E().S(bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil))
+//line internal/http/views/pages/staticpage/list.qtpl:116
+	qw422016.N().S(`</a></li></ul></div></div></div></div><div class="pcoded-inner-content"><div class="main-body"><div class="page-wrapper"><div class="page-body"><div class="row"><div class="col-md-12 col-xl-12"><div class="card sale-card"><div class="card-header"><h5 id="toolbar"><div class="ml-n1 mr-n1"><a class="btn waves-effect waves-light btn-success m-1" href="/staticPages/create"><i class="icofont icofont-plus"></i>`)
+//line internal/http/views/pages/staticpage/list.qtpl:133
+	qw422016.E().S(bootstrap.Translator.T(p.Lang, "CREATE", nil))
+//line internal/http/views/pages/staticpage/list.qtpl:133
+	qw422016.N().S(`</a><button class="btn waves-effect waves-light btn-primary m-1" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="filter"><i class="icofont icofont-filter"></i>`)
+//line internal/http/views/pages/staticpage/list.qtpl:136
+	qw422016.E().S(bootstrap.Translator.T(p.Lang, "FILTER", nil))
+//line internal/http/views/pages/staticpage/list.qtpl:136
+	qw422016.N().S(`</button><button id="delete" class="btn waves-effect waves-light btn-danger m-1 disabled" disabled><i class="icofont icofont-trash"></i>`)
+//line internal/http/views/pages/staticpage/list.qtpl:139
+	qw422016.E().S(bootstrap.Translator.T(p.Lang, "DELETE", nil))
+//line internal/http/views/pages/staticpage/list.qtpl:139
+	qw422016.N().S(`</button></div></h5></div><div class="card-block">`)
+//line internal/http/views/pages/staticpage/list.qtpl:145
 	partials.StreamFilter(qw422016)
-//line internal/http/views/pages/staticpage/list.qtpl:147
+//line internal/http/views/pages/staticpage/list.qtpl:145
 	qw422016.N().S(`<table id="static-page-list"data-detail-formatter="detailFormatter"data-minimum-count-columns="2"data-pagination="true"data-unique-id="id"data-id-field="id"data-page-list="[10, 25, 50, 100, all]"data-page-size="10"data-side-pagination="server"data-sort-name="createdAt"data-sort-order="desc"data-url='`)
-//line internal/http/views/pages/staticpage/list.qtpl:160
+//line internal/http/views/pages/staticpage/list.qtpl:158
 	qw422016.E().S(bootstrap.SharedConfig.ApiGateway.HTTPAddress)
-//line internal/http/views/pages/staticpage/list.qtpl:160
+//line internal/http/views/pages/staticpage/list.qtpl:158
 	qw422016.N().S(`/v1/staticPages?includes=createdByUser,updatedByUser&includeTotal=true&useCache=0'data-query-params="queryParams"data-response-handler="responseHandler"></table></div></div></div></div></div></div></div></div></div>`)
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 }
 
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 func (p *List) WriteContent(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	p.StreamContent(qw422016)
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 }
 
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 func (p *List) Content() string {
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	p.WriteContent(qb422016)
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 	return qs422016
-//line internal/http/views/pages/staticpage/list.qtpl:173
+//line internal/http/views/pages/staticpage/list.qtpl:171
 }

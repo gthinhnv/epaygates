@@ -51,12 +51,10 @@
 
 {% func (p *List) Script() %}
 	{% code
-		lang := p.Ctx.GetString("lang")
-
 		statusList := make([]*commonmodel.StatusItem, len(bootstrap.StatusItems))
 		for i := 0; i < len(bootstrap.StatusItems); i++ {
 			statusList[i] = &commonmodel.StatusItem{
-				Name: bootstrap.Translator.T(lang, bootstrap.StatusItems[i].Name, nil),
+				Name: bootstrap.Translator.T(p.Lang, bootstrap.StatusItems[i].Name, nil),
 				Value: bootstrap.StatusItems[i].Value,
 			}
 		}
@@ -64,7 +62,7 @@
 		pageTypeList := make([]*commonmodel.PageTypeItem, len(bootstrap.PageTypeItems))
 		for i := 0; i < len(bootstrap.PageTypeItems); i++ {
 			pageTypeList[i] = &commonmodel.PageTypeItem{
-				Name: bootstrap.Translator.T(lang, bootstrap.PageTypeItems[i].Name, nil),
+				Name: bootstrap.Translator.T(p.Lang, bootstrap.PageTypeItems[i].Name, nil),
 				Value: bootstrap.PageTypeItems[i].Value,
 			}
 		}
@@ -104,8 +102,8 @@
 					<div class="page-header-title">
 						<i class="feather icon-home bg-c-blue"></i>
 						<div class="d-inline">
-							<h5>PAGES</h5>
-							<span>PAGE_LIST</span>
+							<h5>{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</h5>
+							<span>...</span>
 						</div>
 					</div>
 				</div>
@@ -113,9 +111,9 @@
 					<div class="page-header-breadcrumb">
 						<ul class=" breadcrumb breadcrumb-title">
 							<li class="breadcrumb-item">
-								<a href="/"><i class="feather icon-home"></i>{% space %}DASHBOARD</a>
+								<a href="/"><i class="feather icon-home"></i>{% space %}{%s bootstrap.Translator.T(p.Lang, "DASHBOARD", nil) %}</a>
 							</li>
-							<li class="breadcrumb-item"><a href="#!">PAGES</a></li>
+							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -132,13 +130,13 @@
 										<h5 id="toolbar">
 											<div class="ml-n1 mr-n1">
 												<a class="btn waves-effect waves-light btn-success m-1" href="/staticPages/create">
-													<i class="icofont icofont-plus"></i>CREATE
+													<i class="icofont icofont-plus"></i>{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}
 												</a>
 												<button class="btn waves-effect waves-light btn-primary m-1" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="filter">
-													<i class="icofont icofont-filter"></i>FILTER
+													<i class="icofont icofont-filter"></i>{%s bootstrap.Translator.T(p.Lang, "FILTER", nil) %}
 												</button>
 												<button id="delete" class="btn waves-effect waves-light btn-danger m-1 disabled" disabled>
-													<i class="icofont icofont-trash"></i>DELETE
+													<i class="icofont icofont-trash"></i>{%s bootstrap.Translator.T(p.Lang, "DELETE", nil) %}
 												</button>
 											</div>
 										</h5>
