@@ -7,10 +7,12 @@ import (
 )
 
 type Config struct {
-	Port      int
-	Log       logger.LogConfig
-	Version   string
-	MenuItems []*MenuItem
+	Port           int
+	Log            logger.LogConfig
+	Version        string
+	SupportedLangs []string
+	DefaultLang    string
+	MenuItems      []*MenuItem
 }
 
 type MenuItem struct {
