@@ -1,9 +1,10 @@
 {% import (
     "shared/models/staticpagemodel"
+    "cms/internal/bootstrap"
 ) %}
 
 {% stripspace %}
-{% func Form(model *staticpagemodel.StaticPage) %}
+{% func Form(model *staticpagemodel.StaticPage, lang string) %}
 <ul class="nav nav-tabs md-tabs tab-icon mb-0" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#main" role="tab">
@@ -65,6 +66,11 @@
                 <div class="form-group">
                     <label class="col-form-label d-block" for="pageType">Page Type:</label>
                     <select class="form-control page-type-selection is-select2" name="pageType">
+                        {% for _, pageTypeItem := range bootstrap.PageTypeItems %}
+                            <option value="{%d int(pageTypeItem.Value) %}" {% if model != nil && int32(model.PageType) == pageTypeItem.Value %}selected{% endif %}>
+                                {%s bootstrap.Translator.T(lang, pageTypeItem.Name, nil) %}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -74,6 +80,11 @@
                 <div class="form-group">
                     <label class="col-form-label d-block" for="status">Status:</label>
                     <select class="form-control status-selection is-select2" name="status">
+                        {% for _, statusItem := range bootstrap.StatusItems %}
+                            <option value="{%d int(statusItem.Value) %}" {% if model != nil && int32(model.Status) == statusItem.Value %}selected{% endif %}>
+                                {%s bootstrap.Translator.T(lang, statusItem.Name, nil) %}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -124,6 +135,11 @@
                     <div class="form-group">
                         <label class="col-form-label d-block" for="adsPlatform">Ads Platform:</label>
                         <select class="form-control ads-platform-selection is-select2" name="adsPlatform">
+                            {% for _, adsPlatformItem := range bootstrap.AdsPlatformItems %}
+                                <option value="{%d int(adsPlatformItem.Value) %}" {% if model != nil && int32(model.AdsPlatform) == adsPlatformItem.Value %}selected{% endif %}>
+                                    {%s bootstrap.Translator.T(lang, adsPlatformItem.Name, nil) %}
+                                </option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>

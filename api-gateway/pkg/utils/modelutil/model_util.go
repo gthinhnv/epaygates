@@ -27,7 +27,7 @@ func BuildStatuses() []*commonmodel.StatusItem {
 
 func BuildPageTypes() []*commonmodel.PageTypeItem {
 	// Allocate exact size
-	pageTypeList := make([]*commonmodel.PageTypeItem, 0, len(commonpb.Status_value))
+	pageTypeList := make([]*commonmodel.PageTypeItem, 0, len(commonpb.PageType_value))
 
 	for name, val := range commonpb.PageType_value {
 		pageTypeList = append(pageTypeList, &commonmodel.PageTypeItem{
@@ -46,9 +46,9 @@ func BuildPageTypes() []*commonmodel.PageTypeItem {
 
 func BuildAdsPlatforms() []*commonmodel.AdsPlatformItem {
 	// Allocate exact size
-	adsPlatformList := make([]*commonmodel.AdsPlatformItem, 0, len(commonpb.Status_value))
+	adsPlatformList := make([]*commonmodel.AdsPlatformItem, 0, len(commonpb.AdsPlatform_value))
 
-	for name, val := range commonpb.PageType_value {
+	for name, val := range commonpb.AdsPlatform_value {
 		adsPlatformList = append(adsPlatformList, &commonmodel.AdsPlatformItem{
 			Name:  name,
 			Value: val,

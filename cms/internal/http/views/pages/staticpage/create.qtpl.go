@@ -341,51 +341,7 @@ $(function () {
         allowClear: false,
         minimumResultsForSearch: Infinity,
         placeholder: 'Select status',
-        dropdownParent: $('#static-page-form'),
-        ajax: {
-            url: `)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`${config.apiAddress}/v1/common/statuses`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`,
-            headers: {
-                'Authorization': `)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`Bearer ${getAccessToken()}`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`,
-            },
-            delay: 300,
-            data: function (params) {
-                var query = {
-                    name: params.term,
-                }
-
-                return query;
-            },
-            processResults: function (res) {
-                return {
-                    results: res.data
-                };
-            }
-        },
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        templateResult: function (data) {
-            return data.text;
-        },
-        templateSelection: function (data) {
-            return data.text;
-        }
+        dropdownParent: $('#static-page-form')
     });
 
     $('#static-page-form .page-type-selection').select2({
@@ -393,51 +349,7 @@ $(function () {
         allowClear: false,
         minimumResultsForSearch: Infinity,
         placeholder: 'Select page type',
-        dropdownParent: $('#static-page-form'),
-        ajax: {
-            url: `)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`${config.apiAddress}/v1/common/pageTypes`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`,
-            headers: {
-                'Authorization': `)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`Bearer ${getAccessToken()}`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`,
-            },
-            delay: 300,
-            data: function (params) {
-                var query = {
-                    name: params.term,
-                }
-
-                return query;
-            },
-            processResults: function (res) {
-                return {
-                    results: res.data
-                };
-            }
-        },
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        templateResult: function (data) {
-            return data.text;
-        },
-        templateSelection: function (data) {
-            return data.text;
-        }
+        dropdownParent: $('#static-page-form')
     });
 
     $('#static-page-form .ads-platform-selection').select2({
@@ -445,51 +357,7 @@ $(function () {
         allowClear: false,
         minimumResultsForSearch: Infinity,
         placeholder: 'Select Ads Platform',
-        dropdownParent: $('#static-page-form'),
-        ajax: {
-            url: `)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`${config.apiAddress}/v1/common/adsPlatforms`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`,
-            headers: {
-                'Authorization': `)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`Bearer ${getAccessToken()}`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:65
-	qw422016.N().S(`,
-            },
-            delay: 300,
-            data: function (params) {
-                var query = {
-                    name: params.term,
-                }
-
-                return query;
-            },
-            processResults: function (res) {
-                return {
-                    results: res.data
-                };
-            }
-        },
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        templateResult: function (data) {
-            return data.text;
-        },
-        templateSelection: function (data) {
-            return data.text;
-        }
+        dropdownParent: $('#static-page-form')
     });
 });`)
 //line internal/http/views/pages/staticpage/create.qtpl:65
@@ -611,7 +479,7 @@ func (p *Create) StreamContent(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/create.qtpl:91
 	qw422016.N().S(`</a></li></ul></div></div></div></div><div class="pcoded-inner-content"><div class="main-body"><div class="page-wrapper"><div class="page-body"><div class="row"><div class="col-md-12 col-xl-12"><div class="card sale-card"><div class="card-block">`)
 //line internal/http/views/pages/staticpage/create.qtpl:105
-	partials.StreamForm(qw422016, nil)
+	partials.StreamForm(qw422016, nil, p.Lang)
 //line internal/http/views/pages/staticpage/create.qtpl:105
 	qw422016.N().S(`</div></div></div></div></div></div></div></div></div>`)
 //line internal/http/views/pages/staticpage/create.qtpl:115

@@ -71,35 +71,7 @@ $(function () {
         allowClear: false,
         minimumResultsForSearch: Infinity,
         placeholder: 'Select status',
-        dropdownParent: $('#static-page-form'),
-        ajax: {
-            url: `${config.apiAddress}/v1/common/statuses`,
-            headers: {
-                'Authorization': `Bearer ${getAccessToken()}`,
-            },
-            delay: 300,
-            data: function (params) {
-                var query = {
-                    name: params.term,
-                }
-
-                return query;
-            },
-            processResults: function (res) {
-                return {
-                    results: res.data
-                };
-            }
-        },
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        templateResult: function (data) {
-            return data.text;
-        },
-        templateSelection: function (data) {
-            return data.text;
-        }
+        dropdownParent: $('#static-page-form')
     });
 
     $('#static-page-form .page-type-selection').select2({
@@ -107,35 +79,7 @@ $(function () {
         allowClear: false,
         minimumResultsForSearch: Infinity,
         placeholder: 'Select page type',
-        dropdownParent: $('#static-page-form'),
-        ajax: {
-            url: `${config.apiAddress}/v1/common/pageTypes`,
-            headers: {
-                'Authorization': `Bearer ${getAccessToken()}`,
-            },
-            delay: 300,
-            data: function (params) {
-                var query = {
-                    name: params.term,
-                }
-
-                return query;
-            },
-            processResults: function (res) {
-                return {
-                    results: res.data
-                };
-            }
-        },
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        templateResult: function (data) {
-            return data.text;
-        },
-        templateSelection: function (data) {
-            return data.text;
-        }
+        dropdownParent: $('#static-page-form')
     });
 
     $('#static-page-form .ads-platform-selection').select2({
@@ -143,34 +87,6 @@ $(function () {
         allowClear: false,
         minimumResultsForSearch: Infinity,
         placeholder: 'Select Ads Platform',
-        dropdownParent: $('#static-page-form'),
-        ajax: {
-            url: `${config.apiAddress}/v1/common/adsPlatforms`,
-            headers: {
-                'Authorization': `Bearer ${getAccessToken()}`,
-            },
-            delay: 300,
-            data: function (params) {
-                var query = {
-                    name: params.term,
-                }
-
-                return query;
-            },
-            processResults: function (res) {
-                return {
-                    results: res.data
-                };
-            }
-        },
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        templateResult: function (data) {
-            return data.text;
-        },
-        templateSelection: function (data) {
-            return data.text;
-        }
+        dropdownParent: $('#static-page-form')
     });
 });
