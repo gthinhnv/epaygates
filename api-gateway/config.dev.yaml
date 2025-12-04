@@ -3,4 +3,6 @@ log:
   output: console
   filePath: logs/app.log
   level: info # level: info # logrus Level: error, warning, info, debug, trace
+supportedLangs: ["en", "vi"]
+defaultLang: "en"
 allowedHosts: ["127.0.0.1"]

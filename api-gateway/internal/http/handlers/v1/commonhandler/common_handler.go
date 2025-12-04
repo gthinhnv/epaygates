@@ -1,6 +1,7 @@
 package commonhandler
 
 import (
+	"apigateway/internal/bootstrap"
 	"apigateway/pkg/utils/modelutil"
 	"net/http"
 	"shared/models/commonmodel"
@@ -26,6 +27,9 @@ func NewCommonHandler() *CommonHandler {
 }
 
 func (h *CommonHandler) ListStatuses(c *gin.Context) {
+	for i := 0; i < len(statusesList); i++ {
+		statusesList[i].Name = bootstrap.Translator.T(c.GetString("lang"), statusesList[i].Name, nil)
+	}
 	c.JSON(http.StatusOK, apiutil.Response{
 		Code:    apiutil.CODE_SUCCESS,
 		Message: "success",

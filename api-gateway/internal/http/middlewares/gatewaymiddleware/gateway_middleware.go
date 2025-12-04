@@ -42,6 +42,8 @@ func ContextSetup() gin.HandlerFunc {
 			return
 		}
 
+		c.Set("lang", bootstrap.Config.DefaultLang)
+
 		c.Next()
 	}
 }

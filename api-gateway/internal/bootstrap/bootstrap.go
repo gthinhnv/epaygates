@@ -2,9 +2,13 @@ package bootstrap
 
 import (
 	"apigateway/internal/config"
+	"fmt"
 	"os"
+	"path/filepath"
+	"runtime"
 	sharedConfig "shared/config"
 	"shared/pkg/logger"
+	"shared/pkg/translator"
 
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
@@ -16,6 +20,8 @@ var (
 	Config       *config.Config
 
 	Logger *logger.Logger
+
+	Translator *translator.Translator
 
 	MetadataServiceConn *grpc.ClientConn
 )
@@ -44,10 +50,28 @@ func Init() error {
 		return err
 	}
 
+	Translator = translator.New(buildLocaleEntries(Config.SupportedLangs), Config.DefaultLang)
+
 	MetadataServiceConn, err = grpc.NewClient(SharedConfig.MetadataService.GRPCAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return err
 	}
 
 	return nil
+}
+
+func buildLocaleEntries(supportedLangs []string) []*translator.LocaleEntry {
+	_, filename, _, _ := runtime.Caller(0)
+	baseDir := filepath.Dir(filename)
+
+	localeEntries := make([]*translator.LocaleEntry, len(supportedLangs))
+
+	for i, lang := range supportedLangs {
+		localeEntries[i] = &translator.LocaleEntry{
+			Name: lang,
+			Path: filepath.Join(baseDir, fmt.Sprintf("../locales/%s.json", lang)),
+		}
+	}
+
+	return localeEntries
 }

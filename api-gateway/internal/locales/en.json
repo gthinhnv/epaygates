@@ -1,0 +1,6 @@
+{
+  "HELLO": "Hello, {{name}}!",
+  "STATUS_UNSPECIFIED": "Unspecified",
+  "STATUS_ACTIVE": "Active",
+  "STATUS_INACTIVE": "Inactive"
+}
