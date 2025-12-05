@@ -11,7 +11,6 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -264,7 +263,7 @@ func (x *CreateResponse) GetId() uint64 {
 type UpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          *StaticPage            `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"`
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	Fields        []string               `protobuf:"bytes,2,rep,name=fields,proto3" json:"fields,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -306,9 +305,9 @@ func (x *UpdateRequest) GetPage() *StaticPage {
 	return nil
 }
 
-func (x *UpdateRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+func (x *UpdateRequest) GetFields() []string {
 	if x != nil {
-		return x.UpdateMask
+		return x.Fields
 	}
 	return nil
 }
@@ -742,7 +741,7 @@ var File_staticpagepb_schema_proto protoreflect.FileDescriptor
 
 const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
-	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcf\x04\n" +
+	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcf\x04\n" +
 	"\n" +
 	"StaticPage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
@@ -769,11 +768,10 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\rCreateRequest\x12,\n" +
 	"\x04page\x18\x01 \x01(\v2\x18.staticpagepb.StaticPageR\x04page\" \n" +
 	"\x0eCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"z\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"U\n" +
 	"\rUpdateRequest\x12,\n" +
-	"\x04page\x18\x01 \x01(\v2\x18.staticpagepb.StaticPageR\x04page\x12;\n" +
-	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\" \n" +
+	"\x04page\x18\x01 \x01(\v2\x18.staticpagepb.StaticPageR\x04page\x12\x16\n" +
+	"\x06fields\x18\x02 \x03(\tR\x06fields\" \n" +
 	"\x0eUpdateResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"@\n" +
 	"\rDeleteRequest\x12\x10\n" +
@@ -838,7 +836,6 @@ var file_staticpagepb_schema_proto_goTypes = []any{
 	(commonpb.AdsPlatform)(0),     // 13: commonpb.AdsPlatform
 	(commonpb.Status)(0),          // 14: commonpb.Status
 	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
 }
 var file_staticpagepb_schema_proto_depIdxs = []int32{
 	11, // 0: staticpagepb.StaticPage.page_type:type_name -> commonpb.PageType
@@ -849,17 +846,16 @@ var file_staticpagepb_schema_proto_depIdxs = []int32{
 	15, // 5: staticpagepb.StaticPage.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 6: staticpagepb.CreateRequest.page:type_name -> staticpagepb.StaticPage
 	0,  // 7: staticpagepb.UpdateRequest.page:type_name -> staticpagepb.StaticPage
-	16, // 8: staticpagepb.UpdateRequest.update_mask:type_name -> google.protobuf.FieldMask
-	11, // 9: staticpagepb.ListRequest.page_types:type_name -> commonpb.PageType
-	13, // 10: staticpagepb.ListRequest.ads_platforms:type_name -> commonpb.AdsPlatform
-	14, // 11: staticpagepb.ListRequest.statuses:type_name -> commonpb.Status
-	0,  // 12: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
-	0,  // 13: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	11, // 8: staticpagepb.ListRequest.page_types:type_name -> commonpb.PageType
+	13, // 9: staticpagepb.ListRequest.ads_platforms:type_name -> commonpb.AdsPlatform
+	14, // 10: staticpagepb.ListRequest.statuses:type_name -> commonpb.Status
+	0,  // 11: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
+	0,  // 12: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_staticpagepb_schema_proto_init() }

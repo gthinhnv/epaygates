@@ -7,7 +7,6 @@ import "commonpb/ads_platform.proto";
 import "commonpb/page_type.proto";
 import "commonpb/seo.proto";
 import "commonpb/status.proto";
-import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
 // ========================
@@ -52,7 +51,7 @@ message CreateResponse {
 message UpdateRequest {
   StaticPage page = 1;
 
-  google.protobuf.FieldMask update_mask = 2;
+  repeated string fields = 2;
 }
 
 message UpdateResponse {
