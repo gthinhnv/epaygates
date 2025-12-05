@@ -16,14 +16,22 @@ $(function () {
             },
             error: function (xhr, status, error) {
                 const resJson = xhr.responseJSON || {};
-                const errs = resJson.errs || {};
-                $('#page-form').find('input[name], select[name], textarea[name]').each(function () {
-                    const name = $(this).attr('name');
-                    const errMsg = errs[name];
-                    if (errMsg && errMsg != '') {
-                        addFieldError($(this), errMsg);
+                const errors = resJson.data || {};
+                errors.forEach(e => {
+                    const { field, message } = e;
+
+                    // Escape special characters for jQuery attribute selector
+                    const safeField = field.replace(/([!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~])/g, "\\$1");
+
+                    const $input = $('#static-page-form').find(`[name="${safeField}"]`).first();
+
+                    if ($input.length) {
+                        addFieldError($input, message);
+                    } else {
+                        console.warn(`Field not found: ${field}`);
                     }
                 });
+
                 toastr['error'](resJson.message || `An error occurred!`);
             },
             contentType: 'application/json',

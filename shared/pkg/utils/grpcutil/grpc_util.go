@@ -7,12 +7,9 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-type ErrorField struct {
-	FieldName  string
-	FieldValue any
-	RuleId     string
-	RuleValue  any
-	Message    string
+type FieldViolation struct {
+	Field   string `json:"field"`
+	Message string `json:"message"`
 }
 
 func BuildValidationError(err error) error {
@@ -41,17 +38,22 @@ func BuildValidationError(err error) error {
 	return st.Err()
 }
 
-func ParseValidationError(err error) ([]*errdetails.BadRequest_FieldViolation, bool) {
+func ParseValidationError(err error) ([]*FieldViolation, bool) {
 	st, ok := status.FromError(err)
 	if !ok {
 		return nil, false
 	}
 
-	var result []*errdetails.BadRequest_FieldViolation
+	var result []*FieldViolation
 	for _, detail := range st.Details() {
 		switch t := detail.(type) {
 		case *errdetails.BadRequest:
-			result = append(result, t.FieldViolations...)
+			for _, v := range t.FieldViolations {
+				result = append(result, &FieldViolation{
+					Field:   v.Field,
+					Message: v.Description,
+				})
+			}
 		}
 	}
 

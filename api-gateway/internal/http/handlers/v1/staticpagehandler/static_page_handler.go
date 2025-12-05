@@ -4,7 +4,6 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"context"
-	"fmt"
 	"net/http"
 	"shared/models/staticpagemodel"
 	"shared/pkg/utils/apiutil"
@@ -51,13 +50,12 @@ func (h *StaticPageHandler) Create(c *gin.Context) {
 			"err": err,
 		}).Warn("StaticPageHandler >>> Create: failed to create static page")
 
-		fields, ok := grpcutil.ParseValidationError(err)
-		fmt.Println("***********", ok)
-		fmt.Println(fields)
+		fields, _ := grpcutil.ParseValidationError(err)
 
 		c.JSON(http.StatusBadRequest, apiutil.Response{
 			Code:    apiutil.CODE_ERROR,
 			Message: "An error happened when creating new static page",
+			Data:    fields,
 		})
 		return
 	}

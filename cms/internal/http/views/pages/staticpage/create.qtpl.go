@@ -394,18 +394,54 @@ $(function () {
 	qw422016.N().S("`")
 //line internal/http/views/pages/staticpage/create.qtpl:66
 	qw422016.N().S(`);
-                window.location.replace('/pages');
+                window.location.replace('/staticPages');
             },
             error: function (xhr, status, error) {
                 const resJson = xhr.responseJSON || {};
-                const errs = resJson.errs || {};
-                $('#page-form').find('input[name], select[name], textarea[name]').each(function () {
-                    const name = $(this).attr('name');
-                    const errMsg = errs[name];
-                    if (errMsg && errMsg != '') {
-                        addFieldError($(this), errMsg);
+                const errors = resJson.data || {};
+                errors.forEach(e => {
+                    const { field, message } = e;
+
+                    // Escape special characters for jQuery attribute selector
+                    const safeField = field.replace(/([!"#$%&'()*+,./:;<=>?@[\\\]^`)
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S("`")
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S(`{|}~])/g, "\\$1");
+
+                    const $input = $('#static-page-form').find(`)
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S("`")
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S(`[name="${safeField}"]`)
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S("`")
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S(`).first();
+
+                    if ($input.length) {
+                        addFieldError($input, message);
+                    } else {
+                        console.warn(`)
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S("`")
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S(`Field not found: ${field}`)
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S("`")
+//line internal/http/views/pages/staticpage/create.qtpl:66
+	qw422016.N().S(`);
                     }
                 });
+
+                // const errs = resJson.errs || {};
+                // $('#page-form').find('input[name], select[name], textarea[name]').each(function () {
+                //     const name = $(this).attr('name');
+                //     const errMsg = errs[name];
+                //     if (errMsg && errMsg != '') {
+                //         addFieldError($(this), errMsg);
+                //     }
+                // });
                 toastr['error'](resJson.message || `)
 //line internal/http/views/pages/staticpage/create.qtpl:66
 	qw422016.N().S("`")
