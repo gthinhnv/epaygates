@@ -12,6 +12,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -37,8 +38,8 @@ type StaticPage struct {
 	Status         commonpb.Status        `protobuf:"varint,9,opt,name=status,proto3,enum=commonpb.Status" json:"status,omitempty"`
 	CreatedBy      uint64                 `protobuf:"varint,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	UpdatedBy      uint64                 `protobuf:"varint,11,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	CreatedAt      int64                  `protobuf:"varint,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt      int64                  `protobuf:"varint,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	DeletedVersion int32                  `protobuf:"varint,14,opt,name=deleted_version,json=deletedVersion,proto3" json:"deleted_version,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -151,18 +152,18 @@ func (x *StaticPage) GetUpdatedBy() uint64 {
 	return 0
 }
 
-func (x *StaticPage) GetCreatedAt() int64 {
+func (x *StaticPage) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
+	return nil
 }
 
-func (x *StaticPage) GetUpdatedAt() int64 {
+func (x *StaticPage) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
 	}
-	return 0
+	return nil
 }
 
 func (x *StaticPage) GetDeletedVersion() int32 {
@@ -174,15 +175,7 @@ func (x *StaticPage) GetDeletedVersion() int32 {
 
 type CreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-	Slug          string                 `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
-	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	PageType      commonpb.PageType      `protobuf:"varint,4,opt,name=page_type,json=pageType,proto3,enum=commonpb.PageType" json:"page_type,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Seo           *commonpb.SEO          `protobuf:"bytes,6,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform   commonpb.AdsPlatform   `protobuf:"varint,7,opt,name=ads_platform,json=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"ads_platform,omitempty"`
-	Status        commonpb.Status        `protobuf:"varint,8,opt,name=status,proto3,enum=commonpb.Status" json:"status,omitempty"`
-	CreatedBy     uint64                 `protobuf:"varint,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Page          *StaticPage            `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -217,67 +210,11 @@ func (*CreateRequest) Descriptor() ([]byte, []int) {
 	return file_staticpagepb_schema_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateRequest) GetTitle() string {
+func (x *CreateRequest) GetPage() *StaticPage {
 	if x != nil {
-		return x.Title
-	}
-	return ""
-}
-
-func (x *CreateRequest) GetSlug() string {
-	if x != nil {
-		return x.Slug
-	}
-	return ""
-}
-
-func (x *CreateRequest) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *CreateRequest) GetPageType() commonpb.PageType {
-	if x != nil {
-		return x.PageType
-	}
-	return commonpb.PageType(0)
-}
-
-func (x *CreateRequest) GetSortOrder() int32 {
-	if x != nil {
-		return x.SortOrder
-	}
-	return 0
-}
-
-func (x *CreateRequest) GetSeo() *commonpb.SEO {
-	if x != nil {
-		return x.Seo
+		return x.Page
 	}
 	return nil
-}
-
-func (x *CreateRequest) GetAdsPlatform() commonpb.AdsPlatform {
-	if x != nil {
-		return x.AdsPlatform
-	}
-	return commonpb.AdsPlatform(0)
-}
-
-func (x *CreateRequest) GetStatus() commonpb.Status {
-	if x != nil {
-		return x.Status
-	}
-	return commonpb.Status(0)
-}
-
-func (x *CreateRequest) GetCreatedBy() uint64 {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return 0
 }
 
 type CreateResponse struct {
@@ -325,19 +262,9 @@ func (x *CreateResponse) GetId() uint64 {
 }
 
 type UpdateRequest struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	Id          uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Title       string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Slug        string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
-	Content     string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	PageType    commonpb.PageType      `protobuf:"varint,5,opt,name=page_type,json=pageType,proto3,enum=commonpb.PageType" json:"page_type,omitempty"`
-	SortOrder   int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Seo         *commonpb.SEO          `protobuf:"bytes,7,opt,name=seo,proto3" json:"seo,omitempty"`
-	AdsPlatform commonpb.AdsPlatform   `protobuf:"varint,8,opt,name=ads_platform,json=adsPlatform,proto3,enum=commonpb.AdsPlatform" json:"ads_platform,omitempty"`
-	Status      commonpb.Status        `protobuf:"varint,9,opt,name=status,proto3,enum=commonpb.Status" json:"status,omitempty"`
-	UpdatedBy   uint64                 `protobuf:"varint,10,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	// standard Google field mask ("title", "slug", "seo", ...)
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,11,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          *StaticPage            `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"`
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -372,74 +299,11 @@ func (*UpdateRequest) Descriptor() ([]byte, []int) {
 	return file_staticpagepb_schema_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateRequest) GetId() uint64 {
+func (x *UpdateRequest) GetPage() *StaticPage {
 	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *UpdateRequest) GetTitle() string {
-	if x != nil {
-		return x.Title
-	}
-	return ""
-}
-
-func (x *UpdateRequest) GetSlug() string {
-	if x != nil {
-		return x.Slug
-	}
-	return ""
-}
-
-func (x *UpdateRequest) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *UpdateRequest) GetPageType() commonpb.PageType {
-	if x != nil {
-		return x.PageType
-	}
-	return commonpb.PageType(0)
-}
-
-func (x *UpdateRequest) GetSortOrder() int32 {
-	if x != nil {
-		return x.SortOrder
-	}
-	return 0
-}
-
-func (x *UpdateRequest) GetSeo() *commonpb.SEO {
-	if x != nil {
-		return x.Seo
+		return x.Page
 	}
 	return nil
-}
-
-func (x *UpdateRequest) GetAdsPlatform() commonpb.AdsPlatform {
-	if x != nil {
-		return x.AdsPlatform
-	}
-	return commonpb.AdsPlatform(0)
-}
-
-func (x *UpdateRequest) GetStatus() commonpb.Status {
-	if x != nil {
-		return x.Status
-	}
-	return commonpb.Status(0)
-}
-
-func (x *UpdateRequest) GetUpdatedBy() uint64 {
-	if x != nil {
-		return x.UpdatedBy
-	}
-	return 0
 }
 
 func (x *UpdateRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
@@ -878,59 +742,37 @@ var File_staticpagepb_schema_proto protoreflect.FileDescriptor
 
 const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
-	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a google/protobuf/field_mask.proto\"\xe7\x03\n" +
+	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcf\x04\n" +
 	"\n" +
 	"StaticPage\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12/\n" +
-	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
+	"\x05title\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x1b\n" +
+	"\x04slug\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04slug\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
+	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\bpageType\x12\x1d\n" +
 	"\n" +
 	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12$\n" +
-	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOH\x00R\x03seo\x88\x01\x01\x128\n" +
-	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
-	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1d\n" +
+	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOH\x00R\x03seo\x88\x01\x01\x12B\n" +
+	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformB\b\xbaH\x05\x82\x01\x02\x10\x01R\vadsPlatform\x122\n" +
+	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1d\n" +
 	"\n" +
 	"created_by\x18\n" +
 	" \x01(\x04R\tcreatedBy\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\v \x01(\x04R\tupdatedBy\x12\x1d\n" +
+	"updated_by\x18\v \x01(\x04R\tupdatedBy\x129\n" +
 	"\n" +
-	"created_at\x18\f \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\x03R\tupdatedAt\x12'\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12'\n" +
 	"\x0fdeleted_version\x18\x0e \x01(\x05R\x0edeletedVersionB\x06\n" +
-	"\x04_seo\"\xed\x02\n" +
-	"\rCreateRequest\x12\x1d\n" +
-	"\x05title\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x1b\n" +
-	"\x04slug\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04slug\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\x129\n" +
-	"\tpage_type\x18\x04 \x01(\x0e2\x12.commonpb.PageTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\bpageType\x12\x1d\n" +
-	"\n" +
-	"sort_order\x18\x05 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\x06 \x01(\v2\r.commonpb.SEOR\x03seo\x128\n" +
-	"\fads_platform\x18\a \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x122\n" +
-	"\x06status\x18\b \x01(\x0e2\x10.commonpb.StatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1d\n" +
-	"\n" +
-	"created_by\x18\t \x01(\x04R\tcreatedBy\" \n" +
+	"\x04_seo\"=\n" +
+	"\rCreateRequest\x12,\n" +
+	"\x04page\x18\x01 \x01(\v2\x18.staticpagepb.StaticPageR\x04page\" \n" +
 	"\x0eCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"\x94\x03\n" +
-	"\rUpdateRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12/\n" +
-	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1d\n" +
-	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x1f\n" +
-	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOR\x03seo\x128\n" +
-	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
-	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1d\n" +
-	"\n" +
-	"updated_by\x18\n" +
-	" \x01(\x04R\tupdatedBy\x12;\n" +
-	"\vupdate_mask\x18\v \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"z\n" +
+	"\rUpdateRequest\x12,\n" +
+	"\x04page\x18\x01 \x01(\v2\x18.staticpagepb.StaticPageR\x04page\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\" \n" +
 	"\x0eUpdateResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"@\n" +
@@ -995,32 +837,29 @@ var file_staticpagepb_schema_proto_goTypes = []any{
 	(*commonpb.SEO)(nil),          // 12: commonpb.SEO
 	(commonpb.AdsPlatform)(0),     // 13: commonpb.AdsPlatform
 	(commonpb.Status)(0),          // 14: commonpb.Status
-	(*fieldmaskpb.FieldMask)(nil), // 15: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
 }
 var file_staticpagepb_schema_proto_depIdxs = []int32{
 	11, // 0: staticpagepb.StaticPage.page_type:type_name -> commonpb.PageType
 	12, // 1: staticpagepb.StaticPage.seo:type_name -> commonpb.SEO
 	13, // 2: staticpagepb.StaticPage.ads_platform:type_name -> commonpb.AdsPlatform
 	14, // 3: staticpagepb.StaticPage.status:type_name -> commonpb.Status
-	11, // 4: staticpagepb.CreateRequest.page_type:type_name -> commonpb.PageType
-	12, // 5: staticpagepb.CreateRequest.seo:type_name -> commonpb.SEO
-	13, // 6: staticpagepb.CreateRequest.ads_platform:type_name -> commonpb.AdsPlatform
-	14, // 7: staticpagepb.CreateRequest.status:type_name -> commonpb.Status
-	11, // 8: staticpagepb.UpdateRequest.page_type:type_name -> commonpb.PageType
-	12, // 9: staticpagepb.UpdateRequest.seo:type_name -> commonpb.SEO
-	13, // 10: staticpagepb.UpdateRequest.ads_platform:type_name -> commonpb.AdsPlatform
-	14, // 11: staticpagepb.UpdateRequest.status:type_name -> commonpb.Status
-	15, // 12: staticpagepb.UpdateRequest.update_mask:type_name -> google.protobuf.FieldMask
-	11, // 13: staticpagepb.ListRequest.page_types:type_name -> commonpb.PageType
-	13, // 14: staticpagepb.ListRequest.ads_platforms:type_name -> commonpb.AdsPlatform
-	14, // 15: staticpagepb.ListRequest.statuses:type_name -> commonpb.Status
-	0,  // 16: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
-	0,  // 17: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	15, // 4: staticpagepb.StaticPage.created_at:type_name -> google.protobuf.Timestamp
+	15, // 5: staticpagepb.StaticPage.updated_at:type_name -> google.protobuf.Timestamp
+	0,  // 6: staticpagepb.CreateRequest.page:type_name -> staticpagepb.StaticPage
+	0,  // 7: staticpagepb.UpdateRequest.page:type_name -> staticpagepb.StaticPage
+	16, // 8: staticpagepb.UpdateRequest.update_mask:type_name -> google.protobuf.FieldMask
+	11, // 9: staticpagepb.ListRequest.page_types:type_name -> commonpb.PageType
+	13, // 10: staticpagepb.ListRequest.ads_platforms:type_name -> commonpb.AdsPlatform
+	14, // 11: staticpagepb.ListRequest.statuses:type_name -> commonpb.Status
+	0,  // 12: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
+	0,  // 13: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_staticpagepb_schema_proto_init() }

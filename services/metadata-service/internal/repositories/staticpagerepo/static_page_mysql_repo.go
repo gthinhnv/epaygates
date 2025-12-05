@@ -25,7 +25,9 @@ func NewMysqlRepository(db *sqlx.DB) Repository {
 // --------------------------------------------------
 // Create inserts a new static page and returns its ID.
 // --------------------------------------------------
-func (r *MysqlRepository) Create(ctx context.Context, page *staticpagepb.CreateRequest) (uint64, error) {
+func (r *MysqlRepository) Create(ctx context.Context, req *staticpagepb.CreateRequest) (uint64, error) {
+	page := req.GetPage()
+
 	var seoJson []byte
 	if page.Seo != nil {
 		seoJson, _ = json.Marshal(page.Seo)

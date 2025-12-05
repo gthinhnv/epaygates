@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"sync"
 	"time"
+
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 var (
@@ -66,25 +68,25 @@ func getSetters(srcType, dstType reflect.Type) []fieldSetter {
 		dstFieldType := dstField.Type
 
 		// ----------------------------------------------------------
-		// Special case: time.Time <-> int64
+		// Special case: time.Time <-> timestamppb.Timestamp
 		// ----------------------------------------------------------
 		if (dstField.Name == "CreatedAt" || dstField.Name == "UpdatedAt") &&
 			srcFieldType == reflect.TypeOf(time.Time{}) &&
-			dstFieldType.Kind() == reflect.Int64 {
+			dstFieldType == reflect.TypeOf(&timestamppb.Timestamp{}) {
 
 			setters = append(setters, func(sv, dv reflect.Value) {
 				svField := fieldByIndex(sv, srcIndex)
 				if !svField.IsValid() {
 					return
 				}
-				sec := svField.Interface().(time.Time).Unix()
-				fieldByIndex(dv, dstIndex).SetInt(sec)
+				ts := timestamppb.New(svField.Interface().(time.Time))
+				fieldByIndex(dv, dstIndex).Set(reflect.ValueOf(ts))
 			})
 			continue
 		}
 
 		if (dstField.Name == "CreatedAt" || dstField.Name == "UpdatedAt") &&
-			srcFieldType.Kind() == reflect.Int64 &&
+			srcFieldType == reflect.TypeOf(&timestamppb.Timestamp{}) &&
 			dstFieldType == reflect.TypeOf(time.Time{}) {
 
 			setters = append(setters, func(sv, dv reflect.Value) {
@@ -92,7 +94,7 @@ func getSetters(srcType, dstType reflect.Type) []fieldSetter {
 				if !svField.IsValid() {
 					return
 				}
-				t := time.Unix(svField.Int(), 0)
+				t := svField.Interface().(*timestamppb.Timestamp).AsTime()
 				fieldByIndex(dv, dstIndex).Set(reflect.ValueOf(t))
 			})
 			continue

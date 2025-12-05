@@ -4,6 +4,7 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"context"
+	"fmt"
 	"net/http"
 	"shared/models/staticpagemodel"
 	"shared/pkg/utils/apiutil"
@@ -131,6 +132,7 @@ func (h *StaticPageHandler) List(c *gin.Context) {
 	var staticPages []*staticpagemodel.StaticPage
 
 	for _, staticPagePB := range resp.GetPages() {
+		fmt.Println("***", staticPagePB.CreatedAt)
 		var staticPage staticpagemodel.StaticPage
 		if err := dbutil.MapStruct(staticPagePB, &staticPage); err != nil {
 			bootstrap.Logger.WithFields(logrus.Fields{

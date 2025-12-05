@@ -30,12 +30,14 @@ func main() {
 	defer cancel()
 
 	resp, err := staticPageClient.Create(ctx, &staticpagepb.CreateRequest{
-		Title:     "Test Static Page",
-		Slug:      "test-static-page",
-		Content:   "<h1>This is a test static page</h1>",
-		PageType:  commonpb.PageType_PAGE_TYPE_HEADER,
-		SortOrder: 1,
-		Status:    commonpb.Status_STATUS_ACTIVE,
+		Page: &staticpagepb.StaticPage{
+			Title:     "Test Static Page",
+			Slug:      "test-static-page",
+			Content:   "<h1>This is a test static page</h1>",
+			PageType:  commonpb.PageType_PAGE_TYPE_HEADER,
+			SortOrder: 1,
+			Status:    commonpb.Status_STATUS_ACTIVE,
+		},
 	})
 	fmt.Println("errrrrrrrr", err)
 	fmt.Println("resp", resp)

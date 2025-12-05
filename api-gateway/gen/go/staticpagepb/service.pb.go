@@ -28,34 +28,34 @@ const file_staticpagepb_service_proto_rawDesc = "" +
 	"\x11StaticPageService\x12C\n" +
 	"\x06Create\x12\x1b.staticpagepb.CreateRequest\x1a\x1c.staticpagepb.CreateResponse\x12C\n" +
 	"\x06Update\x12\x1b.staticpagepb.UpdateRequest\x1a\x1c.staticpagepb.UpdateResponse\x12C\n" +
-	"\x06Delete\x12\x1b.staticpagepb.DeleteRequest\x1a\x1c.staticpagepb.DeleteResponse\x12=\n" +
-	"\x04List\x12\x19.staticpagepb.ListRequest\x1a\x1a.staticpagepb.ListResponse\x12:\n" +
-	"\x03Get\x12\x18.staticpagepb.GetRequest\x1a\x19.staticpagepb.GetResponseB\x90\x01\n" +
+	"\x06Delete\x12\x1b.staticpagepb.DeleteRequest\x1a\x1c.staticpagepb.DeleteResponse\x12:\n" +
+	"\x03Get\x12\x18.staticpagepb.GetRequest\x1a\x19.staticpagepb.GetResponse\x12=\n" +
+	"\x04List\x12\x19.staticpagepb.ListRequest\x1a\x1a.staticpagepb.ListResponseB\x90\x01\n" +
 	"\x10com.staticpagepbB\fServiceProtoP\x01Z\x1eapigateway/gen/go/staticpagepb\xa2\x02\x03SXX\xaa\x02\fStaticpagepb\xca\x02\fStaticpagepb\xe2\x02\x18Staticpagepb\\GPBMetadata\xea\x02\fStaticpagepbb\x06proto3"
 
 var file_staticpagepb_service_proto_goTypes = []any{
 	(*CreateRequest)(nil),  // 0: staticpagepb.CreateRequest
 	(*UpdateRequest)(nil),  // 1: staticpagepb.UpdateRequest
 	(*DeleteRequest)(nil),  // 2: staticpagepb.DeleteRequest
-	(*ListRequest)(nil),    // 3: staticpagepb.ListRequest
-	(*GetRequest)(nil),     // 4: staticpagepb.GetRequest
+	(*GetRequest)(nil),     // 3: staticpagepb.GetRequest
+	(*ListRequest)(nil),    // 4: staticpagepb.ListRequest
 	(*CreateResponse)(nil), // 5: staticpagepb.CreateResponse
 	(*UpdateResponse)(nil), // 6: staticpagepb.UpdateResponse
 	(*DeleteResponse)(nil), // 7: staticpagepb.DeleteResponse
-	(*ListResponse)(nil),   // 8: staticpagepb.ListResponse
-	(*GetResponse)(nil),    // 9: staticpagepb.GetResponse
+	(*GetResponse)(nil),    // 8: staticpagepb.GetResponse
+	(*ListResponse)(nil),   // 9: staticpagepb.ListResponse
 }
 var file_staticpagepb_service_proto_depIdxs = []int32{
 	0, // 0: staticpagepb.StaticPageService.Create:input_type -> staticpagepb.CreateRequest
 	1, // 1: staticpagepb.StaticPageService.Update:input_type -> staticpagepb.UpdateRequest
 	2, // 2: staticpagepb.StaticPageService.Delete:input_type -> staticpagepb.DeleteRequest
-	3, // 3: staticpagepb.StaticPageService.List:input_type -> staticpagepb.ListRequest
-	4, // 4: staticpagepb.StaticPageService.Get:input_type -> staticpagepb.GetRequest
+	3, // 3: staticpagepb.StaticPageService.Get:input_type -> staticpagepb.GetRequest
+	4, // 4: staticpagepb.StaticPageService.List:input_type -> staticpagepb.ListRequest
 	5, // 5: staticpagepb.StaticPageService.Create:output_type -> staticpagepb.CreateResponse
 	6, // 6: staticpagepb.StaticPageService.Update:output_type -> staticpagepb.UpdateResponse
 	7, // 7: staticpagepb.StaticPageService.Delete:output_type -> staticpagepb.DeleteResponse
-	8, // 8: staticpagepb.StaticPageService.List:output_type -> staticpagepb.ListResponse
-	9, // 9: staticpagepb.StaticPageService.Get:output_type -> staticpagepb.GetResponse
+	8, // 8: staticpagepb.StaticPageService.Get:output_type -> staticpagepb.GetResponse
+	9, // 9: staticpagepb.StaticPageService.List:output_type -> staticpagepb.ListResponse
 	5, // [5:10] is the sub-list for method output_type
 	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

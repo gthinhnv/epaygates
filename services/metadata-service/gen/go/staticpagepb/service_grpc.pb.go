@@ -22,8 +22,8 @@ const (
 	StaticPageService_Create_FullMethodName = "/staticpagepb.StaticPageService/Create"
 	StaticPageService_Update_FullMethodName = "/staticpagepb.StaticPageService/Update"
 	StaticPageService_Delete_FullMethodName = "/staticpagepb.StaticPageService/Delete"
-	StaticPageService_List_FullMethodName   = "/staticpagepb.StaticPageService/List"
 	StaticPageService_Get_FullMethodName    = "/staticpagepb.StaticPageService/Get"
+	StaticPageService_List_FullMethodName   = "/staticpagepb.StaticPageService/List"
 )
 
 // StaticPageServiceClient is the client API for StaticPageService service.
@@ -36,10 +36,10 @@ type StaticPageServiceClient interface {
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	// Soft/hard delete
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
-	// List pages (with pagination, filter, sort)
-	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 	// Get one page by ID/slug
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
+	// List pages (with pagination, filter, sort)
+	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 }
 
 type staticPageServiceClient struct {
@@ -80,20 +80,20 @@ func (c *staticPageServiceClient) Delete(ctx context.Context, in *DeleteRequest,
 	return out, nil
 }
 
-func (c *staticPageServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
+func (c *staticPageServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListResponse)
-	err := c.cc.Invoke(ctx, StaticPageService_List_FullMethodName, in, out, cOpts...)
+	out := new(GetResponse)
+	err := c.cc.Invoke(ctx, StaticPageService_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *staticPageServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *staticPageServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, StaticPageService_Get_FullMethodName, in, out, cOpts...)
+	out := new(ListResponse)
+	err := c.cc.Invoke(ctx, StaticPageService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -110,10 +110,10 @@ type StaticPageServiceServer interface {
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	// Soft/hard delete
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
-	// List pages (with pagination, filter, sort)
-	List(context.Context, *ListRequest) (*ListResponse, error)
 	// Get one page by ID/slug
 	Get(context.Context, *GetRequest) (*GetResponse, error)
+	// List pages (with pagination, filter, sort)
+	List(context.Context, *ListRequest) (*ListResponse, error)
 	mustEmbedUnimplementedStaticPageServiceServer()
 }
 
@@ -133,11 +133,11 @@ func (UnimplementedStaticPageServiceServer) Update(context.Context, *UpdateReque
 func (UnimplementedStaticPageServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedStaticPageServiceServer) List(context.Context, *ListRequest) (*ListResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method List not implemented")
-}
 func (UnimplementedStaticPageServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedStaticPageServiceServer) List(context.Context, *ListRequest) (*ListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedStaticPageServiceServer) mustEmbedUnimplementedStaticPageServiceServer() {}
 func (UnimplementedStaticPageServiceServer) testEmbeddedByValue()                           {}
@@ -214,24 +214,6 @@ func _StaticPageService_Delete_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StaticPageService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StaticPageServiceServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StaticPageService_List_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StaticPageServiceServer).List(ctx, req.(*ListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _StaticPageService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRequest)
 	if err := dec(in); err != nil {
@@ -246,6 +228,24 @@ func _StaticPageService_Get_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(StaticPageServiceServer).Get(ctx, req.(*GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StaticPageService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StaticPageServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StaticPageService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StaticPageServiceServer).List(ctx, req.(*ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -270,12 +270,12 @@ var StaticPageService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StaticPageService_Delete_Handler,
 		},
 		{
-			MethodName: "List",
-			Handler:    _StaticPageService_List_Handler,
-		},
-		{
 			MethodName: "Get",
 			Handler:    _StaticPageService_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _StaticPageService_List_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

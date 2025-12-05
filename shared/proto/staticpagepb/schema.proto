@@ -8,6 +8,7 @@ import "commonpb/page_type.proto";
 import "commonpb/seo.proto";
 import "commonpb/status.proto";
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
 
 // ========================
 // ENTITY
@@ -15,37 +16,29 @@ import "google/protobuf/field_mask.proto";
 
 message StaticPage {
   uint64 id = 1;
-  string title = 2;
-  string slug = 3;
+  string title = 2 [(buf.validate.field).string.min_len = 1];
+  string slug = 3 [(buf.validate.field).string.min_len = 1];
   string content = 4;
-  commonpb.PageType page_type = 5;
+  commonpb.PageType page_type = 5 [(buf.validate.field).enum.defined_only = true];
   int32 sort_order = 6;
   optional commonpb.SEO seo = 7;
-  commonpb.AdsPlatform ads_platform = 8;
-  commonpb.Status status = 9;
+  commonpb.AdsPlatform ads_platform = 8 [(buf.validate.field).enum.defined_only = true];
+  commonpb.Status status = 9 [(buf.validate.field).enum.defined_only = true];
 
   uint64 created_by = 10;
   uint64 updated_by = 11;
-  int64 created_at = 12;
-  int64 updated_at = 13;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
 
   int32 deleted_version = 14;
 }
 
 // ========================
-// CREATE https://protovalidate.com
+// CREATE
 // ========================
 
 message CreateRequest {
-  string title = 1 [(buf.validate.field).string.min_len = 1];
-  string slug = 2 [(buf.validate.field).string.min_len = 1];
-  string content = 3;
-  commonpb.PageType page_type = 4 [(buf.validate.field).enum.defined_only = true];
-  int32 sort_order = 5;
-  commonpb.SEO seo = 6;
-  commonpb.AdsPlatform ads_platform = 7;
-  commonpb.Status status = 8 [(buf.validate.field).enum.defined_only = true];
-  uint64 created_by = 9;
+  StaticPage page = 1;
 }
 
 message CreateResponse {
@@ -57,21 +50,9 @@ message CreateResponse {
 // ========================
 
 message UpdateRequest {
-  uint64 id = 1;
+  StaticPage page = 1;
 
-  string title = 2;
-  string slug = 3;
-  string content = 4;
-  commonpb.PageType page_type = 5;
-  int32 sort_order = 6;
-  commonpb.SEO seo = 7;
-  commonpb.AdsPlatform ads_platform = 8;
-  commonpb.Status status = 9;
-
-  uint64 updated_by = 10;
-
-  // standard Google field mask ("title", "slug", "seo", ...)
-  google.protobuf.FieldMask update_mask = 11;
+  google.protobuf.FieldMask update_mask = 2;
 }
 
 message UpdateResponse {
