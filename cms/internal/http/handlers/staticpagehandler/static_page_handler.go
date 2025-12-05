@@ -6,7 +6,6 @@ import (
 	"cms/internal/http/views/layout"
 	"cms/internal/http/views/pages/staticpage"
 	"context"
-	"fmt"
 	"net/http"
 	"shared/models/staticpagemodel"
 	"shared/pkg/utils/dbutil"
@@ -36,7 +35,7 @@ func (h *StaticPageHandler) Update(c *gin.Context) {
 	// Parse ID
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
-		c.AbortWithError(http.StatusNotFound, fmt.Errorf("Not found"))
+		c.AbortWithStatus(http.StatusNotFound)
 		return
 	}
 
@@ -44,14 +43,14 @@ func (h *StaticPageHandler) Update(c *gin.Context) {
 		Id: id,
 	})
 	if err != nil {
-		c.AbortWithError(http.StatusNotFound, fmt.Errorf("Cannot get data"))
+		c.AbortWithStatus(http.StatusNotFound)
 		return
 	}
 
 	var staticPage staticpagemodel.StaticPage
 	err = dbutil.MapStruct(resp.Page, &staticPage)
 	if err != nil {
-		c.AbortWithError(http.StatusNotFound, fmt.Errorf("Cannot get data."))
+		c.AbortWithStatus(http.StatusNotFound)
 		return
 	}
 

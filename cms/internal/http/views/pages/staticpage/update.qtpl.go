@@ -341,7 +341,8 @@ $(function () {
         allowClear: false,
         minimumResultsForSearch: Infinity,
         placeholder: 'Select status',
-        dropdownParent: $('#static-page-form')
+        dropdownParent: $('#static-page-form'),
+        tags: true
     });
 
     $('#static-page-form .page-type-selection').select2({
