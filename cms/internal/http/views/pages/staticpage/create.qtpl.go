@@ -340,7 +340,6 @@ $(function () {
         minimumResultsForSearch: Infinity,
         placeholder: 'Select status',
         dropdownParent: $('#static-page-form'),
-        tags: true
     });
 
     $('#static-page-form .page-type-selection').select2({

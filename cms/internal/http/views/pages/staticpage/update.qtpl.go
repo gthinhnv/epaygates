@@ -35,7 +35,7 @@ type Update struct {
 //line internal/http/views/pages/staticpage/update.qtpl:17
 func (p *Update) streamgetSeoTitle(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:17
-	qw422016.N().S(`Update new page`)
+	qw422016.N().S(`Update static page`)
 //line internal/http/views/pages/staticpage/update.qtpl:19
 }
 
@@ -342,7 +342,6 @@ $(function () {
         minimumResultsForSearch: Infinity,
         placeholder: 'Select status',
         dropdownParent: $('#static-page-form'),
-        tags: true
     });
 
     $('#static-page-form .page-type-selection').select2({

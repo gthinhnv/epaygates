@@ -15,7 +15,7 @@
 
 {% stripspace %}
 {% func (p *Update) getSeoTitle() %}
-	Update new page
+	Update static page
 {% endfunc %}
 {% endstripspace %}
 
