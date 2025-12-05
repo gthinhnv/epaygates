@@ -1,43 +1,45 @@
 {% import (
+	"shared/models/staticpagemodel"
 	"cms/internal/bootstrap"
 	"cms/internal/http/views/layout"
 	"cms/internal/http/views/pages/staticpage/partials"
 ) %}
 
 {% code
-	type Create struct {
+	type Update struct {
 		layout.BasePage
+		StaticPage *staticpagemodel.StaticPage
 		Errs map[string]string
 	}
 %}
 
 {% stripspace %}
-{% func (p *Create) getSeoTitle() %}
-	Create new page
+{% func (p *Update) getSeoTitle() %}
+	Update new page
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Create) getSeoDesc() %}
+{% func (p *Update) getSeoDesc() %}
 	This is seo desc
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Create) getSeoKW() %}
+{% func (p *Update) getSeoKW() %}
 	This is seo keyword
 {% endfunc %}
 {% endstripspace %}
 
-{% func (p *Create) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
+{% func (p *Update) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
 
-{% func (p *Create) Seo() %}
+{% func (p *Update) Seo() %}
 	{%= p.BasePage.Seo() %}
 	<meta name="title" content="{%s= p.getSeoTitle() %}">
 {% endfunc %}
 
 {% stripspace %}
-{% func (p *Create) Css() %}
+{% func (p *Update) Css() %}
 	{%= p.BasePage.Css([]string{
 		"<link rel=\"stylesheet\" href=\"/assets/libs/select2/css/select2.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/toastr/toastr.min.css\">",
@@ -46,7 +48,7 @@
 {% endfunc %}
 {% endstripspace %}
 
-{% func (p *Create) Script() %}
+{% func (p *Update) Script() %}
 	{%= p.BasePage.Script([]string{
 		"<script src=\"/assets/libs/select2/js/select2.min.js\"></script>",
 		"<script src=\"/assets/libs/toastr/toastr.min.js\"></script>",
@@ -61,12 +63,12 @@
 		const trans = {};
 
 		{% cat "./partials/form.js" %}
-		{% cat "./create.js" %}
+		{% cat "./update.js" %}
 	</script>
 {% endfunc %}
 
 {% stripspace %}
-{% func (p *Create) Content() %}
+{% func (p *Update) Content() %}
 	<div class="pcoded-content">
 		<div class="page-header card">
 			<div class="row align-items-end">
@@ -74,7 +76,7 @@
 					<div class="page-header-title">
 						<i class="feather icon-home bg-c-blue"></i>
 						<div class="d-inline">
-							<h5>{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}</h5>
+							<h5>{%s bootstrap.Translator.T(p.Lang, "UPDATE", nil) %}</h5>
 							<span class="icofont icofont-dog"></span>
 						</div>
 					</div>
@@ -86,7 +88,7 @@
 								<a href="/"><i class="feather icon-home"></i>{% space %}{%s bootstrap.Translator.T(p.Lang, "DASHBOARD", nil) %}</a>
 							</li>
 							<li class="breadcrumb-item"><a href="/staticPages">{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</a></li>
-							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}</a></li>
+							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang, "UPDATE", nil) %}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -100,7 +102,7 @@
 							<div class="col-md-12 col-xl-12">
 								<div class="card sale-card">
 									<div class="card-block">		
-										{%= partials.Form(nil, p.Lang) %}
+										{%= partials.Form(p.StaticPage, p.Lang) %}
 									</div>
 								</div>
 							</div>

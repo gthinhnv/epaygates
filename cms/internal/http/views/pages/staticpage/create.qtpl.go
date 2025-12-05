@@ -9,248 +9,246 @@ import (
 	"cms/internal/bootstrap"
 	"cms/internal/http/views/layout"
 	"cms/internal/http/views/pages/staticpage/partials"
-	"shared/models/staticpagemodel"
 )
 
-//line internal/http/views/pages/staticpage/create.qtpl:8
+//line internal/http/views/pages/staticpage/create.qtpl:7
 import (
 	qtio422016 "io"
 
 	qt422016 "github.com/valyala/quicktemplate"
 )
 
-//line internal/http/views/pages/staticpage/create.qtpl:8
+//line internal/http/views/pages/staticpage/create.qtpl:7
 var (
 	_ = qtio422016.Copy
 	_ = qt422016.AcquireByteBuffer
 )
 
-//line internal/http/views/pages/staticpage/create.qtpl:9
+//line internal/http/views/pages/staticpage/create.qtpl:8
 type Create struct {
 	layout.BasePage
-	StaticPage *staticpagemodel.StaticPage
-	Errs       map[string]string
+	Errs map[string]string
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:17
+//line internal/http/views/pages/staticpage/create.qtpl:15
 func (p *Create) streamgetSeoTitle(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:17
+//line internal/http/views/pages/staticpage/create.qtpl:15
 	qw422016.N().S(`Create new page`)
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 func (p *Create) writegetSeoTitle(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	p.streamgetSeoTitle(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 func (p *Create) getSeoTitle() string {
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	p.writegetSeoTitle(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:19
+//line internal/http/views/pages/staticpage/create.qtpl:17
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:23
+//line internal/http/views/pages/staticpage/create.qtpl:21
 func (p *Create) streamgetSeoDesc(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:23
+//line internal/http/views/pages/staticpage/create.qtpl:21
 	qw422016.N().S(`This is seo desc`)
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 func (p *Create) writegetSeoDesc(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	p.streamgetSeoDesc(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 func (p *Create) getSeoDesc() string {
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	p.writegetSeoDesc(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:25
+//line internal/http/views/pages/staticpage/create.qtpl:23
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:29
+//line internal/http/views/pages/staticpage/create.qtpl:27
 func (p *Create) streamgetSeoKW(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:29
+//line internal/http/views/pages/staticpage/create.qtpl:27
 	qw422016.N().S(`This is seo keyword`)
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 func (p *Create) writegetSeoKW(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	p.streamgetSeoKW(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 func (p *Create) getSeoKW() string {
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	p.writegetSeoKW(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:31
+//line internal/http/views/pages/staticpage/create.qtpl:29
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 func (p *Create) StreamTitle(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	qw422016.N().S(p.getSeoTitle())
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 func (p *Create) WriteTitle(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	p.StreamTitle(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 func (p *Create) Title() string {
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	p.WriteTitle(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:34
+//line internal/http/views/pages/staticpage/create.qtpl:32
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:36
+//line internal/http/views/pages/staticpage/create.qtpl:34
 func (p *Create) StreamSeo(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:36
+//line internal/http/views/pages/staticpage/create.qtpl:34
 	qw422016.N().S(`
 	`)
-//line internal/http/views/pages/staticpage/create.qtpl:37
+//line internal/http/views/pages/staticpage/create.qtpl:35
 	p.BasePage.StreamSeo(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:37
+//line internal/http/views/pages/staticpage/create.qtpl:35
 	qw422016.N().S(`
 	<meta name="title" content="`)
-//line internal/http/views/pages/staticpage/create.qtpl:38
+//line internal/http/views/pages/staticpage/create.qtpl:36
 	qw422016.N().S(p.getSeoTitle())
-//line internal/http/views/pages/staticpage/create.qtpl:38
+//line internal/http/views/pages/staticpage/create.qtpl:36
 	qw422016.N().S(`">
 `)
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 func (p *Create) WriteSeo(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	p.StreamSeo(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 func (p *Create) Seo() string {
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	p.WriteSeo(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:39
+//line internal/http/views/pages/staticpage/create.qtpl:37
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:42
+//line internal/http/views/pages/staticpage/create.qtpl:40
 func (p *Create) StreamCss(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:43
+//line internal/http/views/pages/staticpage/create.qtpl:41
 	p.BasePage.StreamCss(qw422016, []string{
 		"<link rel=\"stylesheet\" href=\"/assets/libs/select2/css/select2.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/toastr/toastr.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/icheck/skins/square/green.css\">",
 	})
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 func (p *Create) WriteCss(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	p.StreamCss(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 func (p *Create) Css() string {
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	p.WriteCss(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:48
+//line internal/http/views/pages/staticpage/create.qtpl:46
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:51
+//line internal/http/views/pages/staticpage/create.qtpl:49
 func (p *Create) StreamScript(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:51
+//line internal/http/views/pages/staticpage/create.qtpl:49
 	qw422016.N().S(`
 	`)
-//line internal/http/views/pages/staticpage/create.qtpl:52
+//line internal/http/views/pages/staticpage/create.qtpl:50
 	p.BasePage.StreamScript(qw422016, []string{
 		"<script src=\"/assets/libs/select2/js/select2.min.js\"></script>",
 		"<script src=\"/assets/libs/toastr/toastr.min.js\"></script>",
@@ -258,7 +256,7 @@ func (p *Create) StreamScript(qw422016 *qt422016.Writer) {
 		"<script src=\"/assets/libs/icheck/icheck.min.js\"></script>",
 		"<script src=\"/assets/libs/slugify/slugify.js\"></script>",
 	})
-//line internal/http/views/pages/staticpage/create.qtpl:58
+//line internal/http/views/pages/staticpage/create.qtpl:56
 	qw422016.N().S(`
 	<script type="text/javascript">
 		toastr.options.closeButton = true;
@@ -267,7 +265,7 @@ func (p *Create) StreamScript(qw422016 *qt422016.Writer) {
 		const trans = {};
 
 		`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
+//line internal/http/views/pages/staticpage/create.qtpl:63
 	qw422016.N().S(`function getFormData($form) {
     var formData = $form.serializeArray()
         .reduce(function (json, { name, value }) {
@@ -360,10 +358,10 @@ $(function () {
         dropdownParent: $('#static-page-form')
     });
 });`)
-//line internal/http/views/pages/staticpage/create.qtpl:65
+//line internal/http/views/pages/staticpage/create.qtpl:63
 	qw422016.N().S(`
 		`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`$(function () {
     $('#static-page-form.form-create').submit(function (event) {
         event.preventDefault();
@@ -372,13 +370,13 @@ $(function () {
         $.ajax({
             type: 'POST',
             url: `)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`${config.apiAddress}/v1/staticPages/create`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`,
             authRequired: true,          // 👈 marks this request for interception
             xhrFields: { withCredentials: true },
@@ -386,13 +384,13 @@ $(function () {
             data: JSON.stringify(formData),
             success: function (data) {
                 toastr['success'](`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`A new page was created successfully!`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`);
                 window.location.replace('/staticPages');
             },
@@ -404,52 +402,44 @@ $(function () {
 
                     // Escape special characters for jQuery attribute selector
                     const safeField = field.replace(/([!"#$%&'()*+,./:;<=>?@[\\\]^`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`{|}~])/g, "\\$1");
 
                     const $input = $('#static-page-form').find(`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`[name="${safeField}"]`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`).first();
 
                     if ($input.length) {
                         addFieldError($input, message);
                     } else {
                         console.warn(`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`Field not found: ${field}`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`);
                     }
                 });
 
-                // const errs = resJson.errs || {};
-                // $('#page-form').find('input[name], select[name], textarea[name]').each(function () {
-                //     const name = $(this).attr('name');
-                //     const errMsg = errs[name];
-                //     if (errMsg && errMsg != '') {
-                //         addFieldError($(this), errMsg);
-                //     }
-                // });
                 toastr['error'](resJson.message || `)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`An error occurred!`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`);
             },
             contentType: 'application/json',
@@ -459,90 +449,90 @@ $(function () {
         return false;
     });
 });`)
-//line internal/http/views/pages/staticpage/create.qtpl:66
+//line internal/http/views/pages/staticpage/create.qtpl:64
 	qw422016.N().S(`
 	</script>
 `)
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 func (p *Create) WriteScript(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	p.StreamScript(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 func (p *Create) Script() string {
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	p.WriteScript(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:68
+//line internal/http/views/pages/staticpage/create.qtpl:66
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:71
+//line internal/http/views/pages/staticpage/create.qtpl:69
 func (p *Create) StreamContent(qw422016 *qt422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:71
+//line internal/http/views/pages/staticpage/create.qtpl:69
 	qw422016.N().S(`<div class="pcoded-content"><div class="page-header card"><div class="row align-items-end"><div class="col-lg-8"><div class="page-header-title"><i class="feather icon-home bg-c-blue"></i><div class="d-inline"><h5>`)
-//line internal/http/views/pages/staticpage/create.qtpl:79
+//line internal/http/views/pages/staticpage/create.qtpl:77
 	qw422016.E().S(bootstrap.Translator.T(p.Lang, "CREATE", nil))
-//line internal/http/views/pages/staticpage/create.qtpl:79
+//line internal/http/views/pages/staticpage/create.qtpl:77
 	qw422016.N().S(`</h5><span class="icofont icofont-dog"></span></div></div></div><div class="col-lg-4"><div class="page-header-breadcrumb"><ul class=" breadcrumb breadcrumb-title"><li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i>`)
-//line internal/http/views/pages/staticpage/create.qtpl:88
+//line internal/http/views/pages/staticpage/create.qtpl:86
 	qw422016.N().S(` `)
-//line internal/http/views/pages/staticpage/create.qtpl:88
+//line internal/http/views/pages/staticpage/create.qtpl:86
 	qw422016.E().S(bootstrap.Translator.T(p.Lang, "DASHBOARD", nil))
+//line internal/http/views/pages/staticpage/create.qtpl:86
+	qw422016.N().S(`</a></li><li class="breadcrumb-item"><a href="/staticPages">`)
 //line internal/http/views/pages/staticpage/create.qtpl:88
-	qw422016.N().S(`</a></li><li class="breadcrumb-item"><a href="/pages">`)
-//line internal/http/views/pages/staticpage/create.qtpl:90
 	qw422016.E().S(bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil))
-//line internal/http/views/pages/staticpage/create.qtpl:90
+//line internal/http/views/pages/staticpage/create.qtpl:88
 	qw422016.N().S(`</a></li><li class="breadcrumb-item"><a href="#!">`)
-//line internal/http/views/pages/staticpage/create.qtpl:91
+//line internal/http/views/pages/staticpage/create.qtpl:89
 	qw422016.E().S(bootstrap.Translator.T(p.Lang, "CREATE", nil))
-//line internal/http/views/pages/staticpage/create.qtpl:91
+//line internal/http/views/pages/staticpage/create.qtpl:89
 	qw422016.N().S(`</a></li></ul></div></div></div></div><div class="pcoded-inner-content"><div class="main-body"><div class="page-wrapper"><div class="page-body"><div class="row"><div class="col-md-12 col-xl-12"><div class="card sale-card"><div class="card-block">`)
-//line internal/http/views/pages/staticpage/create.qtpl:105
+//line internal/http/views/pages/staticpage/create.qtpl:103
 	partials.StreamForm(qw422016, nil, p.Lang)
-//line internal/http/views/pages/staticpage/create.qtpl:105
+//line internal/http/views/pages/staticpage/create.qtpl:103
 	qw422016.N().S(`</div></div></div></div></div></div></div></div></div>`)
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 func (p *Create) WriteContent(qq422016 qtio422016.Writer) {
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	p.StreamContent(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 }
 
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 func (p *Create) Content() string {
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	p.WriteContent(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 	return qs422016
-//line internal/http/views/pages/staticpage/create.qtpl:115
+//line internal/http/views/pages/staticpage/create.qtpl:113
 }

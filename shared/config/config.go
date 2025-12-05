@@ -9,7 +9,7 @@ import (
 
 type Config struct {
 	MetadataService MetadataService
-	ApiGateway      ApiGateway
+	APIGateway      APIGateway
 	CMS             CMS
 	Web             Web
 }
@@ -18,7 +18,7 @@ type MetadataService struct {
 	GRPCAddress string
 }
 
-type ApiGateway struct {
+type APIGateway struct {
 	GRPCAddress string
 	HTTPAddress string
 }

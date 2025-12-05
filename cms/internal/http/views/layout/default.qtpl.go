@@ -492,7 +492,7 @@ func (p *BasePage) StreamScript(qw422016 *qt422016.Writer, libs []string) {
         const config = {
             apiAddress: '`)
 //line internal/http/views/layout/default.qtpl:88
-	qw422016.N().S(bootstrap.SharedConfig.ApiGateway.HTTPAddress)
+	qw422016.N().S(bootstrap.SharedConfig.APIGateway.HTTPAddress)
 //line internal/http/views/layout/default.qtpl:88
 	qw422016.N().S(`'
         };

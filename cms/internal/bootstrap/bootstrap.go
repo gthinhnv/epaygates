@@ -32,7 +32,7 @@ var (
 	PageTypeItems    []*commonmodel.PageTypeItem
 	StatusItems      []*commonmodel.StatusItem
 
-	MetadataServiceConn *grpc.ClientConn
+	APIServiceConn *grpc.ClientConn
 )
 
 func Init() error {
@@ -67,7 +67,7 @@ func Init() error {
 	PageTypeItems = modelutil.BuildPageTypes()
 	StatusItems = modelutil.BuildStatuses()
 
-	MetadataServiceConn, err = grpc.NewClient(SharedConfig.MetadataService.GRPCAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	APIServiceConn, err = grpc.NewClient(SharedConfig.APIGateway.GRPCAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return err
 	}

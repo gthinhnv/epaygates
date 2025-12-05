@@ -85,7 +85,7 @@ Page prints a page implementing Page interface.
 {% func (p *BasePage) Script(libs []string) %}
     <script type="text/javascript">
         const config = {
-            apiAddress: '{%s= bootstrap.SharedConfig.ApiGateway.HTTPAddress %}'
+            apiAddress: '{%s= bootstrap.SharedConfig.APIGateway.HTTPAddress %}'
         };
     </script>
     <script src="/assets/libs/jquery/jquery.min.js"></script>

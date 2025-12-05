@@ -875,7 +875,7 @@ func (p *List) StreamContent(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:145
 	qw422016.N().S(`<table id="static-page-list"data-detail-formatter="detailFormatter"data-minimum-count-columns="2"data-pagination="true"data-unique-id="id"data-id-field="id"data-page-list="[10, 25, 50, 100, all]"data-page-size="10"data-side-pagination="server"data-sort-name="createdAt"data-sort-order="desc"data-url='`)
 //line internal/http/views/pages/staticpage/list.qtpl:158
-	qw422016.E().S(bootstrap.SharedConfig.ApiGateway.HTTPAddress)
+	qw422016.E().S(bootstrap.SharedConfig.APIGateway.HTTPAddress)
 //line internal/http/views/pages/staticpage/list.qtpl:158
 	qw422016.N().S(`/v1/staticPages?includes=createdByUser,updatedByUser&includeTotal=true&useCache=0'data-query-params="queryParams"data-response-handler="responseHandler"></table></div></div></div></div></div></div></div></div></div>`)
 //line internal/http/views/pages/staticpage/list.qtpl:171

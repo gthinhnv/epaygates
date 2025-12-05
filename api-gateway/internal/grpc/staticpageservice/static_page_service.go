@@ -18,6 +18,21 @@ func NewStaticPageServiceServer() *StaticPageServiceServer {
 }
 
 func (s *StaticPageServiceServer) Create(ctx context.Context, req *staticpagepb.CreateRequest) (*staticpagepb.CreateResponse, error) {
-	bootstrap.Logger.Info("StaticPageServiceServer: Create called")
 	return s.client.Create(ctx, req)
+}
+
+func (s *StaticPageServiceServer) Update(ctx context.Context, req *staticpagepb.UpdateRequest) (*staticpagepb.UpdateResponse, error) {
+	return s.client.Update(ctx, req)
+}
+
+func (s *StaticPageServiceServer) Delete(ctx context.Context, req *staticpagepb.DeleteRequest) (*staticpagepb.DeleteResponse, error) {
+	return s.client.Delete(ctx, req)
+}
+
+func (s *StaticPageServiceServer) Get(ctx context.Context, req *staticpagepb.GetRequest) (*staticpagepb.GetResponse, error) {
+	return s.client.Get(ctx, req)
+}
+
+func (s *StaticPageServiceServer) List(ctx context.Context, req *staticpagepb.ListRequest) (*staticpagepb.ListResponse, error) {
+	return s.client.List(ctx, req)
 }

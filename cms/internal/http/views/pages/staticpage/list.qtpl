@@ -155,7 +155,7 @@
 											data-side-pagination="server"
 											data-sort-name="createdAt"
 											data-sort-order="desc"
-											data-url='{%s bootstrap.SharedConfig.ApiGateway.HTTPAddress %}/v1/staticPages?includes=createdByUser,updatedByUser&includeTotal=true&useCache=0'
+											data-url='{%s bootstrap.SharedConfig.APIGateway.HTTPAddress %}/v1/staticPages?includes=createdByUser,updatedByUser&includeTotal=true&useCache=0'
 											data-query-params="queryParams"
 											data-response-handler="responseHandler">
 										</table>
