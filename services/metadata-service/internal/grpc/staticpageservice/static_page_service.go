@@ -2,9 +2,9 @@ package staticpageservice
 
 import (
 	"context"
-	"fmt"
 	"metadatasvc/gen/go/staticpagepb"
 	"metadatasvc/internal/bootstrap"
+	"shared/pkg/utils/grpcutil"
 
 	"buf.build/go/protovalidate"
 	"google.golang.org/grpc/codes"
@@ -21,14 +21,7 @@ func NewStaticPageServiceServer() *StaticPageServiceServer {
 
 func (s *StaticPageServiceServer) Create(ctx context.Context, req *staticpagepb.CreateRequest) (*staticpagepb.CreateResponse, error) {
 	if err := protovalidate.Validate(req); err != nil {
-		if ve, ok := err.(*protovalidate.ValidationError); ok {
-			for _, violation := range ve.Violations {
-				fmt.Println("fieldName", protovalidate.FieldPathString(violation.Proto.GetField()))
-				fmt.Println("message", violation.Proto.GetMessage())
-				fmt.Println("ruleId", violation.Proto.GetRuleId())
-			}
-		}
-		return nil, status.Errorf(codes.InvalidArgument, "validation failed: %v", err)
+		return nil, grpcutil.BuildValidationError(err)
 	}
 
 	id, err := bootstrap.Repos.StaticPageRepo.Create(ctx, req)

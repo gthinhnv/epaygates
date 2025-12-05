@@ -84,7 +84,9 @@ Page prints a page implementing Page interface.
 {% func (p *BasePage) Footer() %}{%= Footer(p) %}{% endfunc %}
 {% func (p *BasePage) Script(libs []string) %}
     <script type="text/javascript">
-        const config = {};
+        const config = {
+            apiAddress: '{%s= bootstrap.SharedConfig.ApiGateway.HTTPAddress %}'
+        };
     </script>
     <script src="/assets/libs/jquery/jquery.min.js"></script>
     <script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>

@@ -489,7 +489,13 @@ func (p *BasePage) StreamScript(qw422016 *qt422016.Writer, libs []string) {
 //line internal/http/views/layout/default.qtpl:85
 	qw422016.N().S(`
     <script type="text/javascript">
-        const config = {};
+        const config = {
+            apiAddress: '`)
+//line internal/http/views/layout/default.qtpl:88
+	qw422016.N().S(bootstrap.SharedConfig.ApiGateway.HTTPAddress)
+//line internal/http/views/layout/default.qtpl:88
+	qw422016.N().S(`'
+        };
     </script>
     <script src="/assets/libs/jquery/jquery.min.js"></script>
     <script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
@@ -498,54 +504,54 @@ func (p *BasePage) StreamScript(qw422016 *qt422016.Writer, libs []string) {
     <script src="/assets/libs/waves/waves.min.js"></script>
     <script src="/assets/libs/rocket-loader/rocket-loader.min.js"></script>
     `)
-//line internal/http/views/layout/default.qtpl:95
+//line internal/http/views/layout/default.qtpl:97
 	for _, scr := range libs {
-//line internal/http/views/layout/default.qtpl:95
+//line internal/http/views/layout/default.qtpl:97
 		qw422016.N().S(`
         `)
-//line internal/http/views/layout/default.qtpl:96
+//line internal/http/views/layout/default.qtpl:98
 		qw422016.N().S(scr)
-//line internal/http/views/layout/default.qtpl:96
+//line internal/http/views/layout/default.qtpl:98
 		qw422016.N().S(`
     `)
-//line internal/http/views/layout/default.qtpl:97
+//line internal/http/views/layout/default.qtpl:99
 	}
-//line internal/http/views/layout/default.qtpl:97
+//line internal/http/views/layout/default.qtpl:99
 	qw422016.N().S(`
     <script src="/assets/libs/admindek/js/pcoded.min.js"></script>
     <script src="/assets/libs/admindek/js/vertical-layout.min.js"></script>
     <script src="/assets/libs/admindek/js/script.min.js"></script>
     <script src="/assets/js/main.js?v=`)
-//line internal/http/views/layout/default.qtpl:101
+//line internal/http/views/layout/default.qtpl:103
 	qw422016.E().S(bootstrap.Config.Version)
-//line internal/http/views/layout/default.qtpl:101
+//line internal/http/views/layout/default.qtpl:103
 	qw422016.N().S(`"></script>
 `)
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 }
 
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 func (p *BasePage) WriteScript(qq422016 qtio422016.Writer, libs []string) {
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	p.StreamScript(qw422016, libs)
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 }
 
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 func (p *BasePage) Script(libs []string) string {
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	p.WriteScript(qb422016, libs)
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	qs422016 := string(qb422016.B)
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 	return qs422016
-//line internal/http/views/layout/default.qtpl:102
+//line internal/http/views/layout/default.qtpl:104
 }

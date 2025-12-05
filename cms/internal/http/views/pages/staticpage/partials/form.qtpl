@@ -1,6 +1,7 @@
 {% import (
     "shared/models/staticpagemodel"
     "cms/internal/bootstrap"
+    "strings"
 ) %}
 
 {% stripspace %}
@@ -103,7 +104,7 @@
             <div class="col-lg-12 col-sm-12">
                 <div class="form-group">
                     <label class="col-form-label" for="metaDescription">Meta Description:</label>
-                    <textarea name="metaDescription" default="" class="form-control" autocomplete="off">{% if model != nil && model.Seo != nil %}{%s model.Seo.MetaDesc %}{% endif %}</textarea>
+                    <textarea name="metaDesc" default="" class="form-control" autocomplete="off">{% if model != nil && model.Seo != nil %}{%s model.Seo.MetaDesc %}{% endif %}</textarea>
                 </div>
             </div>
         </div>
@@ -111,8 +112,7 @@
             <div class="col-lg-12 col-sm-12">
                 <div class="form-group">
                     <label class="col-form-label" for="metaKeywords">Meta Keywords:</label>
-                    <textarea name="metaKeywords" default="" class="form-control" autocomplete="off"></textarea>
-                    {% comment %} <textarea name="metaKeywords" default="" class="form-control" autocomplete="off">{% if model != nil && model.Seo != nil %}{%s model.Seo.MetaKeywords %}{% endif %}</textarea> {% endcomment %}
+                    <textarea name="metaKeywords" default="" class="form-control" autocomplete="off">{% if model != nil && model.Seo != nil %}{%s strings.Join(model.Seo.MetaKeywords, ",") %}{% endif %}</textarea>
                 </div>
             </div>
         </div>

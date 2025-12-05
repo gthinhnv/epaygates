@@ -4,10 +4,12 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"context"
+	"fmt"
 	"net/http"
 	"shared/models/staticpagemodel"
 	"shared/pkg/utils/apiutil"
 	"shared/pkg/utils/dbutil"
+	"shared/pkg/utils/grpcutil"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -22,6 +24,49 @@ func NewStaticPageHandler() *StaticPageHandler {
 	return &StaticPageHandler{
 		client: staticpagepb.NewStaticPageServiceClient(bootstrap.MetadataServiceConn),
 	}
+}
+
+func (h *StaticPageHandler) Create(c *gin.Context) {
+	var payload staticpagemodel.StaticPage
+	if err := c.ShouldBind(&payload); err != nil {
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "invalid payload",
+		})
+		return
+	}
+
+	var req staticpagepb.CreateRequest
+	if err := dbutil.MapStruct(payload, &req); err != nil {
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "invalid payload",
+		})
+		return
+	}
+
+	resp, err := h.client.Create(context.Background(), &req)
+	if err != nil {
+		bootstrap.Logger.WithFields(logrus.Fields{
+			"err": err,
+		}).Warn("StaticPageHandler >>> Create: failed to create static page")
+
+		fields, ok := grpcutil.ParseValidationError(err)
+		fmt.Println("***********", ok)
+		fmt.Println(fields)
+
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "An error happened when creating new static page",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, apiutil.Response{
+		Code:    apiutil.CODE_SUCCESS,
+		Message: "Success",
+		Data:    resp.Id,
+	})
 }
 
 func (h *StaticPageHandler) Get(c *gin.Context) {

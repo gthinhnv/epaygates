@@ -12,7 +12,7 @@ $(function () {
             data: JSON.stringify(formData),
             success: function (data) {
                 toastr['success'](`A new page was created successfully!`);
-                window.location.replace('/pages');
+                window.location.replace('/staticPages');
             },
             error: function (xhr, status, error) {
                 const resJson = xhr.responseJSON || {};
