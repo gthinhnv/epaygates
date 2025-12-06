@@ -452,21 +452,21 @@ func (x *DeleteResponse) GetIds() []uint64 {
 }
 
 type ListRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Ids            []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Slug           string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
-	PageTypes      []commonpb.PageType    `protobuf:"varint,4,rep,packed,name=page_types,json=pageTypes,proto3,enum=commonpb.PageType" json:"page_types,omitempty"`
-	AdsPlatforms   []commonpb.AdsPlatform `protobuf:"varint,5,rep,packed,name=ads_platforms,json=adsPlatforms,proto3,enum=commonpb.AdsPlatform" json:"ads_platforms,omitempty"`
-	Statuses       []commonpb.Status      `protobuf:"varint,6,rep,packed,name=statuses,proto3,enum=commonpb.Status" json:"statuses,omitempty"`
-	DeletedVersion int32                  `protobuf:"varint,7,opt,name=deleted_version,json=deletedVersion,proto3" json:"deleted_version,omitempty"`
-	Fields         string                 `protobuf:"bytes,8,opt,name=fields,proto3" json:"fields,omitempty"` // select fields
-	OrderBy        string                 `protobuf:"bytes,9,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	Limit          uint32                 `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
-	Offset         uint32                 `protobuf:"varint,11,opt,name=offset,proto3" json:"offset,omitempty"`
-	WithTotal      bool                   `protobuf:"varint,12,opt,name=with_total,json=withTotal,proto3" json:"with_total,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Slug          string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
+	PageTypes     []int32                `protobuf:"varint,4,rep,packed,name=page_types,json=pageTypes,proto3" json:"page_types,omitempty"`
+	AdsPlatforms  []int32                `protobuf:"varint,5,rep,packed,name=ads_platforms,json=adsPlatforms,proto3" json:"ads_platforms,omitempty"`
+	Statuses      []int32                `protobuf:"varint,6,rep,packed,name=statuses,proto3" json:"statuses,omitempty"`
+	Fields        []string               `protobuf:"bytes,7,rep,name=fields,proto3" json:"fields,omitempty"` // select fields
+	IsDeleted     *bool                  `protobuf:"varint,8,opt,name=is_deleted,json=isDeleted,proto3,oneof" json:"is_deleted,omitempty"`
+	OrderBy       string                 `protobuf:"bytes,9,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	Limit         uint32                 `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        uint32                 `protobuf:"varint,11,opt,name=offset,proto3" json:"offset,omitempty"`
+	WithTotal     bool                   `protobuf:"varint,12,opt,name=with_total,json=withTotal,proto3" json:"with_total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListRequest) Reset() {
@@ -520,39 +520,39 @@ func (x *ListRequest) GetSlug() string {
 	return ""
 }
 
-func (x *ListRequest) GetPageTypes() []commonpb.PageType {
+func (x *ListRequest) GetPageTypes() []int32 {
 	if x != nil {
 		return x.PageTypes
 	}
 	return nil
 }
 
-func (x *ListRequest) GetAdsPlatforms() []commonpb.AdsPlatform {
+func (x *ListRequest) GetAdsPlatforms() []int32 {
 	if x != nil {
 		return x.AdsPlatforms
 	}
 	return nil
 }
 
-func (x *ListRequest) GetStatuses() []commonpb.Status {
+func (x *ListRequest) GetStatuses() []int32 {
 	if x != nil {
 		return x.Statuses
 	}
 	return nil
 }
 
-func (x *ListRequest) GetDeletedVersion() int32 {
-	if x != nil {
-		return x.DeletedVersion
-	}
-	return 0
-}
-
-func (x *ListRequest) GetFields() string {
+func (x *ListRequest) GetFields() []string {
 	if x != nil {
 		return x.Fields
 	}
-	return ""
+	return nil
+}
+
+func (x *ListRequest) GetIsDeleted() bool {
+	if x != nil && x.IsDeleted != nil {
+		return *x.IsDeleted
+	}
+	return false
 }
 
 func (x *ListRequest) GetOrderBy() string {
@@ -782,23 +782,25 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
 	"deleted_by\x18\x02 \x01(\x04R\tdeletedBy\"\"\n" +
 	"\x0eDeleteResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x8f\x03\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\xdc\x02\n" +
 	"\vListRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04slug\x18\x03 \x01(\tR\x04slug\x121\n" +
+	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x1d\n" +
 	"\n" +
-	"page_types\x18\x04 \x03(\x0e2\x12.commonpb.PageTypeR\tpageTypes\x12:\n" +
-	"\rads_platforms\x18\x05 \x03(\x0e2\x15.commonpb.AdsPlatformR\fadsPlatforms\x12,\n" +
-	"\bstatuses\x18\x06 \x03(\x0e2\x10.commonpb.StatusR\bstatuses\x12'\n" +
-	"\x0fdeleted_version\x18\a \x01(\x05R\x0edeletedVersion\x12\x16\n" +
-	"\x06fields\x18\b \x01(\tR\x06fields\x12\x19\n" +
+	"page_types\x18\x04 \x03(\x05R\tpageTypes\x12#\n" +
+	"\rads_platforms\x18\x05 \x03(\x05R\fadsPlatforms\x12\x1a\n" +
+	"\bstatuses\x18\x06 \x03(\x05R\bstatuses\x12\x16\n" +
+	"\x06fields\x18\a \x03(\tR\x06fields\x12\"\n" +
+	"\n" +
+	"is_deleted\x18\b \x01(\bH\x00R\tisDeleted\x88\x01\x01\x12\x19\n" +
 	"\border_by\x18\t \x01(\tR\aorderBy\x12\x14\n" +
 	"\x05limit\x18\n" +
 	" \x01(\rR\x05limit\x12\x16\n" +
 	"\x06offset\x18\v \x01(\rR\x06offset\x12\x1d\n" +
 	"\n" +
-	"with_total\x18\f \x01(\bR\twithTotal\"T\n" +
+	"with_total\x18\f \x01(\bR\twithTotalB\r\n" +
+	"\v_is_deleted\"T\n" +
 	"\fListResponse\x12.\n" +
 	"\x05pages\x18\x01 \x03(\v2\x18.staticpagepb.StaticPageR\x05pages\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x04R\x05total\"H\n" +
@@ -851,16 +853,13 @@ var file_staticpagepb_schema_proto_depIdxs = []int32{
 	15, // 5: staticpagepb.StaticPage.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 6: staticpagepb.CreateRequest.page:type_name -> staticpagepb.StaticPage
 	0,  // 7: staticpagepb.UpdateRequest.page:type_name -> staticpagepb.StaticPage
-	11, // 8: staticpagepb.ListRequest.page_types:type_name -> commonpb.PageType
-	13, // 9: staticpagepb.ListRequest.ads_platforms:type_name -> commonpb.AdsPlatform
-	14, // 10: staticpagepb.ListRequest.statuses:type_name -> commonpb.Status
-	0,  // 11: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
-	0,  // 12: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	0,  // 8: staticpagepb.ListResponse.pages:type_name -> staticpagepb.StaticPage
+	0,  // 9: staticpagepb.GetResponse.page:type_name -> staticpagepb.StaticPage
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_staticpagepb_schema_proto_init() }
@@ -869,6 +868,7 @@ func file_staticpagepb_schema_proto_init() {
 		return
 	}
 	file_staticpagepb_schema_proto_msgTypes[0].OneofWrappers = []any{}
+	file_staticpagepb_schema_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -26,3 +26,11 @@ type StaticPageUpdate struct {
 	StaticPage
 	Fields []string `json:"fields"`
 }
+
+var AllowedOrderFields = map[string]bool{
+	"id":         true,
+	"title":      true,
+	"slug":       true,
+	"created_at": true,
+	"updated_at": true,
+}

@@ -78,12 +78,13 @@ message ListRequest {
   repeated uint64 ids = 1;
   string title = 2;
   string slug = 3;
-  repeated commonpb.PageType page_types = 4;
-  repeated commonpb.AdsPlatform ads_platforms = 5;
-  repeated commonpb.Status statuses = 6;
-  int32 deleted_version = 7;
+  repeated int32 page_types = 4;
+  repeated int32 ads_platforms = 5;
+  repeated int32 statuses = 6;
 
-  string fields = 8; // select fields
+  repeated string fields = 7; // select fields
+
+  optional bool is_deleted = 8;
 
   string order_by = 9;
 

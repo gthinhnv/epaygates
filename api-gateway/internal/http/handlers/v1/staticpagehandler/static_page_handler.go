@@ -173,13 +173,40 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 }
 
 func (h *StaticPageHandler) List(c *gin.Context) {
-	req := staticpagepb.ListRequest{
-		WithTotal: true,
-	}
-	if ids, err := requtil.GetIDs(c); err == nil {
+	req := staticpagepb.ListRequest{}
+	if ids, err := requtil.GetUint64List(c, "ids"); err == nil {
 		req.Ids = ids
 	}
+	req.Title = c.Query("title")
+	req.Slug = c.Query("slug")
+	if pageTypes, err := requtil.GetInt32List(c, "pageTypes"); err == nil {
+		req.PageTypes = pageTypes
+	}
+	if adsPlatforms, err := requtil.GetInt32List(c, "adsPlatforms"); err == nil {
+		req.AdsPlatforms = adsPlatforms
+	}
+	if statuses, err := requtil.GetInt32List(c, "statuses"); err == nil {
+		req.Statuses = statuses
+	}
+	if fields, err := requtil.GetStringList(c, "fields"); err == nil {
+		req.Fields = fields
+	}
+	if isDeleted, err := requtil.GetBool(c, "isDeleted"); err == nil {
+		req.IsDeleted = &isDeleted
+	}
+	if orderBy, err := requtil.GetOrderBy(c); err == nil {
+		req.OrderBy = orderBy
+	}
+	if limit, err := requtil.GetUInt32(c, "limit"); err == nil {
+		req.Limit = limit
+	}
+	if offset, err := requtil.GetUInt32(c, "offset"); err == nil {
+		req.Offset = offset
+	}
 
+	if withTotal, err := requtil.GetBool(c, "withTotal"); err == nil {
+		req.WithTotal = withTotal
+	}
 	resp, err := h.client.List(context.Background(), &req)
 	if err != nil {
 		bootstrap.Logger.WithFields(logrus.Fields{

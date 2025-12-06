@@ -108,9 +108,12 @@ func buildFilters(req *staticpagepb.ListRequest) (string, []interface{}) {
 	}
 
 	// deleted_version
-	if req.DeletedVersion != 0 {
-		where = append(where, "deleted_version = ?")
-		args = append(args, req.DeletedVersion)
+	if req.IsDeleted != nil {
+		if req.GetIsDeleted() {
+			where = append(where, "deleted_version > 0")
+		} else {
+			where = append(where, "deleted_version = 0")
+		}
 	}
 
 	if len(where) == 0 {
@@ -125,7 +128,7 @@ func buildListQuery(req *staticpagepb.ListRequest) (string, []interface{}, error
 	b.Grow(256)
 
 	// SELECT fields
-	fields := strings.TrimSpace(req.Fields)
+	fields := strings.Join(req.Fields, ",")
 	if fields == "" {
 		fields = "*" // default
 	}
