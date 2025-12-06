@@ -22,10 +22,6 @@ type StaticPage struct {
 	DeletedVersion int32                   `db:"deleted_version" json:"-"`
 }
 
-func (m *StaticPage) TableName() string {
-	return "static_pages"
-}
-
 type StaticPageUpdate struct {
 	StaticPage
 	Fields []string `json:"fields"`
