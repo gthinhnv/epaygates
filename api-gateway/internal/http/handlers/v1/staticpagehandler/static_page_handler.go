@@ -9,6 +9,7 @@ import (
 	"shared/pkg/utils/apiutil"
 	"shared/pkg/utils/dbutil"
 	"shared/pkg/utils/grpcutil"
+	"shared/pkg/utils/requtil"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -172,9 +173,14 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 }
 
 func (h *StaticPageHandler) List(c *gin.Context) {
-	resp, err := h.client.List(context.Background(), &staticpagepb.ListRequest{
+	req := staticpagepb.ListRequest{
 		WithTotal: true,
-	})
+	}
+	if ids, err := requtil.GetIDs(c); err == nil {
+		req.Ids = ids
+	}
+
+	resp, err := h.client.List(context.Background(), &req)
 	if err != nil {
 		bootstrap.Logger.WithFields(logrus.Fields{
 			"err": err,

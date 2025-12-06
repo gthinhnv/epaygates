@@ -107,14 +107,14 @@ func (r *MysqlRepository) GetBySlug(slug string) (*staticpagemodel.StaticPage, e
 // List returns pages with filters, sorting, and pagination.
 // --------------------------------------------------
 func (r *MysqlRepository) List(req *staticpagepb.ListRequest) ([]*staticpagemodel.StaticPage, error) {
-	query := `
-		SELECT *
-		FROM static_pages
-		LIMIT ? OFFSET ?
-	`
+	query, args, err := buildListQuery(req)
+	if err != nil {
+		return nil, err
+	}
+
 	var pages []*staticpagemodel.StaticPage
 
-	err := r.db.Select(&pages, query, 10, 0)
+	err = r.db.Select(&pages, query, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -126,13 +126,10 @@ func (r *MysqlRepository) List(req *staticpagepb.ListRequest) ([]*staticpagemode
 // Count returns total items for the given filter (used for pagination).
 // --------------------------------------------------
 func (r *MysqlRepository) Count(req *staticpagepb.ListRequest) (uint64, error) {
-	query := `
-		SELECT COUNT(*)
-		FROM static_pages
-	`
+	query, args := buildCountQuery(req)
 
 	var total uint64
-	err := r.db.Get(&total, query)
+	err := r.db.Get(&total, query, args...)
 	if err != nil {
 		return 0, err
 	}

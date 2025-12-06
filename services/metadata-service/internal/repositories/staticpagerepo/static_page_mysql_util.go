@@ -2,6 +2,7 @@ package staticpagerepo
 
 import (
 	"fmt"
+	"metadatasvc/gen/go/staticpagepb"
 	"shared/models/staticpagemodel"
 	"strings"
 
@@ -46,6 +47,128 @@ func buildUpdateQuery(pageModel *staticpagemodel.StaticPage, fields []string) (s
 	args = append(args, pageModel.Id)
 
 	return b.String(), args, nil
+}
+
+func buildFilters(req *staticpagepb.ListRequest) (string, []interface{}) {
+	var (
+		where []string
+		args  []interface{}
+	)
+
+	// ids
+	if len(req.Ids) > 0 {
+		ph := make([]string, len(req.Ids))
+		for i, id := range req.Ids {
+			ph[i] = "?"
+			args = append(args, id)
+		}
+		where = append(where, "id IN ("+strings.Join(ph, ",")+")")
+	}
+
+	// title LIKE
+	if req.Title != "" {
+		where = append(where, "title LIKE ?")
+		args = append(args, "%"+req.Title+"%")
+	}
+
+	// slug
+	if req.Slug != "" {
+		where = append(where, "slug = ?")
+		args = append(args, req.Slug)
+	}
+
+	// page_types
+	if len(req.PageTypes) > 0 {
+		ph := make([]string, len(req.PageTypes))
+		for i, v := range req.PageTypes {
+			ph[i] = "?"
+			args = append(args, v)
+		}
+		where = append(where, "page_type IN ("+strings.Join(ph, ",")+")")
+	}
+
+	// ads_platforms
+	if len(req.AdsPlatforms) > 0 {
+		ph := make([]string, len(req.AdsPlatforms))
+		for i, v := range req.AdsPlatforms {
+			ph[i] = "?"
+			args = append(args, v)
+		}
+		where = append(where, "ads_platform IN ("+strings.Join(ph, ",")+")")
+	}
+
+	// statuses
+	if len(req.Statuses) > 0 {
+		ph := make([]string, len(req.Statuses))
+		for i, v := range req.Statuses {
+			ph[i] = "?"
+			args = append(args, v)
+		}
+		where = append(where, "status IN ("+strings.Join(ph, ",")+")")
+	}
+
+	// deleted_version
+	if req.DeletedVersion != 0 {
+		where = append(where, "deleted_version = ?")
+		args = append(args, req.DeletedVersion)
+	}
+
+	if len(where) == 0 {
+		return "", args
+	}
+
+	return " WHERE " + strings.Join(where, " AND "), args
+}
+
+func buildListQuery(req *staticpagepb.ListRequest) (string, []interface{}, error) {
+	var b strings.Builder
+	b.Grow(256)
+
+	// SELECT fields
+	fields := strings.TrimSpace(req.Fields)
+	if fields == "" {
+		fields = "*" // default
+	}
+
+	b.WriteString("SELECT ")
+	b.WriteString(fields)
+	b.WriteString(" FROM static_pages")
+
+	// WHERE filters
+	whereSQL, args := buildFilters(req)
+	b.WriteString(whereSQL)
+
+	// ORDER BY
+	if req.OrderBy != "" {
+		b.WriteString(" ORDER BY ")
+		b.WriteString(req.OrderBy)
+	}
+
+	// LIMIT
+	if req.Limit > 0 {
+		b.WriteString(" LIMIT ?")
+		args = append(args, req.Limit)
+	}
+
+	// OFFSET
+	if req.Offset > 0 {
+		b.WriteString(" OFFSET ?")
+		args = append(args, req.Offset)
+	}
+
+	return b.String(), args, nil
+}
+
+func buildCountQuery(req *staticpagepb.ListRequest) (string, []interface{}) {
+	var b strings.Builder
+	b.Grow(128)
+
+	b.WriteString("SELECT COUNT(*) FROM static_pages")
+
+	whereSQL, args := buildFilters(req)
+	b.WriteString(whereSQL)
+
+	return b.String(), args
 }
 
 // prepareCreateStatement prepares the SQL statement for inserting a static page
