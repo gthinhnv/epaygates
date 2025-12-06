@@ -27,6 +27,7 @@
     </li>
 </ul>
 <form id="static-page-form" class="form form-{% if model != nil %}update{% else %}create{% endif %}{% space %}tab-content card-block pb-0">
+    {% if model != nil %}<input name="id" type="hidden" value="{%dul model.Id %}" />{% endif %}
     <div class="general-errs"></div>
 
     <div id="main" class="tab-pane active" role="tabpanel">

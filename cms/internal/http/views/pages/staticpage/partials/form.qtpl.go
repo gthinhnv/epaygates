@@ -41,180 +41,192 @@ func StreamForm(qw422016 *qt422016.Writer, model *staticpagemodel.StaticPage, la
 //line internal/http/views/pages/staticpage/partials/form.qtpl:29
 	qw422016.N().S(` `)
 //line internal/http/views/pages/staticpage/partials/form.qtpl:29
-	qw422016.N().S(`tab-content card-block pb-0"><div class="general-errs"></div><div id="main" class="tab-pane active" role="tabpanel"><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="title">Title<span class="text-danger">*</span>:</label><input name="title" value="`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+	qw422016.N().S(`tab-content card-block pb-0">`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:30
 	if model != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+//line internal/http/views/pages/staticpage/partials/form.qtpl:30
+		qw422016.N().S(`<input name="id" type="hidden" value="`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:30
+		qw422016.N().DUL(model.Id)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:30
+		qw422016.N().S(`" />`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:30
+	}
+//line internal/http/views/pages/staticpage/partials/form.qtpl:30
+	qw422016.N().S(`<div class="general-errs"></div><div id="main" class="tab-pane active" role="tabpanel"><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="title">Title<span class="text-danger">*</span>:</label><input name="title" value="`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
+	if model != nil {
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
 		qw422016.E().S(model.Title)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
 	qw422016.N().S(`" type="text" class="form-control" autocomplete="off" onkeyup="toSlug(this, `)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
 	qw422016.N().S(`#static-page-form input[name='slug']`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
 	qw422016.N().S("`")
-//line internal/http/views/pages/staticpage/partials/form.qtpl:37
+//line internal/http/views/pages/staticpage/partials/form.qtpl:38
 	qw422016.N().S(`)" /></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="slug">Slug<span class="text-danger">*</span>:</label><input name="slug" value="`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:45
+//line internal/http/views/pages/staticpage/partials/form.qtpl:46
 	if model != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:45
+//line internal/http/views/pages/staticpage/partials/form.qtpl:46
 		qw422016.E().S(model.Slug)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:45
+//line internal/http/views/pages/staticpage/partials/form.qtpl:46
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:45
+//line internal/http/views/pages/staticpage/partials/form.qtpl:46
 	qw422016.N().S(`" type="text" class="form-control" autocomplete="off" /></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="sortOrder">Sort Order:</label><input name="sortOrder" value="`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:53
+//line internal/http/views/pages/staticpage/partials/form.qtpl:54
 	if model != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:53
+//line internal/http/views/pages/staticpage/partials/form.qtpl:54
 		qw422016.N().D(int(model.SortOrder))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:53
+//line internal/http/views/pages/staticpage/partials/form.qtpl:54
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:53
+//line internal/http/views/pages/staticpage/partials/form.qtpl:54
 	qw422016.N().S(`" type="number" class="form-control" autocomplete="off" /></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="content">Content:</label><textarea name="content" class="form-control">`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:61
+//line internal/http/views/pages/staticpage/partials/form.qtpl:62
 	if model != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:61
+//line internal/http/views/pages/staticpage/partials/form.qtpl:62
 		qw422016.E().S(model.Content)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:61
+//line internal/http/views/pages/staticpage/partials/form.qtpl:62
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:61
+//line internal/http/views/pages/staticpage/partials/form.qtpl:62
 	qw422016.N().S(`</textarea></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label d-block" for="pageType">Page Type:</label><select class="form-control page-type-selection is-select2" name="pageType">`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:70
+//line internal/http/views/pages/staticpage/partials/form.qtpl:71
 	for _, pageTypeItem := range bootstrap.PageTypeItems {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:70
-		qw422016.N().S(`<option value="`)
 //line internal/http/views/pages/staticpage/partials/form.qtpl:71
+		qw422016.N().S(`<option value="`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:72
 		qw422016.N().D(int(pageTypeItem.Value))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:71
+//line internal/http/views/pages/staticpage/partials/form.qtpl:72
 		qw422016.N().S(`"`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:71
+//line internal/http/views/pages/staticpage/partials/form.qtpl:72
 		if model != nil && int32(model.PageType) == pageTypeItem.Value {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:71
-			qw422016.N().S(`selected`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:71
-		}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:71
-		qw422016.N().S(`>`)
 //line internal/http/views/pages/staticpage/partials/form.qtpl:72
+			qw422016.N().S(`selected`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:72
+		}
+//line internal/http/views/pages/staticpage/partials/form.qtpl:72
+		qw422016.N().S(`>`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:73
 		qw422016.E().S(bootstrap.Translator.T(lang, pageTypeItem.Name, nil))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:72
+//line internal/http/views/pages/staticpage/partials/form.qtpl:73
 		qw422016.N().S(`</option>`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:74
+//line internal/http/views/pages/staticpage/partials/form.qtpl:75
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:74
+//line internal/http/views/pages/staticpage/partials/form.qtpl:75
 	qw422016.N().S(`</select></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label d-block" for="status">Status:</label><select class="form-control status-selection is-select2" name="status">`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:84
+//line internal/http/views/pages/staticpage/partials/form.qtpl:85
 	for _, statusItem := range bootstrap.StatusItems {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:84
-		qw422016.N().S(`<option value="`)
 //line internal/http/views/pages/staticpage/partials/form.qtpl:85
+		qw422016.N().S(`<option value="`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:86
 		qw422016.N().D(int(statusItem.Value))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:85
+//line internal/http/views/pages/staticpage/partials/form.qtpl:86
 		qw422016.N().S(`"`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:85
+//line internal/http/views/pages/staticpage/partials/form.qtpl:86
 		if model != nil && int32(model.Status) == statusItem.Value {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:85
-			qw422016.N().S(`selected`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:85
-		}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:85
-		qw422016.N().S(`>`)
 //line internal/http/views/pages/staticpage/partials/form.qtpl:86
+			qw422016.N().S(`selected`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:86
+		}
+//line internal/http/views/pages/staticpage/partials/form.qtpl:86
+		qw422016.N().S(`>`)
+//line internal/http/views/pages/staticpage/partials/form.qtpl:87
 		qw422016.E().S(bootstrap.Translator.T(lang, statusItem.Name, nil))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:86
+//line internal/http/views/pages/staticpage/partials/form.qtpl:87
 		qw422016.N().S(`</option>`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:88
+//line internal/http/views/pages/staticpage/partials/form.qtpl:89
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:88
+//line internal/http/views/pages/staticpage/partials/form.qtpl:89
 	qw422016.N().S(`</select></div></div></div></div><div id="seo" class="tab-pane" role="tabpanel"><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="metaTitle">Meta Title:</label><input name="metaTitle" value="`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:99
+//line internal/http/views/pages/staticpage/partials/form.qtpl:100
 	if model != nil && model.Seo != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:99
+//line internal/http/views/pages/staticpage/partials/form.qtpl:100
 		qw422016.E().S(model.Seo.MetaTitle)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:99
+//line internal/http/views/pages/staticpage/partials/form.qtpl:100
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:99
+//line internal/http/views/pages/staticpage/partials/form.qtpl:100
 	qw422016.N().S(`" default="" type="text" class="form-control" autocomplete="off" /></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="metaDescription">Meta Description:</label><textarea name="metaDesc" default="" class="form-control" autocomplete="off">`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:107
+//line internal/http/views/pages/staticpage/partials/form.qtpl:108
 	if model != nil && model.Seo != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:107
+//line internal/http/views/pages/staticpage/partials/form.qtpl:108
 		qw422016.E().S(model.Seo.MetaDesc)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:107
+//line internal/http/views/pages/staticpage/partials/form.qtpl:108
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:107
+//line internal/http/views/pages/staticpage/partials/form.qtpl:108
 	qw422016.N().S(`</textarea></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="metaKeywords">Meta Keywords:</label><textarea name="metaKeywords" default="" class="form-control" autocomplete="off">`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:115
+//line internal/http/views/pages/staticpage/partials/form.qtpl:116
 	if model != nil && model.Seo != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:115
+//line internal/http/views/pages/staticpage/partials/form.qtpl:116
 		qw422016.E().S(strings.Join(model.Seo.MetaKeywords, ","))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:115
+//line internal/http/views/pages/staticpage/partials/form.qtpl:116
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:115
+//line internal/http/views/pages/staticpage/partials/form.qtpl:116
 	qw422016.N().S(`</textarea></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label" for="schema">Schema:</label><textarea name="schema" default="" class="form-control" autocomplete="off">`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:123
+//line internal/http/views/pages/staticpage/partials/form.qtpl:124
 	if model != nil && model.Seo != nil {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:123
+//line internal/http/views/pages/staticpage/partials/form.qtpl:124
 		qw422016.E().S(model.Seo.Schema)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:123
+//line internal/http/views/pages/staticpage/partials/form.qtpl:124
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:123
+//line internal/http/views/pages/staticpage/partials/form.qtpl:124
 	qw422016.N().S(`</textarea></div></div></div></div><div id="config" class="tab-pane" role="tabpanel"><div class="card-header pl-0 pr-0"><h5>Ads Config</h5></div><div class="card-block pl-0 pr-0"><div class="row"><div class="col-lg-12 col-sm-12"><div class="form-group"><label class="col-form-label d-block" for="adsPlatform">Ads Platform:</label><select class="form-control ads-platform-selection is-select2" name="adsPlatform">`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:138
+//line internal/http/views/pages/staticpage/partials/form.qtpl:139
 	for _, adsPlatformItem := range bootstrap.AdsPlatformItems {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:138
+//line internal/http/views/pages/staticpage/partials/form.qtpl:139
 		qw422016.N().S(`<option value="`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:139
+//line internal/http/views/pages/staticpage/partials/form.qtpl:140
 		qw422016.N().D(int(adsPlatformItem.Value))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:139
+//line internal/http/views/pages/staticpage/partials/form.qtpl:140
 		qw422016.N().S(`"`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:139
+//line internal/http/views/pages/staticpage/partials/form.qtpl:140
 		if model != nil && int32(model.AdsPlatform) == adsPlatformItem.Value {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:139
+//line internal/http/views/pages/staticpage/partials/form.qtpl:140
 			qw422016.N().S(`selected`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:139
+//line internal/http/views/pages/staticpage/partials/form.qtpl:140
 		}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:139
+//line internal/http/views/pages/staticpage/partials/form.qtpl:140
 		qw422016.N().S(`>`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:140
+//line internal/http/views/pages/staticpage/partials/form.qtpl:141
 		qw422016.E().S(bootstrap.Translator.T(lang, adsPlatformItem.Name, nil))
-//line internal/http/views/pages/staticpage/partials/form.qtpl:140
+//line internal/http/views/pages/staticpage/partials/form.qtpl:141
 		qw422016.N().S(`</option>`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:142
+//line internal/http/views/pages/staticpage/partials/form.qtpl:143
 	}
-//line internal/http/views/pages/staticpage/partials/form.qtpl:142
+//line internal/http/views/pages/staticpage/partials/form.qtpl:143
 	qw422016.N().S(`</select></div></div></div></div></div><div class="row"><div class="col-lg-12 col-sm-12"><button class="btn btn-primary" type="submit"><i class="fa fa-paper-plane"></i>`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:151
+//line internal/http/views/pages/staticpage/partials/form.qtpl:152
 	qw422016.N().S(` `)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:151
+//line internal/http/views/pages/staticpage/partials/form.qtpl:152
 	qw422016.N().S(`Submit</button></div></div></form>`)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 }
 
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 func WriteForm(qq422016 qtio422016.Writer, model *staticpagemodel.StaticPage, lang string) {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	StreamForm(qw422016, model, lang)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	qt422016.ReleaseWriter(qw422016)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 }
 
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 func Form(model *staticpagemodel.StaticPage, lang string) string {
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	qb422016 := qt422016.AcquireByteBuffer()
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	WriteForm(qb422016, model, lang)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	qs422016 := string(qb422016.B)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	qt422016.ReleaseByteBuffer(qb422016)
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 	return qs422016
-//line internal/http/views/pages/staticpage/partials/form.qtpl:155
+//line internal/http/views/pages/staticpage/partials/form.qtpl:156
 }

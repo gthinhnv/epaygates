@@ -32,7 +32,7 @@ func (s *StaticPageServiceServer) Create(ctx context.Context, req *staticpagepb.
 		return nil, grpcutil.BuildValidationError(err)
 	}
 
-	id, err := bootstrap.Repos.StaticPageRepo.Create(ctx, &pageModel)
+	id, err := bootstrap.Repos.StaticPageRepo.Create(&pageModel)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to create static page: %v", err)
 	}
@@ -49,16 +49,19 @@ func (s *StaticPageServiceServer) Update(ctx context.Context, req *staticpagepb.
 
 	page := req.GetPage()
 
-	pageDB, err := bootstrap.Repos.StaticPageRepo.GetByID(ctx, page.Id)
+	pageModel, err := bootstrap.Repos.StaticPageRepo.GetByID(page.Id)
 	if err != nil {
 		return nil, status.Error(codes.NotFound, "not found page")
 	}
 
-	for _, f := range req.Fields {
-		switch f {
-		case "title":
-			pageDB.Title = req.Page.Title
-		}
+	pageModel = applyUpdates(pageModel, req)
+
+	if err := bootstrap.Validate.Struct(pageModel); err != nil {
+		return nil, grpcutil.BuildValidationError(err)
+	}
+
+	if err := bootstrap.Repos.StaticPageRepo.Update(pageModel.Id, pageModel, req.Fields); err != nil {
+		return nil, status.Error(codes.Internal, "an error happened when updating to the database")
 	}
 
 	return &staticpagepb.UpdateResponse{}, nil
@@ -69,7 +72,7 @@ func (s *StaticPageServiceServer) Delete(ctx context.Context, req *staticpagepb.
 }
 
 func (s *StaticPageServiceServer) Get(ctx context.Context, req *staticpagepb.GetRequest) (*staticpagepb.GetResponse, error) {
-	page, err := bootstrap.Repos.StaticPageRepo.GetByID(ctx, req.Id)
+	page, err := bootstrap.Repos.StaticPageRepo.GetByID(req.Id)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get static page: %v", err)
 	}
@@ -85,7 +88,7 @@ func (s *StaticPageServiceServer) Get(ctx context.Context, req *staticpagepb.Get
 }
 
 func (s *StaticPageServiceServer) List(ctx context.Context, req *staticpagepb.ListRequest) (*staticpagepb.ListResponse, error) {
-	pages, err := bootstrap.Repos.StaticPageRepo.List(ctx, req)
+	pages, err := bootstrap.Repos.StaticPageRepo.List(req)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get static page: %v", err)
 	}

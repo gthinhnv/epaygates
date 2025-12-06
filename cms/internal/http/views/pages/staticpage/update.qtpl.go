@@ -283,7 +283,7 @@ func (p *Update) StreamScript(qw422016 *qt422016.Writer) {
         pageType: parseInt(formData.pageType) || 0,
         seo: {
             metaTitle: formData.metaTitle || '',
-            metaDes: formData.metaDes || '',
+            metaDesc: formData.metaDes || '',
             metaKeywords: formData.metaKeywords || '',
             schema: formData.schema || '',
         },
@@ -365,9 +365,14 @@ $(function () {
 		`)
 //line internal/http/views/pages/staticpage/update.qtpl:66
 	qw422016.N().S(`$(function () {
-    $('#static-page-form.form-create').submit(function (event) {
+    $('#static-page-form.form-update').submit(function (event) {
         event.preventDefault();
-        const formData = getFormData($(this));
+
+        const id = $(this).find('input[name="id"][type="hidden"]').val();
+
+        const formData = getFormData($(this));    
+        formData.fields = Object.keys(formData);
+
     
         $.ajax({
             type: 'POST',
@@ -375,7 +380,7 @@ $(function () {
 //line internal/http/views/pages/staticpage/update.qtpl:66
 	qw422016.N().S("`")
 //line internal/http/views/pages/staticpage/update.qtpl:66
-	qw422016.N().S(`${config.apiAddress}/v1/staticPages/create`)
+	qw422016.N().S(`${config.apiAddress}/v1/staticPages/${id}/update`)
 //line internal/http/views/pages/staticpage/update.qtpl:66
 	qw422016.N().S("`")
 //line internal/http/views/pages/staticpage/update.qtpl:66

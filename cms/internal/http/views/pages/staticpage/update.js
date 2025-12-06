@@ -1,11 +1,16 @@
 $(function () {
-    $('#static-page-form.form-create').submit(function (event) {
+    $('#static-page-form.form-update').submit(function (event) {
         event.preventDefault();
-        const formData = getFormData($(this));
+
+        const id = $(this).find('input[name="id"][type="hidden"]').val();
+
+        const formData = getFormData($(this));    
+        formData.fields = Object.keys(formData);
+
     
         $.ajax({
             type: 'POST',
-            url: `${config.apiAddress}/v1/staticPages/create`,
+            url: `${config.apiAddress}/v1/staticPages/${id}/update`,
             authRequired: true,          // 👈 marks this request for interception
             xhrFields: { withCredentials: true },
             crossDomain: true,

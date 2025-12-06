@@ -13,7 +13,7 @@ function getFormData($form) {
         pageType: parseInt(formData.pageType) || 0,
         seo: {
             metaTitle: formData.metaTitle || '',
-            metaDes: formData.metaDes || '',
+            metaDesc: formData.metaDes || '',
             metaKeywords: formData.metaKeywords || '',
             schema: formData.schema || '',
         },

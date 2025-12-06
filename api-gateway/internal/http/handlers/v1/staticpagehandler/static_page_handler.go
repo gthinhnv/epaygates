@@ -4,7 +4,6 @@ import (
 	"apigateway/gen/go/staticpagepb"
 	"apigateway/internal/bootstrap"
 	"context"
-	"fmt"
 	"net/http"
 	"shared/models/staticpagemodel"
 	"shared/pkg/utils/apiutil"
@@ -37,7 +36,7 @@ func (h *StaticPageHandler) Create(c *gin.Context) {
 	}
 
 	var req staticpagepb.CreateRequest
-	if err := dbutil.MapStruct(payload, &req); err != nil {
+	if err := dbutil.MapStruct(payload, &req.Page); err != nil {
 		c.JSON(http.StatusBadRequest, apiutil.Response{
 			Code:    apiutil.CODE_ERROR,
 			Message: "invalid payload",
@@ -56,6 +55,62 @@ func (h *StaticPageHandler) Create(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, apiutil.Response{
 			Code:    apiutil.CODE_ERROR,
 			Message: "An error happened when creating new static page",
+			Data:    fields,
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, apiutil.Response{
+		Code:    apiutil.CODE_SUCCESS,
+		Message: "Success",
+		Data:    resp.Id,
+	})
+}
+
+func (h *StaticPageHandler) Update(c *gin.Context) {
+	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_NOT_FOUND,
+			Message: "Record doen't exist",
+		})
+		return
+	}
+
+	var payload staticpagemodel.StaticPageUpdate
+	if err := c.ShouldBind(&payload); err != nil {
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "invalid payload",
+		})
+		return
+	}
+
+	pageProto := staticpagepb.StaticPage{Id: id}
+	if err := dbutil.MapStruct(payload, &pageProto); err != nil {
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "invalid payload.",
+		})
+		return
+	}
+
+	req := staticpagepb.UpdateRequest{
+		Page:   &pageProto,
+		Fields: payload.Fields,
+	}
+
+	resp, err := h.client.Update(context.Background(), &req)
+	if err != nil {
+		bootstrap.Logger.WithFields(logrus.Fields{
+			"err": err,
+		}).Warn("StaticPageHandler >>> Update: failed to update static page")
+
+		fields, _ := grpcutil.ParseValidationError(err)
+
+		c.JSON(http.StatusBadRequest, apiutil.Response{
+			Code:    apiutil.CODE_ERROR,
+			Message: "An error happened when updating static page",
 			Data:    fields,
 		})
 		return
@@ -132,7 +187,6 @@ func (h *StaticPageHandler) List(c *gin.Context) {
 	var staticPages []*staticpagemodel.StaticPage
 
 	for _, staticPagePB := range resp.GetPages() {
-		fmt.Println("***", staticPagePB.CreatedAt)
 		var staticPage staticpagemodel.StaticPage
 		if err := dbutil.MapStruct(staticPagePB, &staticPage); err != nil {
 			bootstrap.Logger.WithFields(logrus.Fields{
