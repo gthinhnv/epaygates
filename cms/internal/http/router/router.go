@@ -30,7 +30,7 @@ func New() *gin.Engine {
 
 	authenticatedRouter := r.Group("/", authmiddleware.Authenticate())
 
-	authenticatedRouter.GET("/dashboard", dashboardHandler.GetIndex)
+	authenticatedRouter.GET("/", dashboardHandler.GetIndex)
 
 	RegisterStaticPageRoutes(authenticatedRouter)
 

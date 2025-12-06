@@ -86,7 +86,7 @@ func (h *StaticPageHandler) Update(c *gin.Context) {
 		return
 	}
 
-	pageProto := staticpagepb.StaticPage{Id: id}
+	var pageProto staticpagepb.StaticPage
 	if err := dbutil.MapStruct(payload, &pageProto); err != nil {
 		c.JSON(http.StatusBadRequest, apiutil.Response{
 			Code:    apiutil.CODE_ERROR,
@@ -95,6 +95,7 @@ func (h *StaticPageHandler) Update(c *gin.Context) {
 		return
 	}
 
+	pageProto.Id = id
 	req := staticpagepb.UpdateRequest{
 		Page:   &pageProto,
 		Fields: payload.Fields,
