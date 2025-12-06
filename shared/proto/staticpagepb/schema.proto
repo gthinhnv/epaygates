@@ -75,7 +75,6 @@ message DeleteResponse {
 // ========================
 
 message ListRequest {
-  // filters
   repeated uint64 ids = 1;
   string title = 2;
   string slug = 3;
@@ -84,15 +83,14 @@ message ListRequest {
   repeated commonpb.Status statuses = 6;
   int32 deleted_version = 7;
 
-  // sql select override
-  string select = 8;
+  string fields = 8; // select fields
 
-  // sorting: "created_at desc", "sortOrder asc", etc.
-  string sort = 9;
+  string order_by = 9;
 
-  // pagination
   uint32 limit = 10;
   uint32 offset = 11;
+
+  bool include_total = 12;
 }
 
 message ListResponse {

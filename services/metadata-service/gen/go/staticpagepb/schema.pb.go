@@ -452,8 +452,7 @@ func (x *DeleteResponse) GetIds() []uint64 {
 }
 
 type ListRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// filters
+	state          protoimpl.MessageState `protogen:"open.v1"`
 	Ids            []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Slug           string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
@@ -461,15 +460,13 @@ type ListRequest struct {
 	AdsPlatforms   []commonpb.AdsPlatform `protobuf:"varint,5,rep,packed,name=ads_platforms,json=adsPlatforms,proto3,enum=commonpb.AdsPlatform" json:"ads_platforms,omitempty"`
 	Statuses       []commonpb.Status      `protobuf:"varint,6,rep,packed,name=statuses,proto3,enum=commonpb.Status" json:"statuses,omitempty"`
 	DeletedVersion int32                  `protobuf:"varint,7,opt,name=deleted_version,json=deletedVersion,proto3" json:"deleted_version,omitempty"`
-	// sql select override
-	Select string `protobuf:"bytes,8,opt,name=select,proto3" json:"select,omitempty"`
-	// sorting: "created_at desc", "sortOrder asc", etc.
-	Sort string `protobuf:"bytes,9,opt,name=sort,proto3" json:"sort,omitempty"`
-	// pagination
-	Limit         uint32 `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
-	Offset        uint32 `protobuf:"varint,11,opt,name=offset,proto3" json:"offset,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Fields         string                 `protobuf:"bytes,8,opt,name=fields,proto3" json:"fields,omitempty"` // select fields
+	OrderBy        string                 `protobuf:"bytes,9,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	Limit          uint32                 `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset         uint32                 `protobuf:"varint,11,opt,name=offset,proto3" json:"offset,omitempty"`
+	IncludeTotal   bool                   `protobuf:"varint,12,opt,name=include_total,json=includeTotal,proto3" json:"include_total,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListRequest) Reset() {
@@ -551,16 +548,16 @@ func (x *ListRequest) GetDeletedVersion() int32 {
 	return 0
 }
 
-func (x *ListRequest) GetSelect() string {
+func (x *ListRequest) GetFields() string {
 	if x != nil {
-		return x.Select
+		return x.Fields
 	}
 	return ""
 }
 
-func (x *ListRequest) GetSort() string {
+func (x *ListRequest) GetOrderBy() string {
 	if x != nil {
-		return x.Sort
+		return x.OrderBy
 	}
 	return ""
 }
@@ -577,6 +574,13 @@ func (x *ListRequest) GetOffset() uint32 {
 		return x.Offset
 	}
 	return 0
+}
+
+func (x *ListRequest) GetIncludeTotal() bool {
+	if x != nil {
+		return x.IncludeTotal
+	}
+	return false
 }
 
 type ListResponse struct {
@@ -778,7 +782,7 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
 	"deleted_by\x18\x02 \x01(\x04R\tdeletedBy\"\"\n" +
 	"\x0eDeleteResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\xe9\x02\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x95\x03\n" +
 	"\vListRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
@@ -788,11 +792,12 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\rads_platforms\x18\x05 \x03(\x0e2\x15.commonpb.AdsPlatformR\fadsPlatforms\x12,\n" +
 	"\bstatuses\x18\x06 \x03(\x0e2\x10.commonpb.StatusR\bstatuses\x12'\n" +
 	"\x0fdeleted_version\x18\a \x01(\x05R\x0edeletedVersion\x12\x16\n" +
-	"\x06select\x18\b \x01(\tR\x06select\x12\x12\n" +
-	"\x04sort\x18\t \x01(\tR\x04sort\x12\x14\n" +
+	"\x06fields\x18\b \x01(\tR\x06fields\x12\x19\n" +
+	"\border_by\x18\t \x01(\tR\aorderBy\x12\x14\n" +
 	"\x05limit\x18\n" +
 	" \x01(\rR\x05limit\x12\x16\n" +
-	"\x06offset\x18\v \x01(\rR\x06offset\"T\n" +
+	"\x06offset\x18\v \x01(\rR\x06offset\x12#\n" +
+	"\rinclude_total\x18\f \x01(\bR\fincludeTotal\"T\n" +
 	"\fListResponse\x12.\n" +
 	"\x05pages\x18\x01 \x03(\v2\x18.staticpagepb.StaticPageR\x05pages\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x04R\x05total\"H\n" +
