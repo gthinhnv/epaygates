@@ -877,7 +877,7 @@ func (p *List) StreamContent(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:158
 	qw422016.E().S(bootstrap.SharedConfig.APIGateway.HTTPAddress)
 //line internal/http/views/pages/staticpage/list.qtpl:158
-	qw422016.N().S(`/v1/staticPages?includes=createdByUser,updatedByUser&includeTotal=true&useCache=0'data-query-params="queryParams"data-response-handler="responseHandler"></table></div></div></div></div></div></div></div></div></div>`)
+	qw422016.N().S(`/v1/staticPages?useCache=false&include=createdUser,updatedUser&withTotal=true'data-query-params="queryParams"data-response-handler="responseHandler"></table></div></div></div></div></div></div></div></div></div>`)
 //line internal/http/views/pages/staticpage/list.qtpl:171
 }
 

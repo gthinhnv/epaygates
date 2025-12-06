@@ -464,7 +464,7 @@ type ListRequest struct {
 	OrderBy        string                 `protobuf:"bytes,9,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	Limit          uint32                 `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset         uint32                 `protobuf:"varint,11,opt,name=offset,proto3" json:"offset,omitempty"`
-	IncludeTotal   bool                   `protobuf:"varint,12,opt,name=include_total,json=includeTotal,proto3" json:"include_total,omitempty"`
+	WithTotal      bool                   `protobuf:"varint,12,opt,name=with_total,json=withTotal,proto3" json:"with_total,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -576,9 +576,9 @@ func (x *ListRequest) GetOffset() uint32 {
 	return 0
 }
 
-func (x *ListRequest) GetIncludeTotal() bool {
+func (x *ListRequest) GetWithTotal() bool {
 	if x != nil {
-		return x.IncludeTotal
+		return x.WithTotal
 	}
 	return false
 }
@@ -782,7 +782,7 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
 	"deleted_by\x18\x02 \x01(\x04R\tdeletedBy\"\"\n" +
 	"\x0eDeleteResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x95\x03\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x8f\x03\n" +
 	"\vListRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x04R\x03ids\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
@@ -796,8 +796,9 @@ const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\border_by\x18\t \x01(\tR\aorderBy\x12\x14\n" +
 	"\x05limit\x18\n" +
 	" \x01(\rR\x05limit\x12\x16\n" +
-	"\x06offset\x18\v \x01(\rR\x06offset\x12#\n" +
-	"\rinclude_total\x18\f \x01(\bR\fincludeTotal\"T\n" +
+	"\x06offset\x18\v \x01(\rR\x06offset\x12\x1d\n" +
+	"\n" +
+	"with_total\x18\f \x01(\bR\twithTotal\"T\n" +
 	"\fListResponse\x12.\n" +
 	"\x05pages\x18\x01 \x03(\v2\x18.staticpagepb.StaticPageR\x05pages\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x04R\x05total\"H\n" +
