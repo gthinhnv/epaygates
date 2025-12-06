@@ -5,10 +5,8 @@ import (
 	"encoding/json"
 	"metadatasvc/gen/go/staticpagepb"
 	"shared/models/staticpagemodel"
-	"shared/pkg/utils/dbutil"
 
 	"github.com/jmoiron/sqlx"
-	"google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 type MysqlRepository struct {
@@ -25,9 +23,7 @@ func NewMysqlRepository(db *sqlx.DB) Repository {
 // --------------------------------------------------
 // Create inserts a new static page and returns its ID.
 // --------------------------------------------------
-func (r *MysqlRepository) Create(ctx context.Context, req *staticpagepb.CreateRequest) (uint64, error) {
-	page := req.GetPage()
-
+func (r *MysqlRepository) Create(ctx context.Context, page *staticpagemodel.StaticPage) (uint64, error) {
 	var seoJson []byte
 	if page.Seo != nil {
 		seoJson, _ = json.Marshal(page.Seo)
@@ -60,7 +56,7 @@ func (r *MysqlRepository) Create(ctx context.Context, req *staticpagepb.CreateRe
 // --------------------------------------------------
 // Update updates fields using a field mask.
 // --------------------------------------------------
-func (r *MysqlRepository) Update(ctx context.Context, id uint64, req *staticpagepb.UpdateRequest, mask *fieldmaskpb.FieldMask) error {
+func (r *MysqlRepository) Update(ctx context.Context, id uint64, req *staticpagemodel.StaticPage, fields []string) error {
 	return nil
 }
 
@@ -74,7 +70,7 @@ func (r *MysqlRepository) Delete(ctx context.Context, ids []uint64, deletedBy ui
 // --------------------------------------------------
 // GetByID retrieves a static page by ID.
 // --------------------------------------------------
-func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb.StaticPage, error) {
+func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagemodel.StaticPage, error) {
 	var page staticpagemodel.StaticPage
 
 	err := r.db.Get(&page, "SELECT * FROM static_pages WHERE id = ?", id)
@@ -82,50 +78,33 @@ func (r *MysqlRepository) GetByID(ctx context.Context, id uint64) (*staticpagepb
 		return nil, err
 	}
 
-	var pagePB staticpagepb.StaticPage
-
-	if err := dbutil.MapStruct(page, &pagePB); err != nil {
-		return nil, err
-	}
-
-	return &pagePB, nil
+	return &page, nil
 }
 
 // --------------------------------------------------
 // GetBySlug retrieves a static page by slug.
 // --------------------------------------------------
-func (r *MysqlRepository) GetBySlug(ctx context.Context, slug string) (*staticpagepb.StaticPage, error) {
+func (r *MysqlRepository) GetBySlug(ctx context.Context, slug string) (*staticpagemodel.StaticPage, error) {
 	return nil, nil
 }
 
 // --------------------------------------------------
 // List returns pages with filters, sorting, and pagination.
 // --------------------------------------------------
-func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagepb.StaticPage, error) {
+func (r *MysqlRepository) List(ctx context.Context, req *staticpagepb.ListRequest) ([]*staticpagemodel.StaticPage, error) {
 	query := `
 		SELECT *
 		FROM static_pages
 		LIMIT ? OFFSET ?
 	`
-	var pages []staticpagemodel.StaticPage
+	var pages []*staticpagemodel.StaticPage
 
 	err := r.db.SelectContext(ctx, &pages, query, 10, 0)
 	if err != nil {
 		return nil, err
 	}
 
-	var pageProtos []*staticpagepb.StaticPage
-	for _, page := range pages {
-		var pageProto staticpagepb.StaticPage
-
-		if err := dbutil.MapStruct(page, &pageProto); err != nil {
-			return nil, err
-		}
-
-		pageProtos = append(pageProtos, &pageProto)
-	}
-
-	return pageProtos, nil
+	return pages, nil
 }
 
 // --------------------------------------------------

@@ -8,7 +8,6 @@ package staticpagepb
 
 import (
 	commonpb "apigateway/gen/go/commonpb"
-	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -741,19 +740,19 @@ var File_staticpagepb_schema_proto protoreflect.FileDescriptor
 
 const file_staticpagepb_schema_proto_rawDesc = "" +
 	"\n" +
-	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bbuf/validate/validate.proto\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcf\x04\n" +
+	"\x19staticpagepb/schema.proto\x12\fstaticpagepb\x1a\x1bcommonpb/ads_platform.proto\x1a\x18commonpb/page_type.proto\x1a\x12commonpb/seo.proto\x1a\x15commonpb/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9f\x04\n" +
 	"\n" +
 	"StaticPage\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
-	"\x05title\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05title\x12\x1b\n" +
-	"\x04slug\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04slug\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
-	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\bpageType\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
+	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12/\n" +
+	"\tpage_type\x18\x05 \x01(\x0e2\x12.commonpb.PageTypeR\bpageType\x12\x1d\n" +
 	"\n" +
 	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12$\n" +
-	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOH\x00R\x03seo\x88\x01\x01\x12B\n" +
-	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformB\b\xbaH\x05\x82\x01\x02\x10\x01R\vadsPlatform\x122\n" +
-	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06status\x12\x1d\n" +
+	"\x03seo\x18\a \x01(\v2\r.commonpb.SEOH\x00R\x03seo\x88\x01\x01\x128\n" +
+	"\fads_platform\x18\b \x01(\x0e2\x15.commonpb.AdsPlatformR\vadsPlatform\x12(\n" +
+	"\x06status\x18\t \x01(\x0e2\x10.commonpb.StatusR\x06status\x12\x1d\n" +
 	"\n" +
 	"created_by\x18\n" +
 	" \x01(\x04R\tcreatedBy\x12\x1d\n" +

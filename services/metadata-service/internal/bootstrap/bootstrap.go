@@ -8,14 +8,16 @@ import (
 	"os"
 	"shared/pkg/logger"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
 )
 
 var (
-	Config *config.Config
-	Logger *logger.Logger
-	DB     *db.DB
-	Repos  *repositories.Repositories
+	Config   *config.Config
+	Logger   *logger.Logger
+	DB       *db.DB
+	Validate *validator.Validate
+	Repos    *repositories.Repositories
 )
 
 func Init() error {
@@ -47,6 +49,8 @@ func Init() error {
 	if err = DB.Migrate(); err != nil {
 		return err
 	}
+
+	Validate = validator.New()
 
 	Repos = repositories.NewRepositories(DB)
 

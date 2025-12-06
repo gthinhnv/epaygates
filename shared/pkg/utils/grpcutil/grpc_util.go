@@ -1,7 +1,9 @@
 package grpcutil
 
 import (
-	"buf.build/go/protovalidate"
+	"fmt"
+
+	"github.com/go-playground/validator/v10"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -13,7 +15,7 @@ type FieldViolation struct {
 }
 
 func BuildValidationError(err error) error {
-	ve, ok := err.(*protovalidate.ValidationError)
+	errs, ok := err.(validator.ValidationErrors)
 	if !ok {
 		return err
 	}
@@ -21,11 +23,11 @@ func BuildValidationError(err error) error {
 	st := status.New(codes.InvalidArgument, "validation failed")
 	badReq := &errdetails.BadRequest{}
 
-	for _, v := range ve.Violations {
+	for _, e := range errs {
 		badReq.FieldViolations = append(badReq.FieldViolations,
 			&errdetails.BadRequest_FieldViolation{
-				Field:       protovalidate.FieldPathString(v.Proto.GetField()),
-				Description: v.Proto.GetMessage(),
+				Field:       e.Field(),
+				Description: fmt.Sprintf("%s_%s", e.Tag(), e.Value()),
 			},
 		)
 	}
