@@ -88,23 +88,58 @@ func (s *StaticPageServiceServer) Get(ctx context.Context, req *staticpagepb.Get
 }
 
 func (s *StaticPageServiceServer) List(ctx context.Context, req *staticpagepb.ListRequest) (*staticpagepb.ListResponse, error) {
-	pages, err := bootstrap.Repos.StaticPageRepo.List(req)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "failed to get static page: %v", err)
+	var (
+		pages []*staticpagemodel.StaticPage
+		total uint64
+	)
+
+	// channel for errors
+	errCh := make(chan error, 2)
+
+	// Run Get List
+	go func() {
+		p, err := bootstrap.Repos.StaticPageRepo.List(req)
+		if err == nil {
+			pages = p
+		}
+		errCh <- err
+	}()
+
+	// Run Count only when needed
+	if req.WithTotal {
+		go func() {
+			t, err := bootstrap.Repos.StaticPageRepo.Count(req)
+			if err == nil {
+				total = t
+			}
+			errCh <- err
+		}()
 	}
 
+	// Wait for required number of results
+	need := 1
+	if req.WithTotal {
+		need = 2
+	}
+
+	for i := 0; i < need; i++ {
+		if err := <-errCh; err != nil {
+			return nil, status.Errorf(codes.Internal, "failed to list static pages: %v", err)
+		}
+	}
+
+	// Convert to protobuf
 	pageProtos := make([]*staticpagepb.StaticPage, len(pages))
 	for i, page := range pages {
-		var pageProto staticpagepb.StaticPage
-
-		if err := dbutil.MapStruct(page, &pageProto); err != nil {
-			return nil, err
+		pageProto := new(staticpagepb.StaticPage)
+		if err := dbutil.MapStruct(page, pageProto); err != nil {
+			return nil, status.Errorf(codes.Internal, "mapping error: %v", err)
 		}
-
-		pageProtos[i] = &pageProto
+		pageProtos[i] = pageProto
 	}
 
 	return &staticpagepb.ListResponse{
 		Pages: pageProtos,
+		Total: total,
 	}, nil
 }

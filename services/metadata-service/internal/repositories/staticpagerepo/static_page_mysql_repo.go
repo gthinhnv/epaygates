@@ -126,5 +126,16 @@ func (r *MysqlRepository) List(req *staticpagepb.ListRequest) ([]*staticpagemode
 // Count returns total items for the given filter (used for pagination).
 // --------------------------------------------------
 func (r *MysqlRepository) Count(req *staticpagepb.ListRequest) (uint64, error) {
-	return 0, nil
+	query := `
+		SELECT COUNT(*)
+		FROM static_pages
+	`
+
+	var total uint64
+	err := r.db.Get(&total, query)
+	if err != nil {
+		return 0, err
+	}
+
+	return total, nil
 }

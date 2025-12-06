@@ -17,3 +17,10 @@ type Response struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
+
+type ListReponse struct {
+	Code    RespCode    `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+	Total   uint64      `json:"total"`
+}

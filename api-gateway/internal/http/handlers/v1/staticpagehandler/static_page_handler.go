@@ -172,7 +172,9 @@ func (h *StaticPageHandler) Get(c *gin.Context) {
 }
 
 func (h *StaticPageHandler) List(c *gin.Context) {
-	resp, err := h.client.List(context.Background(), &staticpagepb.ListRequest{})
+	resp, err := h.client.List(context.Background(), &staticpagepb.ListRequest{
+		WithTotal: true,
+	})
 	if err != nil {
 		bootstrap.Logger.WithFields(logrus.Fields{
 			"err": err,
@@ -199,9 +201,10 @@ func (h *StaticPageHandler) List(c *gin.Context) {
 		staticPages = append(staticPages, &staticPage)
 	}
 
-	c.JSON(http.StatusOK, apiutil.Response{
+	c.JSON(http.StatusOK, apiutil.ListReponse{
 		Code:    apiutil.CODE_SUCCESS,
 		Message: "Success",
 		Data:    staticPages,
+		Total:   resp.Total,
 	})
 }
