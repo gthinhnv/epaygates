@@ -28,14 +28,14 @@
 
 {% func (p *DashboardIndex) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
 
-{% func (p *DashboardIndex) Seo() %}
-	{%= p.BasePage.Seo() %}
+{% func (p *DashboardIndex) SEO() %}
+	{%= p.BasePage.SEO() %}
 	<meta name="title" content="{%s= p.getSeoTitle() %}">
 {% endfunc %}
 
 {% stripspace %}
-{% func (p *DashboardIndex) Css() %}
-	{%= p.BasePage.Css([]string{
+{% func (p *DashboardIndex) CSS() %}
+	{%= p.BasePage.CSS([]string{
 		"<link rel=\"stylesheet\" href=\"/assets/libs/bootstrap-table/bootstrap-table.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/select2/css/select2.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/toastr/toastr.min.css\">",

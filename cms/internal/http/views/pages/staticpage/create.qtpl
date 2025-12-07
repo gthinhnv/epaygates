@@ -31,14 +31,14 @@
 
 {% func (p *Create) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
 
-{% func (p *Create) Seo() %}
-	{%= p.BasePage.Seo() %}
+{% func (p *Create) SEO() %}
+	{%= p.BasePage.SEO() %}
 	<meta name="title" content="{%s= p.getSeoTitle() %}">
 {% endfunc %}
 
 {% stripspace %}
-{% func (p *Create) Css() %}
-	{%= p.BasePage.Css([]string{
+{% func (p *Create) CSS() %}
+	{%= p.BasePage.CSS([]string{
 		"<link rel=\"stylesheet\" href=\"/assets/libs/select2/css/select2.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/toastr/toastr.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/icheck/skins/square/green.css\">",
@@ -74,7 +74,7 @@
 					<div class="page-header-title">
 						<i class="feather icon-home bg-c-blue"></i>
 						<div class="d-inline">
-							<h5>{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}</h5>
+							<h5>{%s bootstrap.Translator.T(p.Lang(), "CREATE", nil) %}</h5>
 							<span class="icofont icofont-dog"></span>
 						</div>
 					</div>
@@ -83,10 +83,10 @@
 					<div class="page-header-breadcrumb">
 						<ul class=" breadcrumb breadcrumb-title">
 							<li class="breadcrumb-item">
-								<a href="/"><i class="feather icon-home"></i>{% space %}{%s bootstrap.Translator.T(p.Lang, "DASHBOARD", nil) %}</a>
+								<a href="/"><i class="feather icon-home"></i>{% space %}{%s bootstrap.Translator.T(p.Lang(), "DASHBOARD", nil) %}</a>
 							</li>
-							<li class="breadcrumb-item"><a href="/staticPages">{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</a></li>
-							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}</a></li>
+							<li class="breadcrumb-item"><a href="/staticPages">{%s bootstrap.Translator.T(p.Lang(), "STATIC_PAGES", nil) %}</a></li>
+							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang(), "CREATE", nil) %}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 							<div class="col-md-12 col-xl-12">
 								<div class="card sale-card">
 									<div class="card-block">		
-										{%= partials.Form(nil, p.Lang) %}
+										{%= partials.Form(nil, p.Lang()) %}
 									</div>
 								</div>
 							</div>

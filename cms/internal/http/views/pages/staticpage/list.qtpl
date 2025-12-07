@@ -31,14 +31,14 @@
 
 {% func (p *List) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
 
-{% func (p *List) Seo() %}
-	{%= p.BasePage.Seo() %}
+{% func (p *List) SEO() %}
+	{%= p.BasePage.SEO() %}
 	<meta name="title" content="{%s= p.getSeoTitle() %}">
 {% endfunc %}
 
 {% stripspace %}
-{% func (p *List) Css() %}
-	{%= p.BasePage.Css([]string{
+{% func (p *List) CSS() %}
+	{%= p.BasePage.CSS([]string{
 		"<link rel=\"stylesheet\" href=\"/assets/libs/bootstrap-table/bootstrap-table.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/bootstrap-table/extensions/fixed-columns/bootstrap-table-fixed-columns.min.css\">",
 		"<link rel=\"stylesheet\" href=\"/assets/libs/select2/css/select2.min.css\">",
@@ -54,7 +54,7 @@
 		statusList := make([]*commonmodel.StatusItem, len(bootstrap.StatusItems))
 		for i := 0; i < len(bootstrap.StatusItems); i++ {
 			statusList[i] = &commonmodel.StatusItem{
-				Name: bootstrap.Translator.T(p.Lang, bootstrap.StatusItems[i].Name, nil),
+				Name: bootstrap.Translator.T(p.Lang(), bootstrap.StatusItems[i].Name, nil),
 				Value: bootstrap.StatusItems[i].Value,
 			}
 		}
@@ -62,7 +62,7 @@
 		pageTypeList := make([]*commonmodel.PageTypeItem, len(bootstrap.PageTypeItems))
 		for i := 0; i < len(bootstrap.PageTypeItems); i++ {
 			pageTypeList[i] = &commonmodel.PageTypeItem{
-				Name: bootstrap.Translator.T(p.Lang, bootstrap.PageTypeItems[i].Name, nil),
+				Name: bootstrap.Translator.T(p.Lang(), bootstrap.PageTypeItems[i].Name, nil),
 				Value: bootstrap.PageTypeItems[i].Value,
 			}
 		}
@@ -102,7 +102,7 @@
 					<div class="page-header-title">
 						<i class="feather icon-home bg-c-blue"></i>
 						<div class="d-inline">
-							<h5>{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</h5>
+							<h5>{%s bootstrap.Translator.T(p.Lang(), "STATIC_PAGES", nil) %}</h5>
 							<span class="icofont icofont-dog"></span>
 						</div>
 					</div>
@@ -111,9 +111,9 @@
 					<div class="page-header-breadcrumb">
 						<ul class=" breadcrumb breadcrumb-title">
 							<li class="breadcrumb-item">
-								<a href="/"><i class="feather icon-home"></i>{% space %}{%s bootstrap.Translator.T(p.Lang, "DASHBOARD", nil) %}</a>
+								<a href="/"><i class="feather icon-home"></i>{% space %}{%s bootstrap.Translator.T(p.Lang(), "DASHBOARD", nil) %}</a>
 							</li>
-							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</a></li>
+							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang(), "STATIC_PAGES", nil) %}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -130,13 +130,13 @@
 										<h5 id="toolbar">
 											<div class="ml-n1 mr-n1">
 												<a class="btn waves-effect waves-light btn-success m-1" href="/staticPages/create">
-													<i class="icofont icofont-plus"></i>{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}
+													<i class="icofont icofont-plus"></i>{%s bootstrap.Translator.T(p.Lang(), "CREATE", nil) %}
 												</a>
 												<button class="btn waves-effect waves-light btn-primary m-1" type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="filter">
-													<i class="icofont icofont-filter"></i>{%s bootstrap.Translator.T(p.Lang, "FILTER", nil) %}
+													<i class="icofont icofont-filter"></i>{%s bootstrap.Translator.T(p.Lang(), "FILTER", nil) %}
 												</button>
 												<button id="delete" class="btn waves-effect waves-light btn-danger m-1 disabled" disabled>
-													<i class="icofont icofont-trash"></i>{%s bootstrap.Translator.T(p.Lang, "DELETE", nil) %}
+													<i class="icofont icofont-trash"></i>{%s bootstrap.Translator.T(p.Lang(), "DELETE", nil) %}
 												</button>
 											</div>
 										</h5>
