@@ -16,6 +16,18 @@ var updateFieldMap = map[string]func(*staticpagemodel.StaticPage) (string, inter
 	"slug": func(p *staticpagemodel.StaticPage) (string, interface{}) {
 		return "slug = ?", p.Slug
 	},
+	"content": func(p *staticpagemodel.StaticPage) (string, interface{}) {
+		return "content = ?", p.Content
+	},
+	"pageType": func(p *staticpagemodel.StaticPage) (string, interface{}) {
+		return "page_type = ?", p.PageType
+	},
+	"sortOrder": func(p *staticpagemodel.StaticPage) (string, interface{}) {
+		return "sort_order = ?", p.SortOrder
+	},
+	"status": func(p *staticpagemodel.StaticPage) (string, interface{}) {
+		return "status = ?", p.Status
+	},
 }
 
 func buildUpdateQuery(pageModel *staticpagemodel.StaticPage, fields []string) (string, []interface{}, error) {
