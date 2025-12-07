@@ -33,29 +33,29 @@ type Update struct {
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:17
-func (p *Update) streamgetSeoTitle(qw422016 *qt422016.Writer) {
+func (p *Update) streamgetSEOTitle(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:17
 	qw422016.N().S(`Update static page`)
 //line internal/http/views/pages/staticpage/update.qtpl:19
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:19
-func (p *Update) writegetSeoTitle(qq422016 qtio422016.Writer) {
+func (p *Update) writegetSEOTitle(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:19
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/update.qtpl:19
-	p.streamgetSeoTitle(qw422016)
+	p.streamgetSEOTitle(qw422016)
 //line internal/http/views/pages/staticpage/update.qtpl:19
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/update.qtpl:19
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:19
-func (p *Update) getSeoTitle() string {
+func (p *Update) getSEOTitle() string {
 //line internal/http/views/pages/staticpage/update.qtpl:19
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/update.qtpl:19
-	p.writegetSeoTitle(qb422016)
+	p.writegetSEOTitle(qb422016)
 //line internal/http/views/pages/staticpage/update.qtpl:19
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/update.qtpl:19
@@ -66,29 +66,29 @@ func (p *Update) getSeoTitle() string {
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:23
-func (p *Update) streamgetSeoDesc(qw422016 *qt422016.Writer) {
+func (p *Update) streamgetSEODesc(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:23
 	qw422016.N().S(`This is seo desc`)
 //line internal/http/views/pages/staticpage/update.qtpl:25
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:25
-func (p *Update) writegetSeoDesc(qq422016 qtio422016.Writer) {
+func (p *Update) writegetSEODesc(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:25
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/update.qtpl:25
-	p.streamgetSeoDesc(qw422016)
+	p.streamgetSEODesc(qw422016)
 //line internal/http/views/pages/staticpage/update.qtpl:25
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/update.qtpl:25
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:25
-func (p *Update) getSeoDesc() string {
+func (p *Update) getSEODesc() string {
 //line internal/http/views/pages/staticpage/update.qtpl:25
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/update.qtpl:25
-	p.writegetSeoDesc(qb422016)
+	p.writegetSEODesc(qb422016)
 //line internal/http/views/pages/staticpage/update.qtpl:25
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/update.qtpl:25
@@ -99,29 +99,29 @@ func (p *Update) getSeoDesc() string {
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:29
-func (p *Update) streamgetSeoKW(qw422016 *qt422016.Writer) {
+func (p *Update) streamgetSEOKW(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:29
 	qw422016.N().S(`This is seo keyword`)
 //line internal/http/views/pages/staticpage/update.qtpl:31
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:31
-func (p *Update) writegetSeoKW(qq422016 qtio422016.Writer) {
+func (p *Update) writegetSEOKW(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:31
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/update.qtpl:31
-	p.streamgetSeoKW(qw422016)
+	p.streamgetSEOKW(qw422016)
 //line internal/http/views/pages/staticpage/update.qtpl:31
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/update.qtpl:31
 }
 
 //line internal/http/views/pages/staticpage/update.qtpl:31
-func (p *Update) getSeoKW() string {
+func (p *Update) getSEOKW() string {
 //line internal/http/views/pages/staticpage/update.qtpl:31
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/update.qtpl:31
-	p.writegetSeoKW(qb422016)
+	p.writegetSEOKW(qb422016)
 //line internal/http/views/pages/staticpage/update.qtpl:31
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/update.qtpl:31
@@ -134,7 +134,7 @@ func (p *Update) getSeoKW() string {
 //line internal/http/views/pages/staticpage/update.qtpl:34
 func (p *Update) StreamTitle(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/update.qtpl:34
-	qw422016.N().S(p.getSeoTitle())
+	qw422016.N().S(p.getSEOTitle())
 //line internal/http/views/pages/staticpage/update.qtpl:34
 }
 
@@ -175,7 +175,7 @@ func (p *Update) StreamSEO(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
 	<meta name="title" content="`)
 //line internal/http/views/pages/staticpage/update.qtpl:38
-	qw422016.N().S(p.getSeoTitle())
+	qw422016.N().S(p.getSEOTitle())
 //line internal/http/views/pages/staticpage/update.qtpl:38
 	qw422016.N().S(`">
 `)

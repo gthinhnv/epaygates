@@ -9,28 +9,28 @@
 %}
 
 {% stripspace %}
-{% func (p *DashboardIndex) getSeoTitle() %}
+{% func (p *DashboardIndex) getSEOTitle() %}
 	Dashboard
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *DashboardIndex) getSeoDesc() %}
+{% func (p *DashboardIndex) getSEODesc() %}
 	This is seo desc
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *DashboardIndex) getSeoKW() %}
+{% func (p *DashboardIndex) getSEOKW() %}
 	This is seo keyword
 {% endfunc %}
 {% endstripspace %}
 
-{% func (p *DashboardIndex) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
+{% func (p *DashboardIndex) Title() %}{%s= p.getSEOTitle() %}{% endfunc %}
 
 {% func (p *DashboardIndex) SEO() %}
 	{%= p.BasePage.SEO() %}
-	<meta name="title" content="{%s= p.getSeoTitle() %}">
+	<meta name="title" content="{%s= p.getSEOTitle() %}">
 {% endfunc %}
 
 {% stripspace %}

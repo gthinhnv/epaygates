@@ -14,28 +14,28 @@
 %}
 
 {% stripspace %}
-{% func (p *Update) getSeoTitle() %}
+{% func (p *Update) getSEOTitle() %}
 	Update static page
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Update) getSeoDesc() %}
+{% func (p *Update) getSEODesc() %}
 	This is seo desc
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Update) getSeoKW() %}
+{% func (p *Update) getSEOKW() %}
 	This is seo keyword
 {% endfunc %}
 {% endstripspace %}
 
-{% func (p *Update) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
+{% func (p *Update) Title() %}{%s= p.getSEOTitle() %}{% endfunc %}
 
 {% func (p *Update) SEO() %}
 	{%= p.BasePage.SEO() %}
-	<meta name="title" content="{%s= p.getSeoTitle() %}">
+	<meta name="title" content="{%s= p.getSEOTitle() %}">
 {% endfunc %}
 
 {% stripspace %}

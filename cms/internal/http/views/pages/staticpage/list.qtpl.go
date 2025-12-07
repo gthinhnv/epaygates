@@ -31,29 +31,29 @@ type List struct {
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:15
-func (p *List) streamgetSeoTitle(qw422016 *qt422016.Writer) {
+func (p *List) streamgetSEOTitle(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:15
 	qw422016.N().S(`Page List`)
 //line internal/http/views/pages/staticpage/list.qtpl:17
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:17
-func (p *List) writegetSeoTitle(qq422016 qtio422016.Writer) {
+func (p *List) writegetSEOTitle(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:17
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/list.qtpl:17
-	p.streamgetSeoTitle(qw422016)
+	p.streamgetSEOTitle(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:17
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:17
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:17
-func (p *List) getSeoTitle() string {
+func (p *List) getSEOTitle() string {
 //line internal/http/views/pages/staticpage/list.qtpl:17
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/list.qtpl:17
-	p.writegetSeoTitle(qb422016)
+	p.writegetSEOTitle(qb422016)
 //line internal/http/views/pages/staticpage/list.qtpl:17
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/list.qtpl:17
@@ -64,29 +64,29 @@ func (p *List) getSeoTitle() string {
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:21
-func (p *List) streamgetSeoDesc(qw422016 *qt422016.Writer) {
+func (p *List) streamgetSEODesc(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:21
 	qw422016.N().S(`This is seo desc`)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:23
-func (p *List) writegetSeoDesc(qq422016 qtio422016.Writer) {
+func (p *List) writegetSEODesc(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
-	p.streamgetSeoDesc(qw422016)
+	p.streamgetSEODesc(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:23
-func (p *List) getSeoDesc() string {
+func (p *List) getSEODesc() string {
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/list.qtpl:23
-	p.writegetSeoDesc(qb422016)
+	p.writegetSEODesc(qb422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/list.qtpl:23
@@ -97,29 +97,29 @@ func (p *List) getSeoDesc() string {
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:27
-func (p *List) streamgetSeoKW(qw422016 *qt422016.Writer) {
+func (p *List) streamgetSEOKW(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:27
 	qw422016.N().S(`This is seo keyword`)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:29
-func (p *List) writegetSeoKW(qq422016 qtio422016.Writer) {
+func (p *List) writegetSEOKW(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
-	p.streamgetSeoKW(qw422016)
+	p.streamgetSEOKW(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:29
-func (p *List) getSeoKW() string {
+func (p *List) getSEOKW() string {
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/list.qtpl:29
-	p.writegetSeoKW(qb422016)
+	p.writegetSEOKW(qb422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/list.qtpl:29
@@ -132,7 +132,7 @@ func (p *List) getSeoKW() string {
 //line internal/http/views/pages/staticpage/list.qtpl:32
 func (p *List) StreamTitle(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:32
-	qw422016.N().S(p.getSeoTitle())
+	qw422016.N().S(p.getSEOTitle())
 //line internal/http/views/pages/staticpage/list.qtpl:32
 }
 
@@ -173,7 +173,7 @@ func (p *List) StreamSEO(qw422016 *qt422016.Writer) {
 	qw422016.N().S(`
 	<meta name="title" content="`)
 //line internal/http/views/pages/staticpage/list.qtpl:36
-	qw422016.N().S(p.getSeoTitle())
+	qw422016.N().S(p.getSEOTitle())
 //line internal/http/views/pages/staticpage/list.qtpl:36
 	qw422016.N().S(`">
 `)

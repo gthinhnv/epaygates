@@ -12,28 +12,28 @@
 %}
 
 {% stripspace %}
-{% func (p *Create) getSeoTitle() %}
+{% func (p *Create) getSEOTitle() %}
 	Create new page
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Create) getSeoDesc() %}
+{% func (p *Create) getSEODesc() %}
 	This is seo desc
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Create) getSeoKW() %}
+{% func (p *Create) getSEOKW() %}
 	This is seo keyword
 {% endfunc %}
 {% endstripspace %}
 
-{% func (p *Create) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
+{% func (p *Create) Title() %}{%s= p.getSEOTitle() %}{% endfunc %}
 
 {% func (p *Create) SEO() %}
 	{%= p.BasePage.SEO() %}
-	<meta name="title" content="{%s= p.getSeoTitle() %}">
+	<meta name="title" content="{%s= p.getSEOTitle() %}">
 {% endfunc %}
 
 {% stripspace %}
