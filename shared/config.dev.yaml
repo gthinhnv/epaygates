@@ -4,6 +4,6 @@ apiGateway:
   grpcAddress: "127.0.0.1:50500"
   httpAddress: "http://127.0.0.1:50500"
 cms:
-  httpAddress: ""
+  httpAddress: "http://127.0.0.1:50501"
 web:
-  httpAddress: ""
+  httpAddress: "http://127.0.0.1:50502"

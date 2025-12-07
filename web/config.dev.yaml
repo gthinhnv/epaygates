@@ -1,4 +1,4 @@
-port: 50501
+port: 50502
 log:
   output: "console"
   filePath: "logs/app.log"
