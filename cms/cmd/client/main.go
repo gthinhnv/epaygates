@@ -1,12 +1,12 @@
 package main
 
 import (
+	"apigateway/gen/go/commonpb"
+	"apigateway/gen/go/staticpagepb"
 	"cms/internal/bootstrap"
 	"context"
 	"fmt"
 	"log"
-	"metadatasvc/gen/go/commonpb"
-	"metadatasvc/gen/go/staticpagepb"
 	"time"
 
 	"google.golang.org/grpc"

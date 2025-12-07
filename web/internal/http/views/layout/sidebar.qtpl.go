@@ -8,9 +8,10 @@ package layout
 import (
 	"strings"
 	"web/internal/config"
+)
 
 //line internal/http/views/layout/sidebar.qtpl:7
-
+import (
 	qtio422016 "io"
 
 	qt422016 "github.com/valyala/quicktemplate"

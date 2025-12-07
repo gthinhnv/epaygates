@@ -9,9 +9,10 @@ import (
 	"shared/models/staticpagemodel"
 	"strings"
 	"web/internal/bootstrap"
+)
 
 //line internal/http/views/pages/staticpage/partials/form.qtpl:8
-
+import (
 	qtio422016 "io"
 
 	qt422016 "github.com/valyala/quicktemplate"

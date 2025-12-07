@@ -26,7 +26,7 @@ func NewStaticPageHandler() *StaticPageHandler {
 
 func (h *StaticPageHandler) Create(c *gin.Context) {
 	p := staticpage.Create{
-		BasePage: layout.BasePage{Context: c, Lang: c.GetString("lang")},
+		BasePage: layout.BasePage{Context: c},
 	}
 	layout.WritePageTemplate(c.Writer, &p)
 }
@@ -55,7 +55,7 @@ func (h *StaticPageHandler) Update(c *gin.Context) {
 	}
 
 	p := staticpage.Update{
-		BasePage:   layout.BasePage{Context: c, Lang: c.GetString("lang")},
+		BasePage:   layout.BasePage{Context: c},
 		StaticPage: &staticPage,
 	}
 	layout.WritePageTemplate(c.Writer, &p)
@@ -63,7 +63,7 @@ func (h *StaticPageHandler) Update(c *gin.Context) {
 
 func (h *StaticPageHandler) List(c *gin.Context) {
 	p := staticpage.List{
-		BasePage: layout.BasePage{Context: c, Lang: c.GetString("lang")},
+		BasePage: layout.BasePage{Context: c},
 	}
 	layout.WritePageTemplate(c.Writer, &p)
 }
