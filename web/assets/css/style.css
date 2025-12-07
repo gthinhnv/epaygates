@@ -1,0 +1,14 @@
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu[subitem-icon="style1"] .pcoded-submenu li > a .pcoded-mtext:before {
+    padding-left: 4px;
+}
+.table tr td .table-action-item {
+    font-size: 1.1rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.table tr .bs-checkbox input[type="checkbox"] {
+    /* zoom: 1.5; */
+    width: 20px;
+    height: 20px;
+}

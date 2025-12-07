@@ -1,0 +1,114 @@
+{% import (
+	"web/internal/bootstrap"
+	"web/internal/http/views/layout"
+	"web/internal/http/views/pages/staticpage/partials"
+) %}
+
+{% code
+	type Create struct {
+		layout.BasePage
+		Errs map[string]string
+	}
+%}
+
+{% stripspace %}
+{% func (p *Create) getSeoTitle() %}
+	Create new page
+{% endfunc %}
+{% endstripspace %}
+
+{% stripspace %}
+{% func (p *Create) getSeoDesc() %}
+	This is seo desc
+{% endfunc %}
+{% endstripspace %}
+
+{% stripspace %}
+{% func (p *Create) getSeoKW() %}
+	This is seo keyword
+{% endfunc %}
+{% endstripspace %}
+
+{% func (p *Create) Title() %}{%s= p.getSeoTitle() %}{% endfunc %}
+
+{% func (p *Create) Seo() %}
+	{%= p.BasePage.Seo() %}
+	<meta name="title" content="{%s= p.getSeoTitle() %}">
+{% endfunc %}
+
+{% stripspace %}
+{% func (p *Create) Css() %}
+	{%= p.BasePage.Css([]string{
+		"<link rel=\"stylesheet\" href=\"/assets/libs/select2/css/select2.min.css\">",
+		"<link rel=\"stylesheet\" href=\"/assets/libs/toastr/toastr.min.css\">",
+		"<link rel=\"stylesheet\" href=\"/assets/libs/icheck/skins/square/green.css\">",
+	}) %}
+{% endfunc %}
+{% endstripspace %}
+
+{% func (p *Create) Script() %}
+	{%= p.BasePage.Script([]string{
+		"<script src=\"/assets/libs/select2/js/select2.min.js\"></script>",
+		"<script src=\"/assets/libs/toastr/toastr.min.js\"></script>",
+		"<script src=\"/assets/libs/ckeditor/ckeditor.js\"></script>",
+		"<script src=\"/assets/libs/icheck/icheck.min.js\"></script>",
+		"<script src=\"/assets/libs/slugify/slugify.js\"></script>",
+	}) %}
+	<script type="text/javascript">
+		toastr.options.closeButton = true;
+		toastr.options.progressBar = true;
+
+		const trans = {};
+
+		{% cat "./partials/form.js" %}
+		{% cat "./create.js" %}
+	</script>
+{% endfunc %}
+
+{% stripspace %}
+{% func (p *Create) Content() %}
+	<div class="pcoded-content">
+		<div class="page-header card">
+			<div class="row align-items-end">
+				<div class="col-lg-8">
+					<div class="page-header-title">
+						<i class="feather icon-home bg-c-blue"></i>
+						<div class="d-inline">
+							<h5>{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}</h5>
+							<span class="icofont icofont-dog"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="page-header-breadcrumb">
+						<ul class=" breadcrumb breadcrumb-title">
+							<li class="breadcrumb-item">
+								<a href="/"><i class="feather icon-home"></i>{% space %}{%s bootstrap.Translator.T(p.Lang, "DASHBOARD", nil) %}</a>
+							</li>
+							<li class="breadcrumb-item"><a href="/staticPages">{%s bootstrap.Translator.T(p.Lang, "STATIC_PAGES", nil) %}</a></li>
+							<li class="breadcrumb-item"><a href="#!">{%s bootstrap.Translator.T(p.Lang, "CREATE", nil) %}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="pcoded-inner-content">
+			<div class="main-body">
+				<div class="page-wrapper">
+					<div class="page-body">
+						<div class="row">
+							<div class="col-md-12 col-xl-12">
+								<div class="card sale-card">
+									<div class="card-block">		
+										{%= partials.Form(nil, p.Lang) %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfunc %}
+{% endstripspace %}

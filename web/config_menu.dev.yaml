@@ -1,0 +1,16 @@
+items:
+  - id: 0
+    name: DASHBOARD
+    route: /
+    icon: fa fa-home
+    roles: [1, 2, 3, 4]
+  - id: 0
+    name: SYSTEM
+    route: \#system
+    icon: fa fa-cogs
+    roles: []
+    children:
+      - id: 0
+        name: STATIC_PAGES
+        route: /staticPages
+        roles: [1, 2]

@@ -1,0 +1,157 @@
+{% import (
+    "shared/models/staticpagemodel"
+    "web/internal/bootstrap"
+    "strings"
+) %}
+
+{% stripspace %}
+{% func Form(model *staticpagemodel.StaticPage, lang string) %}
+<ul class="nav nav-tabs md-tabs tab-icon mb-0" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#main" role="tab">
+            <i class="icofont icofont-home"></i>Main
+        </a>
+        <div class="slide"></div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#seo" role="tab">
+            <i class="icofont icofont-globe"></i>Seo
+        </a>
+        <div class="slide"></div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#config" role="tab">
+            <i class="icofont icofont-gears"></i>Config
+        </a>
+        <div class="slide"></div>
+    </li>
+</ul>
+<form id="static-page-form" class="form form-{% if model != nil %}update{% else %}create{% endif %}{% space %}tab-content card-block pb-0">
+    {% if model != nil %}<input name="id" type="hidden" value="{%dul model.Id %}" />{% endif %}
+    <div class="general-errs"></div>
+
+    <div id="main" class="tab-pane active" role="tabpanel">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="title">Title<span class="text-danger">*</span>:</label>
+                    <input name="title" value="{% if model != nil %}{%s model.Title %}{% endif %}" type="text" class="form-control" autocomplete="off" onkeyup="toSlug(this, `#static-page-form input[name='slug']`)" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="slug">Slug<span class="text-danger">*</span>:</label>
+                    <input name="slug" value="{% if model != nil %}{%s model.Slug %}{% endif %}" type="text" class="form-control" autocomplete="off" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="sortOrder">Sort Order:</label>
+                    <input name="sortOrder" value="{% if model != nil %}{%d int(model.SortOrder) %}{% endif %}" type="number" class="form-control" autocomplete="off" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="content">Content:</label>
+                    <textarea name="content" class="form-control">{% if model != nil %}{%s model.Content %}{% endif %}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label d-block" for="pageType">Page Type:</label>
+                    <select class="form-control page-type-selection is-select2" name="pageType">
+                        {% for _, pageTypeItem := range bootstrap.PageTypeItems %}
+                            <option value="{%d int(pageTypeItem.Value) %}" {% if model != nil && int32(model.PageType) == pageTypeItem.Value %}selected{% endif %}>
+                                {%s bootstrap.Translator.T(lang, pageTypeItem.Name, nil) %}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label d-block" for="status">Status:</label>
+                    <select class="form-control status-selection is-select2" name="status">
+                        {% for _, statusItem := range bootstrap.StatusItems %}
+                            <option value="{%d int(statusItem.Value) %}" {% if model != nil && int32(model.Status) == statusItem.Value %}selected{% endif %}>
+                                {%s bootstrap.Translator.T(lang, statusItem.Name, nil) %}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="seo" class="tab-pane" role="tabpanel">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="metaTitle">Meta Title:</label>
+                    <input name="metaTitle" value="{% if model != nil && model.Seo != nil %}{%s model.Seo.MetaTitle %}{% endif %}" default="" type="text" class="form-control" autocomplete="off" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="metaDescription">Meta Description:</label>
+                    <textarea name="metaDesc" default="" class="form-control" autocomplete="off">{% if model != nil && model.Seo != nil %}{%s model.Seo.MetaDesc %}{% endif %}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="metaKeywords">Meta Keywords:</label>
+                    <textarea name="metaKeywords" default="" class="form-control" autocomplete="off">{% if model != nil && model.Seo != nil %}{%s strings.Join(model.Seo.MetaKeywords, ",") %}{% endif %}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label" for="schema">Schema:</label>
+                    <textarea name="schema" default="" class="form-control" autocomplete="off">{% if model != nil && model.Seo != nil %}{%s model.Seo.Schema %}{% endif %}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="config" class="tab-pane" role="tabpanel">
+        <div class="card-header pl-0 pr-0">
+            <h5>Ads Config</h5>
+        </div>
+        <div class="card-block pl-0 pr-0">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <div class="form-group">
+                        <label class="col-form-label d-block" for="adsPlatform">Ads Platform:</label>
+                        <select class="form-control ads-platform-selection is-select2" name="adsPlatform">
+                            {% for _, adsPlatformItem := range bootstrap.AdsPlatformItems %}
+                                <option value="{%d int(adsPlatformItem.Value) %}" {% if model != nil && int32(model.AdsPlatform) == adsPlatformItem.Value %}selected{% endif %}>
+                                    {%s bootstrap.Translator.T(lang, adsPlatformItem.Name, nil) %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-paper-plane"></i>{% space %}Submit</button>
+        </div>
+    </div>
+</form>
+{% endfunc %}
+{% endstripspace %}

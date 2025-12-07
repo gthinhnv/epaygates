@@ -1,0 +1,38 @@
+package router
+
+import (
+	"os"
+	"time"
+	"web/internal/http/handlers/dashboardhandler"
+	"web/internal/http/middlewares/authmiddleware"
+	"web/internal/http/middlewares/gatewaymiddleware"
+
+	"github.com/gin-gonic/gin"
+)
+
+func New() *gin.Engine {
+	if os.Getenv("APP_ENV") == "prod" {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
+	dashboardHandler := dashboardhandler.NewStaticPageHandler()
+
+	r := gin.New()
+
+	staticRouteGroup := r.Group("/", gatewaymiddleware.StaticCache(356*24*time.Hour))
+
+	/*
+	 * Serve static files
+	 */
+	staticRouteGroup.Static("/assets", "./assets")
+
+	r.Use(gatewaymiddleware.ContextSetup())
+
+	authenticatedRouter := r.Group("/", authmiddleware.Authenticate())
+
+	authenticatedRouter.GET("/", dashboardHandler.GetIndex)
+
+	RegisterStaticPageRoutes(authenticatedRouter)
+
+	return r
+}

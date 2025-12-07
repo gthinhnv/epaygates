@@ -1,0 +1,21 @@
+{
+  "HELLO": "Hello, {{name}}!",
+  "STATUS_UNSPECIFIED": "Unspecified",
+  "STATUS_ACTIVE": "Active",
+  "STATUS_INACTIVE": "Inactive",
+  "PAGE_TYPE_UNSPECIFIED": "Unspecified",
+  "PAGE_TYPE_HEADER": "Header",
+  "PAGE_TYPE_FOOTER": "Footer",
+  "ADS_PLATFORM_UNSPECIFIED": "Unspecified",
+  "ADS_PLATFORM_DISABLED": "Disabled",
+  "ADS_PLATFORM_AUTO": "Auto",
+  "ADS_PLATFORM_GOOGLE_ADSENSE": "Google Adsense",
+  "ADS_PLATFORM_PURPLEADS":      "PurpleAds",
+  "ADS_PLATFORM_ADSKEEPER":      "Adskeeper",
+  "ADS_PLATFORM_MGID":           "Mgid",
+  "ADS_PLATFORM_PROPELLER":      "Monetag",
+  "ADS_PLATFORM_ADCASH":         "Adcash",
+  "ADS_PLATFORM_PUBFUTURE":      "Pubfuture",
+  "ADS_PLATFORM_NETPUB":         "Netpub",
+  "ADS_PLATFORM_ADSTERRA":       "Adsterra"
+}
