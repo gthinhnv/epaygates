@@ -15,13 +15,13 @@
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *DashboardIndex) getSEODesc() %}
+{% func (p *DashboardIndex) getSEODescription() %}
 	This is seo desc
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *DashboardIndex) getSEOKW() %}
+{% func (p *DashboardIndex) getSEOKeywords() %}
 	This is seo keyword
 {% endfunc %}
 {% endstripspace %}

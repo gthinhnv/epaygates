@@ -61,29 +61,29 @@ func (p *DashboardIndex) getSEOTitle() string {
 }
 
 //line internal/http/views/pages/dashboard/dashboard.qtpl:18
-func (p *DashboardIndex) streamgetSEODesc(qw422016 *qt422016.Writer) {
+func (p *DashboardIndex) streamgetSEODescription(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/dashboard/dashboard.qtpl:18
 	qw422016.N().S(`This is seo desc`)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
 }
 
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
-func (p *DashboardIndex) writegetSEODesc(qq422016 qtio422016.Writer) {
+func (p *DashboardIndex) writegetSEODescription(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
-	p.streamgetSEODesc(qw422016)
+	p.streamgetSEODescription(qw422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
 }
 
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
-func (p *DashboardIndex) getSEODesc() string {
+func (p *DashboardIndex) getSEODescription() string {
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
-	p.writegetSEODesc(qb422016)
+	p.writegetSEODescription(qb422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:20
@@ -94,29 +94,29 @@ func (p *DashboardIndex) getSEODesc() string {
 }
 
 //line internal/http/views/pages/dashboard/dashboard.qtpl:24
-func (p *DashboardIndex) streamgetSEOKW(qw422016 *qt422016.Writer) {
+func (p *DashboardIndex) streamgetSEOKeywords(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/dashboard/dashboard.qtpl:24
 	qw422016.N().S(`This is seo keyword`)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
 }
 
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
-func (p *DashboardIndex) writegetSEOKW(qq422016 qtio422016.Writer) {
+func (p *DashboardIndex) writegetSEOKeywords(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
-	p.streamgetSEOKW(qw422016)
+	p.streamgetSEOKeywords(qw422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
 }
 
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
-func (p *DashboardIndex) getSEOKW() string {
+func (p *DashboardIndex) getSEOKeywords() string {
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
-	p.writegetSEOKW(qb422016)
+	p.writegetSEOKeywords(qb422016)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/dashboard/dashboard.qtpl:26

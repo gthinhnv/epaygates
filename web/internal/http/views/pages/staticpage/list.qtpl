@@ -9,22 +9,27 @@
 	type List struct {
 		layout.BasePage
 	}
+
+	var a string
 %}
 
 {% stripspace %}
 {% func (p *List) getSEOTitle() %}
+	{% code
+		a = "test"
+	%}
 	Page List
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *List) getSEODesc() %}
-	This is seo desc
+{% func (p *List) getSEODescription() %}
+	This is seo desc {%s a %}
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *List) getSEOKW() %}
+{% func (p *List) getSEOKeywords() %}
 	This is seo keyword
 {% endfunc %}
 {% endstripspace %}
@@ -34,6 +39,8 @@
 {% func (p *List) SEO() %}
 	{%= p.BasePage.SEO() %}
 	<meta name="title" content="{%s= p.getSEOTitle() %}">
+	<meta name="description" content="{%s= p.getSEODescription() %}">
+	<meta name="keywords" content="{%s= p.getSEOKeywords() %}">
 {% endfunc %}
 
 {% stripspace %}

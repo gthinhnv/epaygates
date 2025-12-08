@@ -20,13 +20,13 @@
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Update) getSEODesc() %}
+{% func (p *Update) getSEODescription() %}
 	This is seo desc
 {% endfunc %}
 {% endstripspace %}
 
 {% stripspace %}
-{% func (p *Update) getSEOKW() %}
+{% func (p *Update) getSEOKeywords() %}
 	This is seo keyword
 {% endfunc %}
 {% endstripspace %}

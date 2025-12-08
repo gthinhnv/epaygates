@@ -64,29 +64,29 @@ func (p *List) getSEOTitle() string {
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:21
-func (p *List) streamgetSEODesc(qw422016 *qt422016.Writer) {
+func (p *List) streamgetSEODescription(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:21
 	qw422016.N().S(`This is seo desc`)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:23
-func (p *List) writegetSEODesc(qq422016 qtio422016.Writer) {
+func (p *List) writegetSEODescription(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
-	p.streamgetSEODesc(qw422016)
+	p.streamgetSEODescription(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:23
-func (p *List) getSEODesc() string {
+func (p *List) getSEODescription() string {
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/list.qtpl:23
-	p.writegetSEODesc(qb422016)
+	p.writegetSEODescription(qb422016)
 //line internal/http/views/pages/staticpage/list.qtpl:23
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/list.qtpl:23
@@ -97,29 +97,29 @@ func (p *List) getSEODesc() string {
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:27
-func (p *List) streamgetSEOKW(qw422016 *qt422016.Writer) {
+func (p *List) streamgetSEOKeywords(qw422016 *qt422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:27
 	qw422016.N().S(`This is seo keyword`)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:29
-func (p *List) writegetSEOKW(qq422016 qtio422016.Writer) {
+func (p *List) writegetSEOKeywords(qq422016 qtio422016.Writer) {
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qw422016 := qt422016.AcquireWriter(qq422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
-	p.streamgetSEOKW(qw422016)
+	p.streamgetSEOKeywords(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qt422016.ReleaseWriter(qw422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 }
 
 //line internal/http/views/pages/staticpage/list.qtpl:29
-func (p *List) getSEOKW() string {
+func (p *List) getSEOKeywords() string {
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qb422016 := qt422016.AcquireByteBuffer()
 //line internal/http/views/pages/staticpage/list.qtpl:29
-	p.writegetSEOKW(qb422016)
+	p.writegetSEOKeywords(qb422016)
 //line internal/http/views/pages/staticpage/list.qtpl:29
 	qs422016 := string(qb422016.B)
 //line internal/http/views/pages/staticpage/list.qtpl:29
