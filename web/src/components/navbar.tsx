@@ -41,21 +41,21 @@ export function Navbar() {
 					{/* Hamburger Animation */}
 					<span
 						className={`
-					absolute block h-0.5 w-6 bg-black transition-all duration-300
-					${open ? "rotate-45" : "-translate-y-2"}
-				`}
+							absolute block h-0.5 w-6 bg-black transition-all duration-300
+							${open ? "rotate-45" : "-translate-y-2"}
+						`}
 					/>
 					<span
 						className={`
-					absolute block h-0.5 w-6 bg-black transition-all duration-200
-					${open ? "opacity-0" : "opacity-100"}
-				`}
+							absolute block h-0.5 w-6 bg-black transition-all duration-200
+							${open ? "opacity-0" : "opacity-100"}
+						`}
 					/>
 					<span
 						className={`
-					absolute block h-0.5 w-6 bg-black transition-all duration-300
-					${open ? "-rotate-45" : "translate-y-2"}
-				`}
+							absolute block h-0.5 w-6 bg-black transition-all duration-300
+							${open ? "-rotate-45" : "translate-y-2"}
+						`}
 					/>
 				</Button>
 			</div>
