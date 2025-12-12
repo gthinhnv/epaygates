@@ -16,7 +16,6 @@ export function Navbar() {
 	return (
 		<nav className="border-b bg-white/80 backdrop-blur sticky top-0 z-50">
 			<div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-
 				{/* Logo */}
 				<Link href="/" className="font-semibold text-xl tracking-tight">
 					MyWebsite
@@ -58,6 +57,26 @@ export function Navbar() {
 						`}
 					/>
 				</Button>
+			</div>
+			<div
+				className={`
+					md:hidden
+					fixed right-0 mt-0.5 bg-inherit
+					transform transition-transform duration-300
+					overflow-hidden
+					${open ? "w-full translate-x-0" : "w-0 translate-x-full"}
+				`}
+			>
+				{menu.map((item) => (
+					<Link
+						key={item.href}
+						href={item.href}
+						onClick={() => setOpen(false)}
+						className="block"
+					>
+						{item.label}
+					</Link>
+				))}
 			</div>
 		</nav>
 	);
