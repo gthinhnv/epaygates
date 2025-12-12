@@ -5,5 +5,4 @@ use (
 	./services/metadata-service
 	./api-gateway
 	./cms
-	./web
 )
