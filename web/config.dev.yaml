@@ -1,8 +1,0 @@
-port: 50502
-log:
-  output: "console"
-  filePath: "logs/app.log"
-  level: "info" # level: info # logrus Level: error, warning, info, debug, trace
-version: "1.0.0"
-supportedLangs: ["en", "vi"]
-defaultLang: "en"
