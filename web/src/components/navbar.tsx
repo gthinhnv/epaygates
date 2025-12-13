@@ -29,20 +29,22 @@ export function Navbar() {
 	return (
 		<>
 			<nav className="border-b bg-white/80 backdrop-blur sticky top-0 z-50 h-16">
-				<div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
+				<div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
 					{/* Logo */}
 					<Link href="/" className="font-semibold text-xl tracking-tight">
 						MyWebsite
 					</Link>
 
 					{/* Desktop Menu */}
-					<div className="hidden md:flex gap-8 text-sm font-medium">
+					<ul className="hidden md:flex gap-8 text-sm font-medium">
 						{menu.map((item) => (
-							<Link key={item.href} href={item.href}>
-								{item.label}
-							</Link>
+							<li key={item.href}>
+								<Link href={item.href}>
+									{item.label}
+								</Link>
+							</li>
 						))}
-					</div>
+					</ul>
 
 					{/* Mobile Drawer */}
 					<Button
@@ -74,25 +76,27 @@ export function Navbar() {
 				</div>
 			</nav>
 			<div className="fixed top-16 left-0 right-0 bottom-0 overflow-x-hidden pointer-events-none z-40">
-				<div
+				<ul
 					className={clsx(
-						"absolute right-0 top-0 h-full w-70 bg-white shadow-xl",
+						"absolute right-0 top-0 h-full w-full max-w-sm bg-white shadow-xl",
 						"transform transition-transform duration-300",
 						"pointer-events-auto",
+						"py-2",
 						open ? "translate-x-0" : "translate-x-full"
 					)}
 				>
 					{menu.map((item) => (
-						<Link
-							key={item.href}
-							href={item.href}
-							onClick={() => setOpen(false)}
-							className="block"
-						>
-							{item.label}
-						</Link>
+						<li key={item.href}>
+							<Link
+								href={item.href}
+								onClick={() => setOpen(false)}
+								className="block px-4 py-2"
+							>
+								{item.label}
+							</Link>
+						</li>
 					))}
-				</div>
+				</ul>
 			</div>
 		</>
 	);
