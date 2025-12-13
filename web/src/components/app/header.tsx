@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 
-export function Navbar() {
+export function Header() {
 	const [open, setOpen] = useState(false);
 
 	const menu = [
@@ -32,7 +32,7 @@ export function Navbar() {
 				<div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
 					{/* Logo */}
 					<Link href="/" className="font-semibold text-xl tracking-tight">
-						MyWebsite
+						EpayGates
 					</Link>
 
 					{/* Desktop Menu */}
